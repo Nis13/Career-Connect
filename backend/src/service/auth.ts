@@ -1,25 +1,25 @@
+import { EmployerModel } from './../model/employer';
 import bcrypt from 'bcrypt';
-import { User } from "../interface/users";
+import { Employer, User } from "../interface/users";
 import { sign } from 'jsonwebtoken';
 import config from '../config';
-import { UserModel } from '../model/users';
 
-export async function signup(user:User){
-  const existingUser = await UserModel.getUserByEmail(user.email);
+export async function signup(employer:Employer){
+  const existingUser = await EmployerModel.getUserByEmail(employer.email);
 
   if (existingUser) {
     const message = "User already exists";
     return {message:message};
   }
 
-  const password = await bcrypt.hash(user.password, 10);
-  user.password = password;
+  const password = await bcrypt.hash(employer.password, 10);
+  employer.password = password;
 
-  return UserModel.signup(user);
+  return EmployerModel.signup(employer);
 }
 
 export async function login(body: Pick<User, "email" | "password">) {
-    const existingUser =  await UserModel.getUserByEmail(body.email);
+    const existingUser =  await EmployerModel.getUserByEmail(body.email);
   
     if (!existingUser) {
       return {message:"Invalid Email"};

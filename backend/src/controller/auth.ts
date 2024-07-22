@@ -22,7 +22,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     }
   }
 
-  export async function signup(
+  export async function signupEmployer(
     req: Request,
     res: Response,
     next: NextFunction
