@@ -1,12 +1,12 @@
 import express, { Request, Response } from 'express';
-import jobRoutes from './routes/jobRoutes';
+import routes from "./routes/index";
 import config from './config';
 
 
 const app = express();
 
 app.use(express.json());
-app.use('/api', jobRoutes);
+app.use('/', routes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to the Job Portal API!');
