@@ -12,7 +12,7 @@ const TABLE_NAME = 'users';
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {
     table.bigIncrements('user_id').primary();
-    table.string('name', 50).notNullable().unique();
+    table.string('name', 50).notNullable();
     table.string('email', 255).notNullable().unique();
     table.string('password', 255).notNullable();
     table.string('role', 50).notNullable();

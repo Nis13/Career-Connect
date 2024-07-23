@@ -14,10 +14,11 @@ export interface Employer extends User{
 
 export interface Jobseeker extends User{
     seekerid:number,
-    education:string,
-    skills:string,
-    industry:string,
-    contactno:number
+    jobseekerEducation:string,
+    jobseekerSkills:string,
+    jobseekerIndustry:string,
+    jobseekerContact:number,
+    jobseekerResume:string
 }
 export interface GetUserQuery{
     q?:string,

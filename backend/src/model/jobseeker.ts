@@ -1,16 +1,16 @@
-import { Employer, GetUserQuery, User } from "../interface/users";
+import { GetUserQuery, Jobseeker} from "../interface/users";
 import { BaseModel } from "./base";
 
 
 
-export class EmployerModel extends BaseModel {
+export class JobseekerModel extends BaseModel {
 
-    static async signup(employer:Employer){
+    static async signup(jobseeker: Jobseeker){
         const userToCreate = {
-            email: employer.email,
-            password: employer.password,
-            role: 'employer', 
-            name: employer.name
+            email: jobseeker.email,
+            password: jobseeker.password,
+            role: 'jobseeker', 
+            name: jobseeker.name
         };
 
         await this.queryBuilder()
@@ -20,28 +20,29 @@ export class EmployerModel extends BaseModel {
         const userId =  await this.queryBuilder()
         .select('user_id')
         .table("users")
-        .where("email", employer.email)
+        .where("email", jobseeker.email)
         .first();
 
-        const employerToCreate = {
+        const jobseekerToCreate = {
             user_id: userId.userId, 
-            description: employer.companyDescription,
-            logo: employer.companyLogo,
-            location: employer.companyLocation,
-            contact_no: employer.companyContact
+            education:jobseeker.jobseekerEducation,
+            skills:jobseeker.jobseekerSkills,
+            industry:jobseeker.jobseekerIndustry,
+            contact_no:jobseeker.jobseekerContact,
+            resume:jobseeker.jobseekerResume
         };
 
         await this.queryBuilder()
-            .insert(employerToCreate)
-            .table("employer");
+            .insert(jobseekerToCreate)
+            .table("jobseeker");
     
-    // const createdUser = await this.queryBuilder()
-    //     .select('user_id', 'email', 'name')
-    //     .table("users")
-    //     .where("email", employer.email)
-    //     .first();
+    const createdUser = await this.queryBuilder()
+        .select('user_id', 'email', 'name')
+        .table("users")
+        .where("email", jobseeker.email)
+        .first();
 
-    return {message:"user Created successfully"};
+    return createdUser;
 
     }
 
@@ -68,8 +69,6 @@ export class EmployerModel extends BaseModel {
     static async getUserByEmail(email: string) {
         const query = this.queryBuilder().select('*').from("users").where("email", email).first();
         const result = await query;
-        console.log(result);
-        // const userPermissions =  this.queryBuilder().select('permission').from("permissions").innerjoin("permissions" , { "userPermissions.permission": "permission.id" })
         return result;
     }
 
@@ -80,7 +79,7 @@ export class EmployerModel extends BaseModel {
     }
 
     static async deleteUser(id: number) {
-        await this.queryBuilder().from("employer").where('user_id', id).delete();
+        await this.queryBuilder().from("jobseeker").where('user_id', id).delete();
         await this.queryBuilder().from("users").where('user_id', id).delete();
         return { message: 'User deleted successfully' };
     }
