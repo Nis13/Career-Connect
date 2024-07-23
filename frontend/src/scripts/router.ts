@@ -13,7 +13,7 @@ const routes = [
   },
   {
     path: '/signup',
-    action: async () => fetch('/src/views/Signup/signup.html').then(response => response.text()),
+    action: async () => fetch('/src/views/SignupEmployer/signup.html').then(response => response.text()),
   },
   // Add more routes as needed
 ];

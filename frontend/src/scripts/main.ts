@@ -1,6 +1,3 @@
-// frontend/src/scripts/main.ts
-
-import axios from 'axios';
 import router from './router';
 import { login, signup } from './services/auth';
 
