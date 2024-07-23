@@ -50,7 +50,7 @@ export async function login(body: Pick<User, "email" | "password">) {
     }
     
     const payload = {
-      id: existingUser.id,
+      id: existingUser.userId,
       name: existingUser.name,
       email: existingUser.email,
       role:existingUser.role

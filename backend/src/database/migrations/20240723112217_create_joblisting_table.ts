@@ -1,40 +1,40 @@
 import { Knex } from 'knex';
 
-const TABLE_NAME = 'table_name';
+const TABLE_NAME = 'job_listings';
 
 
 /**
- * Create table TABLE_NAME.
+ * Create table job_listings.
  *
  * @param   {Knex} knex
  * @returns {Promise}
  */
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable(TABLE_NAME, (table) => {
-    table.bigIncrements();
+  return knex.schema
+  .raw("CREATE TYPE job_type AS ENUM ('Full-Time', 'Part-Time', 'Internship','Contract')")
+  .raw("CREATE TYPE job_status AS ENUM ('Active', 'Inactive')")
+  .createTable(TABLE_NAME, (table) => {
+    table.bigIncrements('listing_id').primary();
+    table.bigInteger('created_by').notNullable().unsigned().references('employer_id').inTable("employer").onDelete("CASCADE");
+
+    table.string("title").notNullable();
+    table.string("description").notNullable();
+    table.string("requirements").notNullable();
+    table.string("benefits").notNullable();
+    table.string("location").notNullable();
+    table.string("salary_range").notNullable();
+    table.enu('job_type', ['Full-Time', 'Part-Time', 'Internship','Contract']).notNullable();
+    table.enu('job_status', ['Active', 'Inactive']).defaultTo('Active').notNullable();
 
     table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
-    
-    table
-      .bigInteger('created_by')
-      .unsigned()
-      .notNullable()
-      .references('id')
-      .inTable(TABLE_NAME);
       
     table.timestamp('updated_at').nullable();
-    
-    table
-      .bigInteger('updated_by')
-      .unsigned()
-      .references('id')
-      .inTable(TABLE_NAME)
-      .nullable();
-  });
+  
+})
 }
 
 /**
- * Drop table TABLE_NAME.
+ * Drop table job_listings.
  *
  * @param   {Knex} knex
  * @returns {Promise}
