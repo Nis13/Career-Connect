@@ -3,15 +3,21 @@ export interface User{
     name:string,
     email:string,
     password:string,
-    role:string,
-    contactno:number,
+    role:string
 }
 export interface Employer extends User{
-    companyName: string,
     companyDescription: string,
     companyLogo:string,
     companyLocation:string,
-    companyContact:string
+    companyContact:number,
+}
+
+export interface Jobseeker extends User{
+    jobseekerEducation:string,
+    jobseekerSkills:string,
+    jobseekerIndustry:string,
+    jobseekerContact:number,
+    jobseekerResume:string
 }
 export interface GetUserQuery{
     q?:string,

@@ -1,28 +1,43 @@
+import { EmployerModel } from './../model/employer';
 import bcrypt from 'bcrypt';
-import { User } from "../interface/users";
+import { Employer, Jobseeker, User } from "../interface/users";
 import { sign } from 'jsonwebtoken';
 import config from '../config';
-import { UserModel } from '../model/users';
+import { JobseekerModel } from '../model/jobseeker';
 
-export async function signup(user:User){
-  const existingUser = await UserModel.getUserByEmail(user.email);
+export async function signupEmployer(employer:Employer){
+  const existingUser = await EmployerModel.getUserByEmail(employer.email);
 
   if (existingUser) {
     const message = "User already exists";
     return {message:message};
   }
 
-  const password = await bcrypt.hash(user.password, 10);
-  user.password = password;
+  const password = await bcrypt.hash(employer.password, 10);
+  employer.password = password;
 
-  return UserModel.signup(user);
+  return EmployerModel.signup(employer);
+}
+
+export async function signupJobseeker(jobseeker:Jobseeker){
+  const existingUser = await JobseekerModel.getUserByEmail(jobseeker.email);
+
+  if (existingUser) {
+    const message = "User already exists";
+    return {message:message};
+  }
+
+  const password = await bcrypt.hash(jobseeker.password, 10);
+  jobseeker.password = password;
+
+  return await JobseekerModel.signup(jobseeker);
 }
 
 export async function login(body: Pick<User, "email" | "password">) {
-    const existingUser =  await UserModel.getUserByEmail(body.email);
+    const existingUser =  await EmployerModel.getUserByEmail(body.email);
   
     if (!existingUser) {
-      return {message:"Invalid Email"};
+      return "Invalid Email";
     }
   
     const isValidPassword = await bcrypt.compare(
@@ -31,14 +46,14 @@ export async function login(body: Pick<User, "email" | "password">) {
     );
   
     if (!isValidPassword) {
-      return {message:"Invalid Password"};
+      return "Invalid Password";
     }
     
     const payload = {
       id: existingUser.id,
       name: existingUser.name,
       email: existingUser.email,
-      permissions: existingUser.permissions,
+      role:existingUser.role
     };
   
     const accessToken = await sign(payload, config.jwt.secret!, {
@@ -48,7 +63,7 @@ export async function login(body: Pick<User, "email" | "password">) {
     const refreshToken = await sign(payload, config.jwt.secret!, {
       expiresIn: config.jwt.refreshTokenExpityMS,
     });
-    return { accessToken, refreshToken };
+    return {  message:"user logged in successfully",role:existingUser.role,accessToken, refreshToken };
   }
 
 

@@ -6,7 +6,7 @@ import * as AuthService from "../service/auth";
 export async function login(req: Request, res: Response, next: NextFunction) {
     const { body } = req;
     try {
-      if (!body.name || !body.password) {
+      if (!body.email || !body.password) {
         return {message:"name and password are required"};
       }
   
@@ -18,11 +18,11 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   
       res.status(HttpStatusCodes.OK).json(data);
     } catch (error) {
-      next(error);
+      return error;
     }
   }
 
-  export async function signup(
+  export async function signupEmployer(
     req: Request,
     res: Response,
     next: NextFunction
@@ -32,9 +32,26 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       if (!body || !body.name || !body.password) {
        return {message:"name and password are required"};
       }
-      const data = await AuthService.signup(body);
+      const data = await AuthService.signupEmployer(body);
       res.status(HttpStatusCodes.CREATED).json(data);
     } catch (error) {
-      next(error);
+      return error;
+    }
+  }
+
+  export async function signupJobseeker(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const { body } = req;
+      if (!body || !body.name || !body.password) {
+       return {message:"name and password are required"};
+      }
+      const data = await AuthService.signupJobseeker(body);
+      res.status(HttpStatusCodes.CREATED).json(data);
+    } catch (error) {
+      return error;
     }
   }
