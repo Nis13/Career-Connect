@@ -12,7 +12,7 @@ const TABLE_NAME = 'jobseeker';
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(TABLE_NAME, (table) => {
     table.bigIncrements('seeker_id').primary();
-    table.bigInteger("user_id").unsigned().references("user_id").inTable("users");
+    table.bigInteger("user_id").unsigned().references("user_id").inTable("users").onDelete("CASCADE");
 
     table.string("education").notNullable();
     table.string("skills").notNullable();

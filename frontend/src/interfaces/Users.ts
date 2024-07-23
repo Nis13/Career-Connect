@@ -15,3 +15,11 @@ export interface UserCredentials {
       companyLocation:string,
       companyContact:number,
   }
+
+  export interface Jobseeker extends User{
+    jobseekerEducation:string,
+    jobseekerSkills:string,
+    jobseekerIndustry:string,
+    jobseekerContact:number,
+    jobseekerResume:string
+}

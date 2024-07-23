@@ -2,7 +2,7 @@ import Joi from "joi";
 
 
 
-export const createEmployerBodySchema = Joi.object({
+export const createJobseekerBodySchema = Joi.object({
     name: Joi.string().required().messages({
         'any.required':"Name is required",
     }),
@@ -31,22 +31,23 @@ export const createEmployerBodySchema = Joi.object({
 
         return value;
     }),
-    companyDescription:Joi.string().required().messages({
-        'any.required':'Description is required'
+    jobseekerEducation:Joi.string().required().messages({
+        'any.required':'Education is required'
     }),
 
-    companyLocation:Joi.string().required().messages({
-        'any.required':'Location is required'
+    jobseekerSkills:Joi.string().required().messages({
+        'any.required':'Skill is required'
     }),
-    companyLogo:Joi.string().required().messages({
-        'any.required':'Logo is required'
+    jobseekerIndustry:Joi.string().required().messages({
+        'any.required':'Industry is required'
     }),
-    
-    companyContact:Joi.number().required().min(100).messages({
+    jobseekerResume:Joi.string().required().messages({
+        'any.required':'Resume is required'
+    }),
+    jobseekerContact:Joi.number().required().min(100).messages({
         'any.required':'Contact number is required',
         "number.base":"Contact number must be a number",
         "number.min":"Enter valid contact number"
-
     })
 
 }).options({

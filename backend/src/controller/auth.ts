@@ -18,7 +18,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   
       res.status(HttpStatusCodes.OK).json(data);
     } catch (error) {
-      next(error);
+      return error;
     }
   }
 
@@ -35,7 +35,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       const data = await AuthService.signupEmployer(body);
       res.status(HttpStatusCodes.CREATED).json(data);
     } catch (error) {
-      next(error);
+      return error;
     }
   }
 
@@ -52,6 +52,6 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       const data = await AuthService.signupJobseeker(body);
       res.status(HttpStatusCodes.CREATED).json(data);
     } catch (error) {
-      next(error);
+      return error;
     }
   }

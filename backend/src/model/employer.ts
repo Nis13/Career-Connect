@@ -68,7 +68,7 @@ export class EmployerModel extends BaseModel {
     static async getUserByEmail(email: string) {
         const query = this.queryBuilder().select('*').from("users").where("email", email).first();
         const result = await query;
-        console.log(result);
+        console.log(`getQuery by email: ${result}`);
         // const userPermissions =  this.queryBuilder().select('permission').from("permissions").innerjoin("permissions" , { "userPermissions.permission": "permission.id" })
         return result;
     }

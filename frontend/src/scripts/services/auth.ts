@@ -1,7 +1,7 @@
 // frontend/src/scripts/services/auth.ts
 
 import axios from 'axios';
-import { Employer, UserCredentials } from '../../interfaces/Users';
+import { Employer, Jobseeker, UserCredentials } from '../../interfaces/Users';
 
 
 
@@ -20,7 +20,7 @@ export const login = async (credentials: UserCredentials) => {
   }
 };
 
-export const signup = async (data: Employer) => {
+export const signupemployer = async (data: Employer) => {
     try {
         console.log(data);
         const response = await axios.post(`${BASE_URL}/auth/signup/employer`, data);
@@ -35,4 +35,19 @@ export const signup = async (data: Employer) => {
         }
         throw new Error('Signup failed');
     }
+};
+
+export const signupjobseeker = async (data: Jobseeker) => {
+  try {
+      console.log(data);
+      const response = await axios.post(`${BASE_URL}/auth/signup/jobseeker`, data);
+      return response; 
+  } catch (error) {
+      if (axios.isAxiosError(error)) {
+          console.error('Signup error:', error.response?.data || error.message);
+      } else {
+          console.error('Unexpected error:', error);
+      }
+      throw new Error('Signup failed');
+  }
 };

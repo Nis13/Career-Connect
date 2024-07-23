@@ -32,17 +32,21 @@ export class JobseekerModel extends BaseModel {
             resume:jobseeker.jobseekerResume
         };
 
-        await this.queryBuilder()
+        const response = await this.queryBuilder()
             .insert(jobseekerToCreate)
             .table("jobseeker");
     
-    const createdUser = await this.queryBuilder()
-        .select('user_id', 'email', 'name')
-        .table("users")
-        .where("email", jobseeker.email)
-        .first();
+    // const createdUser = await this.queryBuilder()
+    //     .select('user_id', 'email', 'name')
+    //     .table("users")
+    //     .where("email", jobseeker.email)
+    //     .first();
+    if (response){
+        return {message:"User created Successfully"};
+    }else{
+        return {message:"User can't be created"}
+    }
 
-    return createdUser;
 
     }
 

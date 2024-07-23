@@ -13,7 +13,6 @@ export interface Employer extends User{
 }
 
 export interface Jobseeker extends User{
-    seekerid:number,
     jobseekerEducation:string,
     jobseekerSkills:string,
     jobseekerIndustry:string,

@@ -30,7 +30,7 @@ export async function signupJobseeker(jobseeker:Jobseeker){
   const password = await bcrypt.hash(jobseeker.password, 10);
   jobseeker.password = password;
 
-  return JobseekerModel.signup(jobseeker);
+  return await JobseekerModel.signup(jobseeker);
 }
 
 export async function login(body: Pick<User, "email" | "password">) {
