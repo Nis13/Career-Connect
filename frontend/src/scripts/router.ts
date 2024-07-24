@@ -1,7 +1,5 @@
-
-// frontend/src/scripts/router.ts
-
 import UniversalRouter from 'universal-router';
+
 const routes = [
   {
     path: '/',
