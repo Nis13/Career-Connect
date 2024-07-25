@@ -1,0 +1,57 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card border-light shadow-sm p-4">
+                <h3 class="card-title mb-4 text-center">Job Details Form</h3>
+                <form>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Job Title</label>
+                        <input type="text" class="form-control" id="title" placeholder="Enter job title" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="jobDescription" class="form-label">Job Description</label>
+                        <textarea class="form-control" id="jobDescription" rows="4" placeholder="Enter job description" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="requirements" class="form-label">Requirements</label>
+                        <textarea class="form-control" id="requirements" rows="4" placeholder="Enter job requirements" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="benefits" class="form-label">Benefits</label>
+                        <textarea class="form-control" id="benefits" rows="4" placeholder="Enter job benefits" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="Enter job location" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Salary Range</label>
+                        <div class="d-flex">
+                            <input type="number" class="form-control me-2" id="salaryMin" placeholder="Min Salary" required>
+                            <input type="number" class="form-control" id="salaryMax" placeholder="Max Salary" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="jobType" class="form-label">Job Type</label>
+                        <select class="form-select col-lg-5" id="jobType" required>
+                            <option value="Full-Time" selected>Full-Time</option>
+                            <option value="Part-Time">Part-Time</option>
+                            <option value="Internship">Internship</option>
+                            <option value="Contract">Contract</option>
+                        </select>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn  btn-lg">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,16 +1,24 @@
-<div class="container-fluid job-detail-page">
+<div class="container-fluid job-detail-page py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-            <div class="card job-detail-card mt-5">
+            <div class="card job-detail-card shadow-lg border-light rounded">
                 <div class="card-body">
-                    <h2 class="card-title">{{title}}</h2>
+                    <h2 class="card-title mb-4">{{title}}</h2>
                     <p class="card-text"><strong>ID:</strong> {{listing_id}}</p>
-                    <p class="card-text"><strong>Benefits:</strong> {{benefits}}</p>
-                    <p class="card-text"><strong>Requirements:</strong> {{requirements}}</p>
-                    <p class="card-text"><strong>Description:</strong> {{description}}</p>
-                    <p class="card-text"><strong>Location:</strong> {{location}}</p>
-                    <p class="card-text"><strong>Status:</strong> {{jobStatus}}</p>
-                    <p class="card-text"><strong>Type:</strong> {{jobType}}</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{company_logo}}" alt=" Logo" class="img-thumbnail me-3" style="width: 50px; height: 50px;">
+                        <div>
+                            <p class="card-text mb-0"><strong>Company:</strong> {{company_name}}</p>
+                        </div>
+                    </div>
+                    <p class="card-text mb-2"><strong>Benefits:</strong> {{benefits}}</p>
+                    <p class="card-text mb-2"><strong>Requirements:</strong> {{requirements}}</p>
+                    <p class="card-text mb-2"><strong>Description:</strong> {{description}}</p>
+                    <p class="card-text mb-2"><strong>Location:</strong> {{location}}</p>
+                    <p class="card-text mb-2"><strong>Status:</strong> {{jobStatus}}</p>
+                    <p class="card-text mb-4"><strong>Type:</strong> {{jobType}}</p>
+                    <button class="btn btn-primary">Apply Now</button>
+                    <p class="btn btn-secondary ms-2" id="job-edit-btn" data-id="{{listing_id}}">Edit</p>
                 </div>
             </div>
         </div>

@@ -64,7 +64,13 @@ export class JoblistingModel extends BaseModel {
         return respone;
     }
     static async getJoblistingById(id:number){
-        const query = this.queryBuilder().select('*').from("job_listings").where("listing_id",id).first();
+        const query = this.queryBuilder()
+        // .select('*')
+        .select('listingId','title','job_listings.description','requirements','benefits','job_listings.location','salaryRange','jobType','jobStatus','name','logo')
+        .from("job_listings")
+        .innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
+        .innerJoin("users",{"employer.user_id":"users.user_id"})
+        .where("listing_id",id).first();
         const respone = await query;
         return respone;
     }

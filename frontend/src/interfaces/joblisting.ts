@@ -1,15 +1,22 @@
-import Context from 'universal-router';
-export interface Joblisting{
-    listingId:string,
-    title:string,
-    createdBy:number,
-    description:string,
-    requirements:string,
-    benefits:string,
-    location:string,
-    salaryRange:string,
-    jobType:string,
-    jobStatus:string
+
+export interface Joblisting {
+    type: 'Joblisting';
+    listingId: string;
+    title: string;
+    createdBy: number;
+    description: string;
+    requirements: string;
+    benefits: string;
+    location: string;
+    salaryRange: string;
+    jobType: string;
+    jobStatus: string;
+}
+
+export interface JoblistingDetail extends Omit<Joblisting, 'type'> {
+    type: 'JoblistingDetail';
+    name: string;
+    logo: string;
 }
 
 export interface jobDetailParam{

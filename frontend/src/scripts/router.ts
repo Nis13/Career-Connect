@@ -2,7 +2,8 @@ import UniversalRouter from 'universal-router';
 import { showJoblisting } from '../views/joblisting/joblisting';
 import { joblistingDetail } from '../views/joblisting/joblistingdetail';
 import {  jobDetailParam } from '../interfaces/joblisting';
-import { addJobTileEventListeners } from './eventHandlers/eventHandler';
+import { updateJoblisting } from '../views/joblisting/updateJoblisting';
+import { updateJoblistingEventListeners } from './eventHandlers/eventHandler';
 
 const routes = [
   {
@@ -29,6 +30,10 @@ const routes = [
     },
   },
   {
+    path: '/addjob',
+    action: async () => await fetch('/src/views/joblisting/addjoblisting.html').then(response => response.text()),
+  },
+  {
     path: '/jobdetail/:id',
     // action: async () => 'home'
     action: async({params}:{params:jobDetailParam})=> {
@@ -37,12 +42,16 @@ const routes = [
       return response;
       // return `id of job ${id}`;
     },
-    // async(context:JobDetailContext) =>{
-    //   const { id } = context.params;
-    //   const response = await joblistingDetail(id);
-    //   return response;
-    // }
-  }
+  },
+  {
+    path:'/updatejob/:id',
+    action: async({params}:{params:jobDetailParam})=> {
+      const {id} = params;
+      const response = await updateJoblisting(parseInt(id!));
+      return response;
+      // return `id of job ${id}`;
+    },
+  },
 ];
 
 const router = new UniversalRouter(routes);
