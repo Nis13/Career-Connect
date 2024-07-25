@@ -1,3 +1,4 @@
+import { addjoblisting } from "../../views/joblisting/addjoblisting";
 import handleLogin from "../../views/login/login";
 import handleSignupEmployer from "../../views/SignupEmployer/signup";
 import handleSignupJobseeker from "../../views/SignupJobseeker/signup";
@@ -6,9 +7,9 @@ import render from "../render";
 let areEventListenersAdded = false;
 // Function to add event listeners
 
-export const addEventListeners = () => {
+export const addEventListeners =  () => {
  addJobTileEventListeners();
- updateJoblistingEventListeners()
+ updateJoblistingEventListeners();
  document
    .getElementById("login-form")
    ?.addEventListener("submit", handleLogin);
@@ -18,7 +19,13 @@ export const addEventListeners = () => {
  document
    .getElementById("jobseekerForm")
    ?.addEventListener("submit", handleSignupJobseeker);
-
+   document
+   .getElementById("addJobForm")
+   ?.addEventListener("submit", addjoblisting);
+  // document
+  // .getElementById("addJobForm")
+  // ?.addEventListener("submit",
+   
     // updateJoblistingEventListeners();
   
   if (areEventListenersAdded) return;

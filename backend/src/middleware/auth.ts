@@ -7,7 +7,6 @@ import { User } from "../interface/users";
 
 export function authenticate(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
-  
     if (!authorization) {
       return {message:"token not found"};
     }

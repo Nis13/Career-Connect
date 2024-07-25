@@ -3,7 +3,6 @@ import { showJoblisting } from '../views/joblisting/joblisting';
 import { joblistingDetail } from '../views/joblisting/joblistingdetail';
 import {  jobDetailParam } from '../interfaces/joblisting';
 import { updateJoblisting } from '../views/joblisting/updateJoblisting';
-import { updateJoblistingEventListeners } from './eventHandlers/eventHandler';
 
 const routes = [
   {

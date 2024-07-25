@@ -1,4 +1,3 @@
-import { Joblisting, JoblistingDetail } from "../../interfaces/joblisting";
 import { joblistingById } from '../../scripts/services/joblistingdetail';
 import { populateTemplate } from "../../utils/replaceTemplateVar";
 
