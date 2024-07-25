@@ -1,5 +1,4 @@
 import { Joblisting } from "../interface/joblisting";
-import { Employer, GetUserQuery, User } from "../interface/users";
 import { BaseModel } from "./base";
 
 
@@ -34,6 +33,10 @@ export class JoblistingModel extends BaseModel {
 
     return {message:"job Created successfully"};
 
+    }
+
+    static async updateJoblistingById(listing_id:number, joblisting:Joblisting){
+        
     }
 
 

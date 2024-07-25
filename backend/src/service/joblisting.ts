@@ -11,7 +11,7 @@ export function getJoblistings(){
 export async function getJoblistingById(id:number){
     const data = await JoblistingModel.getJoblistingById(id);
     if (!data){
-        return {message:`user of ${id} not found`}
+        return {message:`job of ${id} not found`}
     }
     return data;
 };

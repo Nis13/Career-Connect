@@ -1,5 +1,5 @@
 import { login } from "../../scripts/services/auth";
-import storeToken from "../../utils/token";
+import {storeToken} from "../../utils/token";
 
 // Function to handle login form submission
 const handleLogin = async (event: Event) => {

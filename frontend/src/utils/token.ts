@@ -1,5 +1,7 @@
-const storeToken = (token: string) => {
+export const storeToken = (token: string) => {
     localStorage.setItem("token", token);
   };
 
-  export default storeToken;
+  export const getToken = () => {
+    return localStorage.getItem("token");
+  }

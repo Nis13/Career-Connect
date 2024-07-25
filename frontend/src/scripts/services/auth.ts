@@ -2,10 +2,7 @@
 
 import axios from 'axios';
 import { Employer, Jobseeker, UserCredentials } from '../../interfaces/Users';
-
-
-
-const BASE_URL = 'http://localhost:8000'; // Adjust based on your backend URL
+import { BASE_URL } from '../../constants/urls';
 
 export const login = async (credentials: UserCredentials) => {
   try {
