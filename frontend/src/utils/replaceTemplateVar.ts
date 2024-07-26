@@ -10,7 +10,8 @@ export function populateTemplate(template: string, job: (Joblisting | Joblisting
     .replace(/{{description}}/g, job.description)
     .replace(/{{location}}/g, job.location)
     .replace(/{{jobStatus}}/g, job.jobStatus)
-    .replace(/{{jobType}}/g, job.jobType);
+    .replace(/{{jobType}}/g, job.jobType)
+    .replace(/{{salaryRange}}/g, job.salaryRange);
   
 
         // console.log(job.type);

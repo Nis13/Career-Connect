@@ -14,6 +14,6 @@ export const showJoblisting =  async () =>{
         // addJobTileEventListeners();
         return addedHtmlString;
       } catch (error) {
-        console.error("Error during listing:", error);
+        console.log("Error during listing:", error);
       }
 }

@@ -1,5 +1,4 @@
 import { Joblisting } from './../interface/joblisting';
-import { GetUserQuery, User } from "../interface/users";
 
 import bcrypt from "bcrypt";
 import { JoblistingModel } from "../model/joblisting";
@@ -18,6 +17,9 @@ export async function getJoblistingById(id:number){
 
 export async function createJoblisting(employerId:number,joblisting:Joblisting){
     return await JoblistingModel.createJoblisting(employerId,joblisting);
+}
+export async function updateJoblisting(employerId:number,listing_id:number,joblisting:Joblisting){
+  return await JoblistingModel.updateJoblistingById(employerId,listing_id,joblisting);
 }
 
 

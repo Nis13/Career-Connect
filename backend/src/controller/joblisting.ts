@@ -47,7 +47,18 @@ export async function getJoblistings(req: Request, res: Response, next: NextFunc
   }
   
 
-  
+  export async function updateJoblisting(req: Request, res: Response, next: NextFunction) {
+    try {
+        const userId = req.user?.id;
+        const { id } = req.params;
+      console.log(userId);
+      const joblisting = req.body;
+      const data = await JoblistingService.updateJoblisting(userId!,parseInt(id),joblisting);
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
   export function deleteJoblistingById(req: Request, res: Response, next: NextFunction) {
     try{
       const { id } = req.params;

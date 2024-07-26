@@ -2,7 +2,7 @@ import UniversalRouter from 'universal-router';
 import { showJoblisting } from '../views/joblisting/joblisting';
 import { joblistingDetail } from '../views/joblisting/joblistingdetail';
 import {  jobDetailParam } from '../interfaces/joblisting';
-import { updateJoblisting } from '../views/joblisting/updateJoblisting';
+import { getJoblistingform } from '../views/joblisting/updateJoblisting';
 
 const routes = [
   {
@@ -46,7 +46,7 @@ const routes = [
     path:'/updatejob/:id',
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
-      const response = await updateJoblisting(parseInt(id!));
+      const response = await getJoblistingform(parseInt(id!));
       return response;
       // return `id of job ${id}`;
     },

@@ -1,4 +1,6 @@
 import { addjoblisting } from "../../views/joblisting/addjoblisting";
+import { updateJoblisting } from "../../views/joblisting/updateJoblisting";
+// import { updateJoblisting } from "../../views/joblisting/updateJoblisting";
 import handleLogin from "../../views/login/login";
 import handleSignupEmployer from "../../views/SignupEmployer/signup";
 import handleSignupJobseeker from "../../views/SignupJobseeker/signup";
@@ -22,6 +24,23 @@ export const addEventListeners =  () => {
    document
    .getElementById("addJobForm")
    ?.addEventListener("submit", addjoblisting);
+
+   document
+    .getElementById("updateJobForm")
+    ?.addEventListener("submit", (event: Event) => {
+      event.preventDefault();
+        const target = event.currentTarget as HTMLElement;
+        console.log("target");
+        console.log(target);
+        if (target && target.dataset.id) {
+          const jobId = target.dataset.id;
+          console.log(jobId);
+          updateJoblisting(parseInt(jobId));
+          // console.log(`/updatejob/${jobId}`);
+          // navigateTo(`/updatejob/${jobId}`);
+        }
+      });
+ 
   // document
   // .getElementById("addJobForm")
   // ?.addEventListener("submit",
@@ -96,3 +115,12 @@ export function updateJoblistingEventListeners() {
       }
     });
   }
+
+  export function saveJobUpdateEventListeners() {
+    // console.log("add event");
+    const jobSaveBtn = document.getElementById("save-job-update")!;
+
+    console.log(jobSaveBtn);
+    
+    }
+  

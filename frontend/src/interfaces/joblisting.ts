@@ -20,6 +20,8 @@ export interface addJoblisting {
     location: string;
     salaryRange: string;
     jobType: string;
+}export interface updateJoblisting extends addJoblisting {
+   listingId:number
 }
 
 export interface JoblistingDetail extends Omit<Joblisting, 'type'> {

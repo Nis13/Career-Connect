@@ -35,8 +35,25 @@ export class JoblistingModel extends BaseModel {
 
     }
 
-    static async updateJoblistingById(listing_id:number, joblisting:Joblisting){
-        
+    static async updateJoblistingById(userId:number,listing_id:number, joblisting:Joblisting){
+        const employerId = await this.queryBuilder().select('employer_id').from("employer").where('user_id',userId).first();
+        const jobToUpdate = {
+            title:joblisting.title,
+            description:joblisting.jobDescription,
+            requirements:joblisting.requirements,
+            benefits:joblisting.benefits,
+            location:joblisting.location,
+            salaryRange:joblisting.salaryRange,
+            jobType:joblisting.jobType,
+            jobStatus:joblisting.jobStatus,
+            createdBy:employerId.employerId
+        };
+        await this.queryBuilder()
+        .update(jobToUpdate)
+        .table("job_listings")
+        .where('listing_id', listing_id);
+
+        return {message:"job updated successfully"};
     }
 
 
