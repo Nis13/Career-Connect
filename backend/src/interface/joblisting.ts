@@ -9,3 +9,10 @@ export interface Joblisting{
     jobType:string,
     jobStatus:string
 }
+
+export interface Application{
+    resume:string,
+    coverLetter:Text,
+    additionalMessage:Text,
+    status:string
+}

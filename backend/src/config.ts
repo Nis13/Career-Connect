@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 
 dotenv.config({path: __dirname + "/../.env"});
 
+const cloudinary = require('cloudinary').v2;
+
 const config = {
     port: process.env.PORT,
     jwt: {
@@ -17,6 +19,7 @@ const config = {
         password: process.env.DB_PASSWORD,
         name: process.env.DB_NAME,
     }
+   
 }
 
 export default config;

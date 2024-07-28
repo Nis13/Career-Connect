@@ -38,7 +38,7 @@ export const createEmployerBodySchema = Joi.object({
     companyLocation:Joi.string().required().messages({
         'any.required':'Location is required'
     }),
-    companyLogo:Joi.string().required().messages({
+    companyLogo:Joi.required().messages({
         'any.required':'Logo is required'
     }),
     
