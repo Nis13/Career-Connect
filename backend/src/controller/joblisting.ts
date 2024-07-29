@@ -1,6 +1,6 @@
 import { NextFunction , Response} from "express";
 
-import { GetUserQuery } from "../interface/users";
+
 import * as JoblistingService from "../service/joblisting";
 import HttpStatusCodes from "http-status-codes";
 import { Request } from "../interface/auth";
@@ -69,6 +69,16 @@ export async function getJoblistings(req: Request, res: Response, next: NextFunc
       res.status(HttpStatusCodes.OK).json(data);
     }
     catch(error){
+      next(error);
+    }
+  }
+
+  export async function getJoblistingByFilter(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { query } = req;
+      const data = await JoblistingService.getJobListingByFilter(query);
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
       next(error);
     }
   }

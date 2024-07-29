@@ -1,6 +1,6 @@
 import HttpStatusCodes from 'http-status-codes';
 import { Response, NextFunction } from "express";
-import { FileRequest, Request } from "../interface/auth";
+import { Request } from "../interface/auth";
 import * as AuthService from "../service/auth";
 
 export async function login(req: Request, res: Response, next: NextFunction) {
@@ -24,24 +24,30 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   }
 
   export async function signupEmployer(
-    req: FileRequest,
+    req: Request,
     res: Response,
     next: NextFunction
   ) {
     try {
-      const { body, file } = req;
-      const companyLogoUrl = file?.path;
-    console.log("file path",companyLogoUrl);
+      const { body} = req;
+      if (req.file) {
+        // The uploaded file information is available in req.file
+        const fileUrl = `uploads/${req.file.filename}`;
+        console.log(fileUrl);
+      
+
       if (!body || !body.name || !body.password) {
        return {message:"name and password are required"};
       }
       console.log(body.companyLogo);
       const employerData = {
         ...body,
-        companyLogo: companyLogoUrl // Add Cloudinary URL to your data
+        companyLogo: fileUrl // Add Cloudinary URL to your data
     };
       const data = await AuthService.signupEmployer(employerData);
+      
       res.status(HttpStatusCodes.CREATED).json(data);
+  }
     } catch (error) {
       return error;
     }

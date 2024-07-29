@@ -11,7 +11,7 @@ export interface UserCredentials {
   }
   export interface Employer extends User{
       companyDescription: string,
-      companyLogo:string,
+      companyLogo:File,
       companyLocation:string,
       companyContact:number,
   }

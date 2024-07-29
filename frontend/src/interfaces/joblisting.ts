@@ -33,3 +33,11 @@ export interface JoblistingDetail extends Omit<Joblisting, 'type'> {
 export interface jobDetailParam{
       id?: string;
   }
+
+  export interface JobFilter{
+    companyName?:string,
+    Location?:string,
+    jobType?:string,
+    title?:string,
+    jobStatus?:string
+}

@@ -1,26 +1,46 @@
 <div class="container-fluid job-detail-page py-5">
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
+        <div class="col-lg-10">
             <div class="card job-detail-card shadow-lg border-light rounded">
-                <div class="card-body">
-                    <h2 class="card-title mb-4">{{title}}</h2>
-                    <p class="card-text"><strong>ID:</strong> {{listing_id}}</p>
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="{{company_logo}}" alt=" Logo" class="img-thumbnail me-3" style="width: 50px; height: 50px;">
-                        <div>
-                            <p class="card-text mb-0"><strong>Company:</strong> {{company_name}}</p>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <img src="http://localhost:8000/{{company_logo}}" alt="Logo" class="img-fluid mb-3" style="width: 100px; height: 100px;">
+                            <h5 class="card-title">{{title}}</h5>
+                            <p class="card-text"><strong>Salary:</strong>{{salaryRange}}</p>
+                            <p class="card-text">{{jobType}}</p>
+                            <div class="d-flex justify-content-center mb-2">
+                                <span class="badge bg-light text-dark me-2">IT</span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <h5 class="text-purple">Job Description</h5>
+                                    <p>{{description}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <h5 class="text-purple">Requirements</h5>
+                                    <p>{{requirements}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <div>
+                                    <h5 class="text-purple">Benefits</h5>
+                                    <p>{{benefits}}</p>
+                                </div>
+                            </div>
+                            <div class=" mb-3">
+                                <p class="btn btn-primary" id="job-apply-btn" data-id="{{listing_id}}">Apply Now</p>
+                                <p class="btn btn-secondary ms-2" id="job-edit-btn" data-id="{{listing_id}}">Edit</p>
+                            </div>
                         </div>
                     </div>
-                    <p class="card-text mb-2"><strong>Benefits:</strong> {{benefits}}</p>
-                    <p class="card-text mb-2"><strong>Requirements:</strong> {{requirements}}</p>
-                    <p class="card-text mb-2"><strong>Description:</strong> {{description}}</p>
-                    <p class="card-text mb-2"><strong>Location:</strong> {{location}}</p>
-                    <p class="card-text mb-2"><strong>Status:</strong> {{jobStatus}}</p>
-                    <p class="card-text mb-4"><strong>Type:</strong> {{jobType}}</p>
-                    <button class="btn btn-primary">Apply Now</button>
-                    <p class="btn btn-secondary ms-2" id="job-edit-btn" data-id="{{listing_id}}">Edit</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

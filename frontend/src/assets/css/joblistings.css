@@ -1,7 +1,7 @@
-.job-card {
+.job-card , .card-body{
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: none;
+    border: 1px solid #8C8AFF;
 }
 
 .job-card:hover {
@@ -9,11 +9,7 @@
     box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
 }
 
-.job-card .card-body {
-    background-color: #f8f9fa; 
-    border-top: 4px solid #8C8AFF; 
-    border-radius: 0 0 5px 5px;
-}
+
 
 .job-card:hover .card-body {
     background-color: #e9ecef; 
@@ -74,4 +70,20 @@ body, html {
 
 .job-detail-card .card-text strong {
     color: #343a40; 
+}
+.job-card {
+    max-width: 350px;
+}
+.card-title {
+    color: #6f42c1; /* Adjust color to match the primary color in your image */
+}
+.badge-light {
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
+.card-text.text-muted {
+    color: #6c757d;
+}
+.text-purple{
+    color: #8C8AFF;
 }

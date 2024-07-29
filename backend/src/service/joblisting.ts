@@ -1,4 +1,4 @@
-import { Joblisting } from './../interface/joblisting';
+import { GetJobQuery, Joblisting } from './../interface/joblisting';
 
 import bcrypt from "bcrypt";
 import { JoblistingModel } from "../model/joblisting";
@@ -29,4 +29,8 @@ export async function updateJoblisting(employerId:number,listing_id:number,jobli
       return {message:'User not found'};
     }
     return JoblistingModel.deleteJoblistingById(id);
+  }
+
+  export function getJobListingByFilter(query:GetJobQuery){
+    return JoblistingModel.getJobListingByFilter(query);
   }

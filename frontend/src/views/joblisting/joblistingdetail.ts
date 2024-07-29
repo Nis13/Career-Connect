@@ -8,6 +8,8 @@ export const joblistingDetail =  async (listing_id:number) =>{
         // console.log(data);
         data.type = 'JoblistingDetail';
         const htmlFile = await fetch('/src/views/joblisting/joblistingdetail.html').then(response => response.text());
+        // data.logo = 'src/'+data.logo;
+        console.log(data.logo);
         const htmlString = populateTemplate(htmlFile, data);
         const addedHtmlString = htmlString;
         return addedHtmlString;

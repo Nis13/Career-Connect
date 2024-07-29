@@ -3,6 +3,7 @@ import { signupemployer } from "../../scripts/services/auth";
 const handleSignupEmployer = async (event: Event) => {
     event.preventDefault();
   
+    const formData = new FormData();
     const name = (document.getElementById("name") as HTMLInputElement).value;
     const email = (document.getElementById("email") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement)
@@ -12,7 +13,7 @@ const handleSignupEmployer = async (event: Event) => {
     ).value;
     const companyLogo = (
       document.getElementById("companyLogo") as HTMLInputElement
-    ).value;
+    ).files![0];
     const companyLocation = (
       document.getElementById("companyLocation") as HTMLInputElement
     ).value;
@@ -34,9 +35,17 @@ const handleSignupEmployer = async (event: Event) => {
       companyLocation: companyLocation,
       companyContact: companyContact,
     };
+    
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('companyDescription', companyDescription);
+    formData.append('companyLogo', companyLogo);  // Note: 'companyLogo' should be a file
+    formData.append('companyLocation', companyLocation);
+    formData.append('companyContact', companyContact.toString()); 
   
     try {
-      const response = await signupemployer(employerData);
+      const response = await signupemployer(formData);
       console.log("message:", response.data.message);
       alert(response.data.message);
       // navigateTo('/');

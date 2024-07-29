@@ -1,4 +1,4 @@
-import { Joblisting } from "../interface/joblisting";
+import { GetJobQuery, Joblisting } from "../interface/joblisting";
 import { BaseModel } from "./base";
 
 
@@ -58,7 +58,8 @@ export class JoblistingModel extends BaseModel {
 
 
     static async getJoblistings(){
-        const query = await this.queryBuilder().select('*').table('job_listings');
+        const query = await this.queryBuilder().select('*').table('job_listings').innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
+        .innerJoin("users",{"employer.user_id":"users.user_id"});
         return query;
     }
     // static async count(filter:GetUserQuery){
@@ -95,5 +96,33 @@ export class JoblistingModel extends BaseModel {
     static async deleteJoblistingById(id: number) {
         await this.queryBuilder().from("job_listings").where('listing_id', id).delete();
         return { message: 'User deleted successfully' };
+    }
+
+    static async getJobListingByFilter(filter:GetJobQuery){
+        // .select('*')
+        const query = this.queryBuilder().select('*').table('job_listings').innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
+        .innerJoin("users",{"employer.user_id":"users.user_id"});
+
+        if (filter.title){
+            query.where("job_listings.title","ilike",`%${filter.title}`);
+        }
+
+        if(filter.location){
+            query.where("job_listings.location","ilike",`%${filter.location}`);
+        }
+
+        if(filter.jobType){
+            query.where("job_listings.jobType","ilike",`%${filter.jobType}`);
+        }
+
+        if(filter.name){
+            query.where("users.name","ilike",`%${filter.name}`);
+        }
+        
+
+        const data = await query;
+
+        return data;
+
     }
 };

@@ -1,8 +1,16 @@
-.container{
+/* .login-container{
     border: black 2px solid;
-}
+} */
 
 .btn{
     background-color:	#8C8AFF;
     color: white;
+}
+.sign-link{
+    color: #8C8AFF;
+    cursor: pointer;
+}
+.sign-link:hover{
+    color: black;
+    text-decoration: none;
 }

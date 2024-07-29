@@ -1,6 +1,6 @@
 import { Joblisting, JoblistingDetail } from './../interfaces/joblisting';
 
-export function populateTemplate(template: string, job: (Joblisting | JoblistingDetail)): string {
+export function populateTemplate(template: string, job: (JoblistingDetail)): string {
     // console.log(job);
     template = template
     .replace(/{{title}}/g, job.title)
@@ -11,7 +11,9 @@ export function populateTemplate(template: string, job: (Joblisting | Joblisting
     .replace(/{{location}}/g, job.location)
     .replace(/{{jobStatus}}/g, job.jobStatus)
     .replace(/{{jobType}}/g, job.jobType)
-    .replace(/{{salaryRange}}/g, job.salaryRange);
+    .replace(/{{salaryRange}}/g, job.salaryRange)
+    .replace(/{{company_name}}/g, job.name)
+    .replace(/{{company_logo}}/g, job.logo);;
   
 
         // console.log(job.type);

@@ -26,5 +26,19 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
   
     next();
   }
+
+  export function authorize(role: string) {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      const user = req.user!;
+      const userId = user.id;
+      // const userPermissions = await UserModel.authorizeUser(userId);
+      console.log(role);
+      if (user.role === role){
+        next();
+      }
+      else return {message:"Forbidden"}
+    };
+  }
+  
   
   

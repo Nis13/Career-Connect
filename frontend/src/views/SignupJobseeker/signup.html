@@ -1,47 +1,59 @@
-<div class="container mt-5 p-5">
-    <div class="row justify-content-center">
-        <!-- Image Column -->
-        <div class="col-md-6">
-            <img src="./src/assets/images/signup.jpg" class="img-fluid" alt="Image Description">
-        </div>
-        
-        <div class="col-md-6">
-            <h1 class="text-center mb-4">Job Seeker Registration</h1>
-            <form id="jobseekerForm" class="row g-3">
-                <div class="col-md-12 form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" required>
+<section class="h-100">
+    <div class="container p-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-12">
+                <div class="card card-registration shadow-lg">
+                    <div class="row g-0">
+                        <!-- Image Column -->
+                        <div class="col-md-6 d-flex align-items-stretch">
+                            <img src="./src/assets/images/signup.jpg" class="img-fluid" alt="Image Description" style="object-fit: cover; height: 100%; width: 100%;">
+                        </div>
+                        <!-- Form Column -->
+                        <div class="col-md-6">
+                            <div class="card-body p-md-5 text-black">
+                                <h1 class="text-center mb-4">Job Seeker Registration</h1>
+                                <form id="jobseekerForm" class="row g-3">
+                                    <div class="col-md-12 form-group">
+                                        <label for="name">Name <span class="required-star">*</span></label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="email">Email <span class="required-star">*</span></label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" required>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="password">Password <span class="required-star">*</span></label>
+                                        <input type="password" class="form-control" id="password" name="password" required>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="jobseekerEducation">Education <span class="required-star">*</span></label>
+                                        <textarea class="form-control" id="jobseekerEducation" name="jobseekerEducation" rows="3" required></textarea>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="jobseekerSkills">Skills<span class="required-star">*</span></label>
+                                        <input type="text" class="form-control" id="jobseekerSkills" name="jobseekerSkills" required>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="jobseekerIndustry">Industry <span class="required-star">*</span></label>
+                                        <input type="text" class="form-control" id="jobseekerIndustry" name="jobseekerIndustry" required>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <label for="jobseekerContact">Jobseeker Contact <span class="required-star">*</span></label>
+                                        <input type="number" class="form-control" id="jobseekerContact" name="jobseekerContact" required>
+                                    </div>
+                                    <div class="col-md-12 form-group">
+                                        <label for="jobseekerResume">Jobseeker Resume</label>
+                                        <input type="text" class="form-control" id="jobseekerResume" name="jobseekerResume">
+                                    </div>
+                                    <div class="col-md-12 text-center ">
+                                        <button type="submit" class=" btn ">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-12 form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" required>
-                </div>
-                <div class="col-md-12 form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <div class="col-md-12 form-group">
-                    <label for="jobseekerEducation">Education</label>
-                    <textarea class="form-control" id="jobseekerEducation" name="jobseekerEducation" rows="3" required></textarea>
-                </div>
-                <div class="col-md-12 form-group">
-                    <label for="jobseekerSkills">Skills</label>
-                    <input type="text" class="form-control" id="jobseekerSkills" name="jobseekerSkills">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label for="jobseekerIndustry">Industry</label>
-                    <input type="text" class="form-control" id="jobseekerIndustry" name="jobseekerIndustry" required>
-                </div>
-                <div class="col-md-6 form-group">
-                    <label for="jobseekerContact">Jobseeker Contact</label>
-                    <input type="number" class="form-control" id="jobseekerContact" name="jobseekerContact" required>
-                </div>
-                <div class="col-md-12 form-group">
-                    <label for="jobseekerResume">Jobseeker Resume</label>
-                    <input type="text" class="form-control" id="jobseekerResume" name="jobseekerResume" required>
-                </div>
-                <button type="submit" class="btn btn-block">Register</button>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</section>

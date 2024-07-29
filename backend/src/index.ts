@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import routes from "./routes/index";
 import config from './config';
 import cors from "cors";
-
+import path from 'path';
 
 const app = express();
 
@@ -13,6 +13,7 @@ app.use(
     origin: "http://localhost:5173"
   })
 );
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
 
 app.use('/', routes);
 

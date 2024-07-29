@@ -3,6 +3,7 @@ import { showJoblisting } from '../views/joblisting/joblisting';
 import { joblistingDetail } from '../views/joblisting/joblistingdetail';
 import {  jobDetailParam } from '../interfaces/joblisting';
 import { getJoblistingform } from '../views/joblisting/updateJoblisting';
+import { getapplyform } from '../views/application/application';
 
 const routes = [
   {
@@ -47,6 +48,16 @@ const routes = [
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
       const response = await getJoblistingform(parseInt(id!));
+      return response;
+      // return `id of job ${id}`;
+    },
+  },
+  {
+    path:'/applyjob/:id',
+    // action: () => fetch('/src/views/application/application.html').then(response => response.text())
+    action: async({params}:{params:jobDetailParam})=> {
+      const {id} = params;
+      const response = await getapplyform(id!);
       return response;
       // return `id of job ${id}`;
     },

@@ -1,17 +1,39 @@
+import axios from "axios";
+import { getToken, handleToken } from "../../utils/token";
 import { addjoblisting } from "../../views/joblisting/addjoblisting";
 import { updateJoblisting } from "../../views/joblisting/updateJoblisting";
-// import { updateJoblisting } from "../../views/joblisting/updateJoblisting";
 import handleLogin from "../../views/login/login";
 import handleSignupEmployer from "../../views/SignupEmployer/signup";
 import handleSignupJobseeker from "../../views/SignupJobseeker/signup";
 import render from "../render";
+import { BASE_URL } from "../../constants/urls";
+import { addApplication } from "../../views/application/application";
+import { showJoblisting } from "../../views/joblisting/joblisting";
+import { showJoblistingFilter } from "../../views/joblisting/jobfilter";
 
 let areEventListenersAdded = false;
-// Function to add event listeners
 
 export const addEventListeners =  () => {
+  document.addEventListener("DOMContentLoaded", async()=>{
+    if (getToken()){
+      const token = getToken();
+      const response = await axios.get(`${BASE_URL}/parse/${token}`);
+      console.log(response);
+      handleToken(response.data.id,response.data.role);
+    }
+  })
+
+
  addJobTileEventListeners();
  updateJoblistingEventListeners();
+ applyJobEventListener();
+
+ document
+      .getElementById("employer-signup-link-login")
+      ?.addEventListener("click", () => navigateTo("/signupemployer"));
+    document
+      .getElementById("jobseeker-signup-link-login")
+      ?.addEventListener("click", () => navigateTo("/signupjobseeker"));
  document
    .getElementById("login-form")
    ?.addEventListener("submit", handleLogin);
@@ -24,7 +46,12 @@ export const addEventListeners =  () => {
    document
    .getElementById("addJobForm")
    ?.addEventListener("submit", addjoblisting);
-
+   document
+   .getElementById('job-application-form')
+   ?.addEventListener("submit", addApplication);
+   document
+   .getElementById('filterForm')
+   ?.addEventListener('submit', showJoblistingFilter);
    document
     .getElementById("updateJobForm")
     ?.addEventListener("submit", (event: Event) => {
@@ -40,12 +67,6 @@ export const addEventListeners =  () => {
           // navigateTo(`/updatejob/${jobId}`);
         }
       });
- 
-  // document
-  // .getElementById("addJobForm")
-  // ?.addEventListener("submit",
-   
-    // updateJoblistingEventListeners();
   
   if (areEventListenersAdded) return;
 
@@ -98,6 +119,7 @@ export const addEventListeners =  () => {
     });
   });
 }
+
 export function updateJoblistingEventListeners() {
   // console.log("add event");
   const jobEditBtn = document.getElementById("job-edit-btn")!;
@@ -115,6 +137,19 @@ export function updateJoblistingEventListeners() {
       }
     });
   }
+  export function applyJobEventListener(){
+    const applyBtn = document.getElementById("job-apply-btn");
+    console.log(applyBtn);
+    applyBtn?.addEventListener('click', (event:Event)=>{
+      const target = event.currentTarget as HTMLElement;
+      if (target && target.dataset.id) {
+        const jobId = target.dataset.id;
+        console.log(jobId);
+        console.log(`/applyjob/${jobId}`);
+        navigateTo(`/applyjob/${jobId}`);
+      }
+    });
+    }
 
   export function saveJobUpdateEventListeners() {
     // console.log("add event");

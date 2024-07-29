@@ -16,3 +16,10 @@ export interface Application{
     additionalMessage:Text,
     status:string
 }
+export interface GetJobQuery{
+    name?:string,
+    location?:string,
+    jobType?:string,
+    title?:string,
+    jobStatus?:string
+}

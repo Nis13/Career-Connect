@@ -12,12 +12,12 @@ const handleLogin = async (event: Event) => {
   
     try {
       const response = await login({ email, password });
-      console.log("Message:", response);
+      console.log("Message:", response.message);
       alert(response.message);
       console.log(response.accessToken);
       storeToken(response.accessToken);
     } catch (error) {
-      console.error("Error during login:", error);
+      console.log("Error during login:", error);
     }
   };
   export default handleLogin;

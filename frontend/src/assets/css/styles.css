@@ -1,7 +1,8 @@
 @import url('./joblistings.css');
 @import url('./login.css');
+@import url('./signup.css');
 
-*{
+* {
     color: #070828;
     margin: 0;
     padding: 0;

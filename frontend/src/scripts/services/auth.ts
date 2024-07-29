@@ -1,7 +1,7 @@
 // frontend/src/scripts/services/auth.ts
 
 import axios from 'axios';
-import { Employer, Jobseeker, UserCredentials } from '../../interfaces/Users';
+import {  Jobseeker, UserCredentials } from '../../interfaces/Users';
 import { BASE_URL } from '../../constants/urls';
 
 export const login = async (credentials: UserCredentials) => {
@@ -17,7 +17,7 @@ export const login = async (credentials: UserCredentials) => {
   }
 };
 
-export const signupemployer = async (data: Employer) => {
+export const signupemployer = async (data: FormData) => {
     try {
         console.log(data);
         const response = await axios.post(`${BASE_URL}/auth/signup/employer`, data);
