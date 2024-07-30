@@ -83,3 +83,14 @@ export async function getJoblistings(req: Request, res: Response, next: NextFunc
     }
   }
   
+  export async function getJoblistingByUserId(req: Request, res: Response, next: NextFunction) {
+    try {
+        const userId = req.user?.id;
+      console.log(userId);
+      const joblisting = req.body;
+      const data = await JoblistingService.getJoblistingByUserId(userId!);
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }

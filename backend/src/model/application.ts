@@ -51,7 +51,8 @@ export class applicationModel extends BaseModel{
     }
 
     static async getApplicationByJobId(jobId:number){
-        const query = this.queryBuilder().select('*').from("application").where("job_id",jobId);
+        const query = this.queryBuilder().select('*').from("application").innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
+        .innerJoin("users",{"jobseeker.user_id":"users.user_id"}).where("job_id",jobId);
         const respone = await query;
         return respone;
     }
@@ -61,5 +62,23 @@ export class applicationModel extends BaseModel{
         const respone = await query;
         return respone;
     }
+    static async getApplicationByUserId(userId:number){
+        const query = this.queryBuilder()
+        // .select('*')
+        .select('*')
+        .from("application")
+        .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
+        .innerJoin("users",{"jobseeker.user_id":"users.user_id"})
+        .where("users.user_id",userId);
+        const respone = await query;
+        return respone;
+    }
     
+    static async updateApplicationStatus(id:number,status:string) {
+        await this.queryBuilder()
+            .table('application') // Replace with your actual table name
+            .where('application_id', id)
+            .update('application_status' ,status);
+        return { success: true };
+    }
 }

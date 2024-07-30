@@ -1,6 +1,7 @@
 @import url('./joblistings.css');
 @import url('./login.css');
 @import url('./signup.css');
+@import url('./home.css');
 
 * {
     color: #070828;

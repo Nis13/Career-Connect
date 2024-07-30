@@ -1,33 +1,22 @@
-import axios from "axios";
-import { getToken, handleToken } from "../../utils/token";
 import { addjoblisting } from "../../views/joblisting/addjoblisting";
 import { updateJoblisting } from "../../views/joblisting/updateJoblisting";
 import handleLogin from "../../views/login/login";
 import handleSignupEmployer from "../../views/SignupEmployer/signup";
 import handleSignupJobseeker from "../../views/SignupJobseeker/signup";
 import render from "../render";
-import { BASE_URL } from "../../constants/urls";
 import { addApplication } from "../../views/application/application";
-import { showJoblisting } from "../../views/joblisting/joblisting";
 import { showJoblistingFilter } from "../../views/joblisting/jobfilter";
+import { handleChangeStatus } from "../services/application";
+import { loadContent } from "../../views/employerDashboard/employerDashboard";
 
 let areEventListenersAdded = false;
 
 export const addEventListeners =  () => {
-  document.addEventListener("DOMContentLoaded", async()=>{
-    if (getToken()){
-      const token = getToken();
-      const response = await axios.get(`${BASE_URL}/parse/${token}`);
-      console.log(response);
-      handleToken(response.data.id,response.data.role);
-    }
-  })
-
-
  addJobTileEventListeners();
  updateJoblistingEventListeners();
  applyJobEventListener();
-
+ seeJobApplication();
+changeStatus();
  document
       .getElementById("employer-signup-link-login")
       ?.addEventListener("click", () => navigateTo("/signupemployer"));
@@ -51,7 +40,7 @@ export const addEventListeners =  () => {
    ?.addEventListener("submit", addApplication);
    document
    .getElementById('filterForm')
-   ?.addEventListener('submit', showJoblistingFilter);
+   ?.addEventListener('submit',showJoblistingFilter);
    document
     .getElementById("updateJobForm")
     ?.addEventListener("submit", (event: Event) => {
@@ -68,6 +57,20 @@ export const addEventListeners =  () => {
         }
       });
   
+      document
+      .getElementById("dashboard")
+      ?.addEventListener("click", () => loadContent('dashboard'));
+      document
+      .getElementById("applications")
+      ?.addEventListener("click", () => loadContent('applications'));
+      document
+      .getElementById("job-post-show")
+      ?.addEventListener("click", () => loadContent('job-postings'));
+      document
+      .getElementById("company-profile")
+      ?.addEventListener("click", () => loadContent('company-profile'));
+
+      
   if (areEventListenersAdded) return;
 
     document
@@ -86,13 +89,11 @@ export const addEventListeners =  () => {
       .getElementById("joblisting-link")
       ?.addEventListener("click", () => navigateTo('/joblisting'));
 
+      
       document
       .getElementById("add-joblisting-link")
       ?.addEventListener("click", () => navigateTo('/addjob'));
-   
       
-      
-
       areEventListenersAdded = true;
   };
 
@@ -157,5 +158,29 @@ export function updateJoblistingEventListeners() {
 
     console.log(jobSaveBtn);
     
+    }
+
+    export function seeJobApplication(){
+      const seeApplicationBtn = document.getElementById('see-application-btn');
+      seeApplicationBtn?.addEventListener('click', (event:Event) =>{
+        const target = event.currentTarget as HTMLElement;
+      if (target && target.dataset.id) {
+        const jobId = target.dataset.id;
+        console.log(jobId);
+        console.log(`/seeApplication/${jobId}`);
+        navigateTo(`/seeApplication/${jobId}`);
+      }
+      })
+    }
+
+    export function changeStatus(){
+
+      document.querySelectorAll('#change-status-btn').forEach(button => {
+        button.addEventListener('click', async () => {
+            const applicationId = (button as HTMLButtonElement).dataset.id!;
+            const status = (document.getElementById(`status-select-${applicationId}`) as HTMLSelectElement).value;
+            handleChangeStatus(parseInt(applicationId),status);
+            console.log(status);
+        })})
     }
   

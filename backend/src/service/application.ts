@@ -13,3 +13,6 @@ export function getApplicationById(applicationId:number){
     return applicationModel.getApplicationById(applicationId);
 }
 
+export function updateApplicationStatus(applicationId:number, status:string){
+    return applicationModel.updateApplicationStatus(applicationId,status);
+}

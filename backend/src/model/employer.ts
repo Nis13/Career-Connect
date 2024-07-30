@@ -84,4 +84,8 @@ export class EmployerModel extends BaseModel {
         await this.queryBuilder().from("users").where('user_id', id).delete();
         return { message: 'User deleted successfully' };
     }
+
+    static async getEmployerDetails(id:number) {
+        return await this.queryBuilder().select('*').from("employer").innerJoin('users', 'employer.user_id', 'users.user_id').where('users.user_id', id);
+    }
 };

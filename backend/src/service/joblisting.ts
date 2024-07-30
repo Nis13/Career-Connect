@@ -34,3 +34,8 @@ export async function updateJoblisting(employerId:number,listing_id:number,jobli
   export function getJobListingByFilter(query:GetJobQuery){
     return JoblistingModel.getJobListingByFilter(query);
   }
+
+
+  export function getJoblistingByUserId(id:number){
+    return JoblistingModel.getJoblistingByUserId(id);
+  }

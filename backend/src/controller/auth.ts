@@ -42,7 +42,7 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       console.log(body.companyLogo);
       const employerData = {
         ...body,
-        companyLogo: fileUrl // Add Cloudinary URL to your data
+        companyLogo: fileUrl 
     };
       const data = await AuthService.signupEmployer(employerData);
       

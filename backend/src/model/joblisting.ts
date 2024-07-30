@@ -62,23 +62,14 @@ export class JoblistingModel extends BaseModel {
         .innerJoin("users",{"employer.user_id":"users.user_id"});
         return query;
     }
-    // static async count(filter:GetUserQuery){
-    //     const { q } = filter;
-
-    //     const query = this.queryBuilder()
-    //     .count("*")
-    //     .table("users")
-    //     .first();
-        
-    //     if (q){
-    //         query.whereLike("name",`%${q}%`);
-    //     }
-
-    //     return query;
-    // }
-    static async getJoblistingByEmployerId(employerId:number){
-        const query = this.queryBuilder().select('*').from("job_listings").where("created_by",employerId).first();
-        const respone = await query;
+    static async getJoblistingByUserId(userId:number){
+        console.log(userId);
+        const query = this.queryBuilder()
+        .select('*')
+        .table('job_listings')
+        .innerJoin('employer', 'job_listings.created_by', 'employer.employer_id')
+        .innerJoin('users', 'employer.user_id', 'users.user_id')
+        .where('users.user_id', userId);        const respone = await query;
         return respone;
     }
     static async getJoblistingById(id:number){
@@ -118,7 +109,9 @@ export class JoblistingModel extends BaseModel {
         if(filter.name){
             query.where("users.name","ilike",`%${filter.name}`);
         }
-        
+        if (filter.jobStatus){
+            query.where("job_listings.title","ilike",`%${filter.jobStatus}`);
+        }
 
         const data = await query;
 

@@ -1,3 +1,4 @@
+import { ApplicationList } from '../interfaces/Application';
 import { Joblisting, JoblistingDetail } from './../interfaces/joblisting';
 
 export function populateTemplate(template: string, job: (JoblistingDetail)): string {
@@ -25,4 +26,16 @@ export function populateTemplate(template: string, job: (JoblistingDetail)): str
         }
     return template;
 
+}
+
+export function populateApplicationTemplate(template: string, application: (ApplicationList)){
+    template = template
+    .replace(/{{listing_id}}/g, application.jobId!.toString())
+    .replace(/{{name}}/g, application.name!)
+    .replace(/{{company_name}}/g, application.jobStatus!)
+    .replace(/{{applicationStatus}}/g, application.applicationStatus)
+    .replace(/{{coverLetter}}/g, application.coverLetter)
+    .replace(/{{application_id}}/g, application.applicationId)
+
+    return template;
 }

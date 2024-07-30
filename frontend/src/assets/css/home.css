@@ -1,0 +1,65 @@
+/* body {
+  } */
+   .landing-body{
+     background-color: #E1D5F0;
+
+   }
+  .landing-page {
+    text-align: center;
+    padding: 5.5rem 20px;
+    color: #5F4B8B;
+  }
+  .landing-page h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  .landing-page p {
+    color: #a29d9d;
+  }
+  .categories {
+    margin: 20px 0;
+  }
+  .category {
+    background-color: #2d2d2d;
+    color: white;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin: 5px;
+    display: inline-block;
+  }
+  .stats {
+    margin-top: 40px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .stats div {
+    background-color: #ffffff; /* White background for stats */
+    border: 1px solid #ced4da; /* Border to separate stats */
+    border-radius: 0.25rem;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for better separation */
+}
+
+.section {
+  padding: 50px 20px;
+}
+.btn-custom {
+  background-color: #2d2d2d;
+  color: white;
+  border-radius: 30px;
+  padding: 10px 20px;
+  margin: 5px;
+  display: inline-block;
+}
+.highlight {
+  background-color: #91c900;
+  border-radius: 30px;
+  padding: 10px 20px;
+  color: white;
+  margin: 5px;
+  display: inline-block;
+}
+.logos img {
+  max-width: 100px;
+  margin: 10px;
+}

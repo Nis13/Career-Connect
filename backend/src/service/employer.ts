@@ -27,3 +27,7 @@ export function getUserByEmail(email:string){
     }
     return EmployerModel.deleteUser(id);
   }
+
+  export function getEmployerDetails(id:number){
+    return EmployerModel.getEmployerDetails(id);
+  }

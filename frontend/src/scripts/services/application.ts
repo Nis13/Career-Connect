@@ -1,4 +1,5 @@
 
+
 import axios from "axios";
 import { BASE_URL} from "../../constants/urls";
 import { getToken} from '../../utils/token';
@@ -19,5 +20,35 @@ export const handleJobApply = async (jobId:number,application:Application) => {
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
+    }
+  };
+
+  export const getApplicationByJobId = async(listing_id:number) =>{
+    try {
+      console.log('from service')
+      console.log(listing_id);
+      console.log(`${BASE_URL}/application/byjob/${listing_id}`);
+      const response = await axios.get(`${BASE_URL}/application/byjob/${listing_id}`,{
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      throw new Error('joblisting get failed');
+    }
+  }
+
+  export const handleChangeStatus = async (application_id:number,status:string) => {
+    try {
+      
+      const response = await axios.put(`${BASE_URL}/application/${application_id}`,
+        {applicationStatus:status}
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      return 'joblisting get failed';
     }
   };

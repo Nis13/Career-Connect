@@ -38,4 +38,17 @@ export async function getApplicationById(req: Request, res: Response, next: Next
 }
 }
 
+export async function updateApplicationStatus(req: Request, res: Response, next: NextFunction){
+  try {
+  const {application_id} = req.params;
+  const body = req.body;
+  console.log(body);
+  const data = await ApplicationService.updateApplicationStatus(parseInt(application_id),body.applicationStatus);
+  res.status(HttpStatusCodes.OK).json(data);
+} catch (error) {
+  next(error);
+}
+}
+
+
 
