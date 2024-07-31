@@ -6,6 +6,8 @@ import { getJoblistingform } from '../views/joblisting/updateJoblisting';
 import { getapplyform } from '../views/application/application';
 import { joblisting} from './services/joblisting';
 import { getApplicationById } from '../views/application/viewapplication';
+import { getApplicationByJobId } from './services/application';
+import { getrole } from '../utils/token';
 
 const routes = [
   {
@@ -27,6 +29,10 @@ const routes = [
   {
     path: '/employerDashboard',
     action: async () => await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text()),
+  },
+  {
+    path: '/jobseekerDashboard',
+    action: async () => await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text()),
   },
 
   {
@@ -58,7 +64,8 @@ const routes = [
     // action: async () => 'home'
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
-      const response = await joblistingDetail(parseInt(id!));
+      const role = getrole()
+      const response = await joblistingDetail(parseInt(id!),role!);
       return response;
       // return `id of job ${id}`;
     },
@@ -89,7 +96,10 @@ const routes = [
       const {id} = params;
       console.log('from nav');
       console.log(id);
-      const response = await getApplicationById(parseInt(id!));
+      console.log('from views');
+        const data = await getApplicationByJobId(parseInt(id!));
+        console.log(data);
+      const response = await getApplicationById(data);
       console.log(response);
       return response;
       // return `id of job ${id}`;

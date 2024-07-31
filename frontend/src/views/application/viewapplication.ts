@@ -1,19 +1,12 @@
-import { ApplicationList } from "../../interfaces/Application";
-import { getApplicationByJobId } from "../../scripts/services/application";
+import { ApplicationList, employerViewApplication } from "../../interfaces/Application";
 import { populateApplicationTemplate} from "../../utils/replaceTemplateVar";
 
-export const getApplicationById =  async (listing_id:number) =>{
+export const getApplicationById =  async (data:employerViewApplication[]) =>{
     try {
-      console.log('from views');
-        const data = await getApplicationByJobId(listing_id);
-        console.log(data);
-        // console.log("from detail");
-        // console.log(data);
-        // data.type = 'JoblistingDetail';
+        if (data.length == 0) return "<h1>No Application to show to show</h1>";
         const htmlFile = await fetch('/src/views/application/viewapplication.html').then(response => response.text());
-        const htmlString = data.map((data:ApplicationList) => populateApplicationTemplate(htmlFile, data)).join('');
+        const htmlString = data.map((data:employerViewApplication) => populateApplicationTemplate(htmlFile, data)).join('');
         const addedHtmlString = '<div class="container mt-4 p-5"><div class="row">'+htmlString+"</div></div>";
-        // data.logo = 'src/'+data.logo;
         console.log(data);
         return addedHtmlString;
       } catch (error) {

@@ -2,12 +2,23 @@ import axios from "axios";
 import { getrole, getToken, handleToken } from "../utils/token";
 import render from "./render";
 import { BASE_URL } from "../constants/urls";
+import { getEmployerImage } from "./services/employer";
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     const userRole = getrole();
+//     if(userRole) loadNavigation(userRole);
+// });
+
 
 document.addEventListener("DOMContentLoaded", async()=>{
   console.log("onload");
   console.log(getToken());
   if (getToken()){
     const token = getToken();
+    const imageUrl = await getEmployerImage();
+    const imgElement = document.getElementById('employer-image') as HTMLImageElement;
+    imgElement.src = imageUrl;
     try{
       const response = await axios.get(`${BASE_URL}/parse/${token}`);
 
@@ -39,7 +50,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
   console.log('no acesss');
   const role = getrole();
   console.log(role);
-  if (role == 'employer'){
+  if (role == 'jobseeker'){
     const addJob = document.getElementById('add-joblisting-link');
     console.log(addJob);
     if (addJob) {

@@ -16,9 +16,11 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/bootstrap": "^5.2.10",
     "@types/node": "^20.14.11",
     "@types/typescript": "^2.0.0",
     "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.3",
     "camelize": "^1.0.1",
     "cloudinary": "^1.21.0",
     "cors": "^2.8.5",

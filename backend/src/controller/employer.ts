@@ -47,7 +47,23 @@ import { Request } from "../interface/auth";
   //     next(error);
   //   }
   // }
-  
+
+  export async function getEmployerById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = req.user?.id;
+      if (!id) {
+        return {message:"User ID is required"};
+      }
+      const data = await  EmployerService.getEmployerById(id);
+      if (!data) {
+       return {message:`User with ID ${id} not found`};
+      }
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
   export async function getEmployerDetails(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = req.user?.id;
@@ -58,6 +74,36 @@ import { Request } from "../interface/auth";
       if (!data) {
        return {message:`User with ID ${userId} not found`};
       }
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  export async function getEmployerImage(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = req.user?.id;
+      if (!userId) {
+        return {message:"User ID is required"};
+      }
+      const data = await  EmployerService.getEmployerImage(userId);
+      if (!data) {
+       return {message:`User with ID ${userId} not found`};
+      }
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+  
+  export async function updateEmployer(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = req.user?.id;
+      const updateData = req.body;
+      if (!userId) {
+        return {message:"User ID is required"};
+      }
+      const data = await  EmployerService.UpdateEmployer(userId,updateData);
       res.status(HttpStatusCodes.OK).json(data);
     } catch (error) {
       next(error);

@@ -22,25 +22,25 @@ const handleSignupJobseeker = async (event: Event) => {
     );
     const jobseekerResume = (
       document.getElementById("jobseekerResume") as HTMLInputElement
-    ).value;
+    ).files![0];
   
     if (isNaN(jobseekerContact)) {
       console.error("Invalid company contact number");
       return;
     }
-    const jobseekerData = {
-      name: name,
-      email: email,
-      password: password,
-      jobseekerEducation: jobseekerEducation,
-      jobseekerSkills: jobseekerSkills,
-      jobseekerIndustry: jobseekerIndustry,
-      jobseekerContact: jobseekerContact,
-      jobseekerResume: jobseekerResume,
-    };
+    
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('jobseekerEducation', jobseekerEducation);
+    formData.append('jobseekerSkills', jobseekerSkills);
+    formData.append('jobseekerIndustry', jobseekerIndustry);
+    formData.append('jobseekerContact', jobseekerContact.toString());
+    formData.append('resume', jobseekerResume);
   
     try {
-      const response = await signupjobseeker(jobseekerData);
+      const response = await signupjobseeker(formData);
       console.log("message:", response.data.message);
       alert(response.data.message);
       // navigateTo('/');

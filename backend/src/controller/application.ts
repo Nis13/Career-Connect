@@ -49,6 +49,23 @@ export async function updateApplicationStatus(req: Request, res: Response, next:
   next(error);
 }
 }
-
+export async function getApplicationByUserId(req: Request, res: Response, next: NextFunction){
+  try {
+  const userId = req.user?.id;
+  const data = await ApplicationService.getApplicationByUserId(userId!);
+  res.status(HttpStatusCodes.OK).json(data);
+} catch (error) {
+  next(error);
+}
+}
+export async function getApplicationByJobseekerId(req: Request, res: Response, next: NextFunction){
+  try {
+  const userId = req.user?.id;
+  const data = await ApplicationService.getApplicationByJobseekerId(userId!);
+  res.status(HttpStatusCodes.OK).json(data);
+} catch (error) {
+  next(error);
+}
+}
 
 

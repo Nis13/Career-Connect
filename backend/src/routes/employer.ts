@@ -1,5 +1,5 @@
 import express from "express";
-import { getEmployerDetails, } from "../controller/employer";
+import { getEmployerById, getEmployerDetails, getEmployerImage, updateEmployer, } from "../controller/employer";
 import { authenticate } from "../middleware/auth";
 
 
@@ -7,6 +7,9 @@ import { authenticate } from "../middleware/auth";
 const router = express();
 
 router.get('/detail',authenticate,getEmployerDetails);
+router.get('/image',authenticate, getEmployerImage);
+router.put('/updateprofile',authenticate, updateEmployer);
+// router.get('/',authenticate,getEmployerById);
 // router.get('/', getUsers);
 
 // router.delete('/:id',deleteUser);

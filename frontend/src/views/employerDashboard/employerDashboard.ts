@@ -1,6 +1,10 @@
-import { addJobTileEventListeners } from "../../scripts/eventHandlers/eventHandler";
-import { joblisting, joblistingByUserId } from "../../scripts/services/joblisting";
-import { showJoblisting, showJoblistingByEmployer } from "../joblisting/joblisting";
+import { addJobTileEventListeners, changeStatus, navigateTo, seeJobApplication } from "../../scripts/eventHandlers/eventHandler";
+import { getApplicationByEmployerId } from "../../scripts/services/application";
+import { getEmployerDetail } from "../../scripts/services/employer";
+import {  joblistingByUserId } from "../../scripts/services/joblisting";
+import { getApplicationById } from "../application/viewapplication";
+import { showJoblistingByEmployer } from "../joblisting/joblisting";
+import { loadEmployerProfile,updateEmployerForm } from "./profile";
 
 export async function loadContent(option: string) {
     let contentHTML: string = '';
@@ -16,12 +20,16 @@ export async function loadContent(option: string) {
                 contentHTML = await showJoblistingByEmployer(jobData) || '';
                 break;
             case 'applications':
-                const applicationsResponse = await fetch('/src/views/employerDashboard/applications.html');
-                contentHTML = await applicationsResponse.text();
+                const applications = await getApplicationByEmployerId();
+                contentHTML = await getApplicationById(applications) || '';
                 break;
+                
             case 'company-profile':
-                const profileResponse = await fetch('/src/views/employerDashboard/profile.html');
-                contentHTML = await profileResponse.text();
+                const response = await getEmployerDetail();
+                contentHTML = await loadEmployerProfile(response);
+                console.log(response);
+                // const profileResponse = await fetch('/src/views/employerDashboard/profile.html');
+                // contentHTML = await profileResponse.text();
                 break;
             default:
                 const defaultResponse = await fetch('/src/views/employerDashboard/dashboard.html');
@@ -30,12 +38,47 @@ export async function loadContent(option: string) {
 
         (document.getElementById('dashboard-left-container') as HTMLElement).innerHTML = contentHTML;
         if (option == 'job-postings')addJobTileEventListeners();
+        if (option == 'applications') {
+            seeJobApplication();
+            changeStatus();}
+            viewJob();
+        if (option == 'company-profile')  editProfileEvent();
+        showJobBtn();
     } catch (error) {
         console.error('Error loading content:', error);
         (document.getElementById('dashboard-left-container') as HTMLElement).innerHTML = '<p>Error loading content.</p>';
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadContent('dashboard');
+
+function showJobBtn(){
+    const viewJobButtons = document.querySelectorAll(".change-status-btn") as NodeListOf<HTMLButtonElement>;
+
+    viewJobButtons.forEach(button => {
+    button.style.display = "block";
+    
 });
+}
+
+function viewJob(){
+    const viewJobButtons = document.querySelectorAll(".view-job-btn") as NodeListOf<HTMLButtonElement>;
+
+    viewJobButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const jobId = (button as HTMLButtonElement).dataset.id!;;
+        console.log(jobId);
+        navigateTo(`/jobdetail/${jobId}`);
+    })
+    
+});
+    
+}
+function  editProfileEvent(){
+    document
+        .getElementById('editEmployerProfileForm')
+        ?.addEventListener('submit', updateEmployerForm);
+}
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     loadContent('dashboard');
+// });

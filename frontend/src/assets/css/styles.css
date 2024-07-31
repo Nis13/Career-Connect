@@ -16,8 +16,12 @@
     padding: 1rem;
 }
 
+.navbar{
+   
+    /* background-color: #a5a5cd; */
+  }
 .nav-link {
-    color: #495057; 
+   
     font-weight: bold;
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;

@@ -7,8 +7,8 @@ export function getUsers(query:GetUserQuery){
     return JobseekerModel.getUsers(query);
 }
 
-export async function getUserById(id:number){
-    const data = await JobseekerModel.getUserById(id);
+export async function getJobseekerById(id:number){
+    const data = await JobseekerModel.getJobseekerById(id);
     if (!data){
         return {message:`user of ${id} not found`}
     }

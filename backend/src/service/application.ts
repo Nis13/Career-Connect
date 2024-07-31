@@ -16,3 +16,12 @@ export function getApplicationById(applicationId:number){
 export function updateApplicationStatus(applicationId:number, status:string){
     return applicationModel.updateApplicationStatus(applicationId,status);
 }
+
+export function getApplicationByUserId(userId:number){
+    return applicationModel.getApplicationByUserId(userId);
+}
+
+export function getApplicationByJobseekerId(userId:number){
+    return applicationModel.getApplicationByJobseekerId(userId);
+}
+

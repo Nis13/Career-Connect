@@ -11,6 +11,16 @@ export interface ApplicationList{
     name?:string,
     jobStatus?:string
     applicationStatus:string,
-    coverLetter:string,
+    // coverLetter:string,
     applicationId:string
+}
+
+export interface employerViewApplication{
+    jobId:number,
+    name:string,
+    email:string,
+    applicationStatus:string,
+    applicationId:string,
+    contactNo:string,
+    jobStatus:string
 }

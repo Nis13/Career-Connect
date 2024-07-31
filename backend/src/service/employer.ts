@@ -1,4 +1,4 @@
-import { GetUserQuery, User } from "../interface/users";
+import { Employer, GetUserQuery, User } from "../interface/users";
 import { EmployerModel } from "../model/employer";
 
 import bcrypt from "bcrypt";
@@ -13,6 +13,14 @@ export async function getUserById(id:number){
         return {message:`user of ${id} not found`}
     }
     return data;
+};
+
+export async function getEmployerById(id:number){
+  const data = await EmployerModel.getEmployerById(id);
+  if (!data){
+      return {message:`user of ${id} not found`}
+  }
+  return data;
 };
 
 export function getUserByEmail(email:string){
@@ -30,4 +38,16 @@ export function getUserByEmail(email:string){
 
   export function getEmployerDetails(id:number){
     return EmployerModel.getEmployerDetails(id);
+  }
+
+  export function getEmployerImage(id:number){
+    return EmployerModel.getEmployerImage(id);
+  }
+
+  export function UpdateEmployer(id: number, updatedData: Partial<Employer>) {
+    const userToUpdate = EmployerModel.getUserById(id);
+    if (!userToUpdate) {
+      return {message:'User not found'};
+    }
+    return EmployerModel.updateEmployer(id, updatedData);
   }

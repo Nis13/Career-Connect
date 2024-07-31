@@ -39,6 +39,41 @@ export const handleJobApply = async (jobId:number,application:Application) => {
       throw new Error('joblisting get failed');
     }
   }
+  export const getApplicationByEmployerId = async() =>{
+    try {
+      const token = getToken();
+      console.log('from service')
+      console.log(`${BASE_URL}/application/getbyemployer/`);
+      const response = await axios.get(`http://localhost:8000/application/getbyemployer`,
+        {
+          headers: {
+          Authorization: `Bearer ${token}`
+        }}
+      );
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      throw new Error('joblisting get failed');
+    }
+  }
+  export const getApplicationByJobseekerId = async() =>{
+    try {
+      const token = getToken();
+      console.log('from service')
+      console.log(`http://localhost:8000/application/getbyjobseeker`);
+      const response = await axios.get(`http://localhost:8000/application/getbyjobseeker`,
+        {
+          headers: {
+          Authorization: `Bearer ${token}`
+        }}
+      );
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      throw new Error('joblisting get failed');
+    }
+  }
+  
 
   export const handleChangeStatus = async (application_id:number,status:string) => {
     try {

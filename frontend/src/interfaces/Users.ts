@@ -23,3 +23,24 @@ export interface UserCredentials {
     jobseekerContact:number,
     jobseekerResume:string
 }
+
+export interface getEmployer{
+    description: string;
+    logo: string;
+    contactNo: string;
+    location: string;
+    name: string;
+    email: string;
+}
+
+export interface getJobseeker{
+    name:string,
+    email:string,
+    resume:string,
+    addtionalMessage:string,
+    coverLetter:string,
+    education:string,
+    skills:string,
+    industry:string,
+    contactNo:number
+}

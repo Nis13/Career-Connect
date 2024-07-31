@@ -15,7 +15,7 @@ export const addjoblisting = async (event:Event) =>{
     const salaryMax = (document.getElementById('salaryMax')as HTMLInputElement).value;
     const jobType = (document.getElementById('jobType')as HTMLSelectElement).value;
     
-    const salaryRange = `${salaryMin},${salaryMax}`;
+    const salaryRange = `${salaryMin}-${salaryMax}`;
 
     const jobListing = {
         

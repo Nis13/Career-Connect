@@ -81,7 +81,11 @@ export class JobseekerModel extends BaseModel {
         const respone = await query;
         return respone;
     }
-
+    static async getJobseekerById(id:number){
+        const query = this.queryBuilder().select('*').from("users").innerJoin("jobseeker",{"jobseeker.user_id":"users.user_id"}).where("users.user_id",id).first();
+        const respone = await query;
+        return respone;
+    }
     static async deleteUser(id: number) {
         await this.queryBuilder().from("jobseeker").where('user_id', id).delete();
         await this.queryBuilder().from("users").where('user_id', id).delete();

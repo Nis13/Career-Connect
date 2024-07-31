@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .job-detail-card {
+            margin-top: 50px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .job-detail-card .company-logo {
+            width: 100px;
+            height: 100px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+        }
+        .apply-btn {
+            background-color: #6c63ff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .text-purple {
+            color: #6c63ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid job-detail-page py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card job-detail-card shadow-lg border-light rounded">
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <div class="company-logo mb-3"></div>
+                                <h5 class="card-title">HealthCare Ltd.</h5>
+                                <p class="card-text"><strong>Salary:</strong> $60,000 - $80,000 per year</p>
+                                <p class="card-text">Full-time Worker</p>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <span class="badge bg-light text-dark me-2">Nursing</span>
+                                    <span class="badge bg-light text-dark">CPR Certification</span>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <h5 class="text-purple">Why Join Us?</h5>
+                                        <p>Nunc sed libero sollicitudin faucibus. Aliquam viverra maecenas amet ut porta aliquam nunc morbi.</p>
+                                        <p>Nunc sed libero sollicitudin faucibus. Aliquam viverra maecenas amet ut porta aliquam nunc morbi.</p>
+                                        <p>10 Jobs Posted &middot; 4.5 Ratings</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <h5 class="text-purple">Requirements</h5>
+                                        <p>Nunc sed libero sollicitudin faucibus. Aliquam viverra maecenas amet ut porta aliquam nunc morbi.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div>
+                                        <h5 class="text-purple">Benefits</h5>
+                                        <p>Nunc sed libero sollicitudin faucibus. Aliquam viverra maecenas amet ut porta aliquam nunc morbi.</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="apply-btn" id="job-apply-btn">Apply Now</p>
+                                    <p class="btn btn-secondary ms-2 job-edit-btn" id="job-edit-btn">Edit</p>
+                                    <p class="btn see-application-btn" id="see-application-btn">See Applications</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

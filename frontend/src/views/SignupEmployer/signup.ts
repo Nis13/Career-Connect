@@ -40,7 +40,7 @@ const handleSignupEmployer = async (event: Event) => {
     formData.append('email', email);
     formData.append('password', password);
     formData.append('companyDescription', companyDescription);
-    formData.append('companyLogo', companyLogo);  // Note: 'companyLogo' should be a file
+    formData.append('companyLogo', companyLogo); 
     formData.append('companyLocation', companyLocation);
     formData.append('companyContact', companyContact.toString()); 
   

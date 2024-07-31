@@ -1,20 +1,20 @@
-<div class="job_tile col-md-4 col-sm-6 mb-4" data-id="{{listing_id}}">
-    <div class="card job-card shadow-sm border-0 rounded">
-      <div class="card-body">
-        <div class="d-flex align-items-center mb-3">
-          <img src="http://localhost:8000/{{company_logo}}" alt="Company Logo" class="img-thumbnail me-3" style="width: 90px; height: 90px; object-fit: cover;">
-          <div class="ml-3">
-            <h5 class="card-title mb-0">{{company_name}}</h5>
-            <small class="text-muted">{{jobStatus}}</small>
-          </div>
+<div class="job_tile col-md-4 col-sm-6 mb-4 bg-light" data-id="{{listing_id}}">
+  <div class="card job-card">
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-3">
+        <img src="http://localhost:8000/{{company_logo}}" alt="Company Logo" class="img-thumbnail me-3" style="width: 80px; height: 80px; object-fit: cover;" onError="this.onerror=null;this.src='/path/to/default-logo.png';">
+        <div class="ml-3">
+          <h5 class="mb-0">{{company_name}}</h5>
+          <small class="text-muted">{{jobStatus}}</small>
         </div>
-        <h5 class="card-title">{{title}}</h5>
-        <p class="card-text"><strong>Salary:</strong> {{salaryRange}}</p>
-        <p class="card-text text-muted"><strong>Type:</strong> {{jobType}}</p>
-        <p class="card-text text-muted">{{description}}</p>
-        <div class="badge-container">
-          <span class="badge bg-light text-dark mr-2 mb-2">IT</span> </div>
+      </div>
+      <h5 class="card-title text-purple">{{title}}</h5>
+      <p class="card-text"><strong>Salary: {{salaryRange}}</strong></p>
+      <p class="card-text text-muted">{{jobType}}</p>
+      <p class="card-text text-muted">{{description}}</p>
+      <div class="badge-container">
+        <span class="badge bg-light text-dark mr-2 mb-2">IT</span>
       </div>
     </div>
   </div>
-  
+</div>

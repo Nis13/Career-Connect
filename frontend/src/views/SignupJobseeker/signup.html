@@ -12,7 +12,7 @@
                         <div class="col-md-6">
                             <div class="card-body p-md-5 text-black">
                                 <h1 class="text-center mb-4">Job Seeker Registration</h1>
-                                <form id="jobseekerForm" class="row g-3">
+                                <form id="jobseekerForm" class="row g-3" enctype="multipart/form-data">
                                     <div class="col-md-12 form-group">
                                         <label for="name">Name <span class="required-star">*</span></label>
                                         <input type="text" class="form-control" id="name" name="name" required>
@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label for="jobseekerResume">Jobseeker Resume</label>
-                                        <input type="text" class="form-control" id="jobseekerResume" name="jobseekerResume">
+                                        <input type="file" class="form-control" id="jobseekerResume" name="jobseekerResume">
                                     </div>
                                     <div class="col-md-12 text-center ">
                                         <button type="submit" class=" btn ">Register</button>

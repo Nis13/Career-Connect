@@ -14,6 +14,7 @@ app.use(
   })
 );
 app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
+app.use('/resumes', express.static(path.join(__dirname, '../public/resumes')));
 
 app.use('/', routes);
 

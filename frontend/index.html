@@ -7,24 +7,61 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/assets/css/styles.css">
 </head>
+
 <body>
   <div id="app">
-    <nav class="nav nav-tabs">
-      <a class="nav-link" id="login-link">Login</a>
-      <a class="nav-link" id="employer-signup-link">Signup as Employer</a>
-      <a class="nav-link" id="jobseeker-signup-link">Signup as Job Seeker</a>
-      <a class="nav-link" id="home-link">Home</a>
-      <a class="nav-link" id="joblisting-link">Job Listing</a>
-      <a class="nav-link" id="add-joblisting-link">Add job</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <img
+            src="./src/assets/images/logomain.png"
+            height="50"
+            alt="MDB Logo"
+            loading="lazy"
+          />
+        </a>
+        <div class="d-flex justify-content-center w-100">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" id="home-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="login-link">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="employer-signup-link">Signup as Employer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="jobseeker-signup-link">Signup as Job Seeker</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="employer-dashboard">Employer Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="jobseeker-dashboard">Jobseeker Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="joblisting-link">Job Listing</a>
+            </li>
+            <li>
+              <a class="nav-link" id="add-joblisting-link">Add job</a>
 
-  </nav>
+            </li>
+            <img id="employer-image" alt="Employer Image" />
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
   
 
-    <div id="content"></div>
+    <div id="content" style="height: 89vh;"></div>
   </div>
-
   <script type="module" src="./src/scripts/main.ts"></script>
-  <script src="./src/views/employerDashboard/employerDashboard.ts"></script>
+  <!-- <script type="module" src="./src/views/nav/navLoader.ts"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

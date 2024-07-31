@@ -59,13 +59,24 @@ export async function login(req: Request, res: Response, next: NextFunction) {
     next: NextFunction
   ) {
     try {
+      if (req.file) {
+        // The uploaded file information is available in req.file
+        const fileUrl = `pdf/${req.file.filename}`;
+        console.log(fileUrl);
       const { body } = req;
       if (!body || !body.name || !body.password) {
        return {message:"name and password are required"};
       }
-      const data = await AuthService.signupJobseeker(body);
+      console.log('file url ko')
+      console.log(fileUrl);
+      const jobseekerData = {
+        ...body,
+        jobseekerResume: fileUrl 
+    };
+    console.log(jobseekerData.resume);
+      const data = await AuthService.signupJobseeker(jobseekerData);
       res.status(HttpStatusCodes.CREATED).json(data);
-    } catch (error) {
+    }} catch (error) {
       return error;
     }
   }
