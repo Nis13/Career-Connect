@@ -17,16 +17,20 @@ export const addApplication = async (event:Event) =>{
  
   console.log('apply application');
 
-
-  const resume = (document.getElementById('resume') as HTMLInputElement).value;
+ const formData = new FormData();
+  const resume = (document.getElementById('resume') as HTMLInputElement).files![0];
   const coverletter = (document.getElementById('coverletter') as HTMLInputElement).value;
-  const message = (document.getElementById('message') as HTMLInputElement).value;
-
-  const applicationData = {
-    resume:resume,
-    coverLetter:coverletter,
-    message:message
-  }
+  let message = (document.getElementById('message') as HTMLInputElement).value;
+  if (!message) message = "No Message";
+  // const applicationData = {
+  //   resume:resume,
+  //   coverLetter:coverletter,
+  //   message:message
+  // }
+  console.log(resume);
+  formData.append('resume',resume);
+  formData.append('coverLetter',coverletter);
+  formData.append('additionalMessage',message)
 
   try {
     const target = event.currentTarget as HTMLElement;
@@ -35,7 +39,8 @@ export const addApplication = async (event:Event) =>{
     if (target && target.dataset.id) {
       const jobId = target.dataset.id;
       console.log(jobId);
-      const response = await handleJobApply(parseInt(jobId),applicationData);
+      console.log(formData)
+      const response = await handleJobApply(parseInt(jobId),formData);
       console.log("message:", response.message);
       alert(response.message);
     }

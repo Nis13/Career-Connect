@@ -2,7 +2,8 @@ import { addJobTileEventListeners, changeStatus, navigateTo, seeJobApplication }
 import { getApplicationByEmployerId } from "../../scripts/services/application";
 import { getEmployerDetail } from "../../scripts/services/employer";
 import {  joblistingByUserId } from "../../scripts/services/joblisting";
-import { getApplicationById } from "../application/viewapplication";
+import { getApplicationforEmployer } from "../application/viewapplication";
+
 import { showJoblistingByEmployer } from "../joblisting/joblisting";
 import { loadEmployerProfile,updateEmployerForm } from "./profile";
 
@@ -21,9 +22,9 @@ export async function loadContent(option: string) {
                 break;
             case 'applications':
                 const applications = await getApplicationByEmployerId();
-                contentHTML = await getApplicationById(applications) || '';
+                contentHTML = await getApplicationforEmployer(applications) || '';
                 break;
-                
+
             case 'company-profile':
                 const response = await getEmployerDetail();
                 contentHTML = await loadEmployerProfile(response);
@@ -42,6 +43,7 @@ export async function loadContent(option: string) {
             seeJobApplication();
             changeStatus();}
             viewJob();
+            viewUser();
         if (option == 'company-profile')  editProfileEvent();
         showJobBtn();
     } catch (error) {
@@ -60,7 +62,7 @@ function showJobBtn(){
 });
 }
 
-function viewJob(){
+export function viewJob(){
     const viewJobButtons = document.querySelectorAll(".view-job-btn") as NodeListOf<HTMLButtonElement>;
 
     viewJobButtons.forEach(button => {
@@ -70,8 +72,18 @@ function viewJob(){
         navigateTo(`/jobdetail/${jobId}`);
     })
     
-});
+});}
+function viewUser(){
+    const viewJobButtons = document.querySelectorAll(".view-user-btn") as NodeListOf<HTMLButtonElement>;
+
+    viewJobButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const applicationId = (button as HTMLButtonElement).dataset.id!;;
+        console.log(applicationId);
+        navigateTo(`/applicationDetail/${applicationId}`);
+    })
     
+});
 }
 function  editProfileEvent(){
     document

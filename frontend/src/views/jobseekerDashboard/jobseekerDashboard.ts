@@ -1,6 +1,7 @@
 import { getApplicationByEmployerId, getApplicationByJobseekerId } from "../../scripts/services/application";
 import { getJobseekerDetail } from "../../scripts/services/jobseeker";
-import { getApplicationById } from "../application/viewapplication";
+import { getApplicationforJobseeker } from "../application/viewapplication";
+import { viewJob } from "../employerDashboard/employerDashboard";
 import { loadJobseekerProfile } from "./profile";
 
 export async function loadContentJobseeker(option: string) {
@@ -17,7 +18,8 @@ export async function loadContentJobseeker(option: string) {
             case 'applications':
                 // contentHTML = 'job applications'
                 const applications = await getApplicationByJobseekerId();
-                contentHTML = await getApplicationById(applications) || '';
+                console.log("applications for job seeker",applications)
+                contentHTML = await getApplicationforJobseeker(applications) || '';
 
                 // const applicationsResponse = await fetch('/src/views/employerDashboard/applications.html');
                 // contentHTML = await applicationsResponse.text();
@@ -38,6 +40,7 @@ export async function loadContentJobseeker(option: string) {
         (document.getElementById('dashboard-left-container') as HTMLElement).innerHTML = contentHTML;
 
         showJobBtn()
+        viewJob()
     } catch (error) {
         console.log('Error loading content:', error);
         (document.getElementById('dashboard-left-container') as HTMLElement).innerHTML = '<p>Error loading content.</p>';

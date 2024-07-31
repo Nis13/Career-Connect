@@ -5,14 +5,24 @@ import HttpStatusCodes from "http-status-codes";
 
 export async function createApplication(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log(req.file)
+      if (req.file){
+        const fileUrl = `pdf/${req.file.filename}`;
+        console.log(fileUrl);
+      
         const userId = req.user?.id;
       console.log(userId);
       const {job_id} = req.params;
-      const jobApplication = req.body;
+      const { body } = req;
       console.log('from body')
-      console.log(jobApplication);
-      const data = await ApplicationService.createApplication(userId!,parseInt(job_id),jobApplication)
+      console.log(body);
+      const applicationData = {
+        ...body,
+        resume: fileUrl
+      }
+      const data = await ApplicationService.createApplication(userId!,parseInt(job_id),applicationData)
       res.status(HttpStatusCodes.OK).json(data);
+      }
     } catch (error) {
       next(error);
     }

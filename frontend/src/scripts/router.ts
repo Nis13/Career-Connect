@@ -5,9 +5,11 @@ import {  jobDetailParam} from '../interfaces/joblisting';
 import { getJoblistingform } from '../views/joblisting/updateJoblisting';
 import { getapplyform } from '../views/application/application';
 import { joblisting} from './services/joblisting';
-import { getApplicationById } from '../views/application/viewapplication';
-import { getApplicationByJobId } from './services/application';
+
+import { getApplicationByJobId, showApplicationByIdS } from './services/application';
 import { getrole } from '../utils/token';
+import { showApplicationById } from '../views/application/seeapplication';
+import { getApplicationforEmployer } from '../views/application/viewapplication';
 
 const routes = [
   {
@@ -99,8 +101,25 @@ const routes = [
       console.log('from views');
         const data = await getApplicationByJobId(parseInt(id!));
         console.log(data);
-      const response = await getApplicationById(data);
+      const response = await getApplicationforEmployer(data);
       console.log(response);
+      return response;
+      // return `id of job ${id}`;
+    },
+  },
+  {
+    path:'/applicationdetail/:id',
+    // action: () => fetch('/src/views/application/application.html').then(response => response.text())
+    action: async({params}:{params:jobDetailParam})=> {
+      const {id} = params;
+      console.log('from nav');
+      console.log(id);
+      console.log('from views');
+        const data = await showApplicationByIdS(parseInt(id!));
+        console.log("Application by ID")
+      console.log(data);
+      const response = await showApplicationById(data);
+      // console.log(response);
       return response;
       // return `id of job ${id}`;
     },

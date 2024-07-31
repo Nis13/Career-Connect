@@ -3,16 +3,17 @@
 import axios from "axios";
 import { BASE_URL} from "../../constants/urls";
 import { getToken} from '../../utils/token';
-import { Application } from "../../interfaces/Application";
 
-export const handleJobApply = async (jobId:number,application:Application) => {
+export const handleJobApply = async (jobId:number,application:FormData) => {
     try {
       const token = getToken();
+      console.log("form data")
       console.log(application);
       const response = await axios.post(`${BASE_URL}/application/${jobId}`,
         application,
         {
           headers: {
+            'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         }}
       );
@@ -39,6 +40,7 @@ export const handleJobApply = async (jobId:number,application:Application) => {
       throw new Error('joblisting get failed');
     }
   }
+
   export const getApplicationByEmployerId = async() =>{
     try {
       const token = getToken();
@@ -67,7 +69,8 @@ export const handleJobApply = async (jobId:number,application:Application) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response);
+      console.log("from jobseeker application")
+      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -87,3 +90,22 @@ export const handleJobApply = async (jobId:number,application:Application) => {
       return 'joblisting get failed';
     }
   };
+
+  export const showApplicationByIdS = async(application_id:number) =>{
+    try {
+      const token = getToken();
+      console.log('from service')
+      console.log(application_id);
+      console.log(`${BASE_URL}/application/get/${application_id}`);
+      const response = await axios.get(`${BASE_URL}/application/get/${application_id}`,
+        {
+          headers: {
+          Authorization: `Bearer ${token}`
+        }}
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error('joblisting get failed');
+    }
+  }

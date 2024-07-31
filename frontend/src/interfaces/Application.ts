@@ -16,7 +16,8 @@ export interface ApplicationList{
 }
 
 export interface employerViewApplication{
-    jobId:number,
+    jobId:string,
+    title:string,
     name:string,
     email:string,
     applicationStatus:string,

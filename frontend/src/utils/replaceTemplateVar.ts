@@ -1,4 +1,4 @@
-import { ApplicationList, employerViewApplication } from '../interfaces/Application';
+import { Application, ApplicationList, employerViewApplication } from '../interfaces/Application';
 import { getEmployer, getJobseeker } from '../interfaces/Users';
 import { Joblisting, JoblistingDetail } from './../interfaces/joblisting';
 
@@ -31,14 +31,26 @@ export function populateTemplate(template: string, job: (JoblistingDetail)): str
 
 export function populateApplicationTemplate(template: string, application: (employerViewApplication)){
     template = template
-    .replace(/{{listing_id}}/g, application.jobId!.toString())
+    .replace(/{{listing_id}}/g, application.jobId)
     .replace(/{{name}}/g, application.name)
     .replace(/{{company_name}}/g, application.jobStatus)
     .replace(/{{applicationStatus}}/g, application.applicationStatus)
     .replace(/{{application_id}}/g, application.applicationId)
     .replace(/{{email}}/g, application.email)
     .replace(/{{contact}}/g, application.contactNo)
-    
+    .replace(/{{title}}/g, application.title)
+    return template;
+}
+export function populateBriefApplicationTemplate(template: string, application: (Application)){
+    console.log(application)
+    console.log(application.resume)
+    template = template
+    .replace(/{{resume}}/g, application.resume)
+    .replace(/{{coverLetter}}/g, application.coverLetter)
+    .replace(/{{additionalMessage}}/g, application.additionalMessage!);
+    // if (application.additionalMessage){
+    //     template = template
+    // }
 
 
     return template;

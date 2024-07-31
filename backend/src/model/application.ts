@@ -58,10 +58,11 @@ export class applicationModel extends BaseModel{
     }
 
     static async getApplicationById(id:number){
-        const query = this.queryBuilder().select('*').from("application").where("application_id",id);
+        const query = this.queryBuilder().select('*').from("application").where("application_id",id).first();
         const respone = await query;
         return respone;
     }
+    
     static async getApplicationByUserId(userId:number){
         const query = this.queryBuilder()
         // .select('*')
@@ -69,7 +70,7 @@ export class applicationModel extends BaseModel{
         .from("employer")
         .innerJoin("job_listings",{ "employer.employer_id": "job_listings.created_by" })
         .innerJoin("application",{"application.job_id" : "job_listings.listing_id"})
-        .innerJoin("users",{"users.user_id":"employer.user_id"})
+        .innerJoin("users",{"users.user_id":"application.seeker_id"})
         .where("employer.user_id",userId);
         const respone = await query;
         return respone;
@@ -82,6 +83,7 @@ export class applicationModel extends BaseModel{
         .select('*')
         .from("application")
         .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
+        .innerJoin("job_listings",{ "application.job_id": "job_listings.listing_id" })
         .where("jobseeker.user_id",userId);
         const respone = await query;
         return respone;
