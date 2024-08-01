@@ -1,20 +1,25 @@
 import UniversalRouter from 'universal-router';
-import { showJoblisting } from '../views/joblisting/joblisting';
+import { showJoblisting, showJoblistingByEmployer } from '../views/joblisting/joblisting';
 import { joblistingDetail } from '../views/joblisting/joblistingdetail';
 import {  jobDetailParam} from '../interfaces/joblisting';
 import { getJoblistingform } from '../views/joblisting/updateJoblisting';
 import { getapplyform } from '../views/application/application';
-import { joblisting} from './services/joblisting';
+import { joblisting, joblistingByUserId} from './services/joblisting';
 
-import { getApplicationByJobId, showApplicationByIdS } from './services/application';
+import { getApplicationByEmployerId, getApplicationByJobId, getApplicationByJobseekerId, showApplicationByIdS } from './services/application';
 import { getrole } from '../utils/token';
 import { showApplicationById } from '../views/application/seeapplication';
-import { getApplicationforEmployer } from '../views/application/viewapplication';
+import { getApplicationforEmployer, getApplicationforJobseeker } from '../views/application/viewapplication';
+import { getEmployerDetail } from './services/employer';
+import { loadEmployerProfile } from '../views/employerDashboard/profile';
+import { getJobseekerDetail } from './services/jobseeker';
+import { loadJobseekerProfile } from '../views/jobseekerDashboard/profile';
 
 const routes = [
   {
     path: '/',
-    action: async () => await fetch('/src/views/home.html').then(response=> response.text()),
+    action: async () => 
+      await fetch('/src/views/home.html').then(response=> response.text()),
   },
   {
     path: '/login',
@@ -33,8 +38,67 @@ const routes = [
     action: async () => await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text()),
   },
   {
+    path: '/employerdashboard/viewapplications',
+    action: async () => {
+      const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
+      const applications = await getApplicationByEmployerId();
+      const applicationsHTML = await getApplicationforEmployer(applications) || '';
+
+      const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${applicationsHTML}</div>`);
+      return combinedHTML;
+    },
+  },
+  {
+    path: '/employerdashboard/jobposted',
+    action: async () => {
+      const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
+      const jobData = await joblistingByUserId();
+      const applicationsHTML = await showJoblistingByEmployer(jobData) || '';
+
+      const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${applicationsHTML}</div>`);
+      return combinedHTML;
+    },
+  },
+  {
+    path: '/employerdashboard/companyprofile',
+    action: async () => {
+      const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
+      const response = await getEmployerDetail();
+      console.log(response);
+      const applicationsHTML = await loadEmployerProfile(response) || '';
+      console.log(applicationsHTML);
+      const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${applicationsHTML}</div>`);
+      return combinedHTML;
+    },
+  },
+  {
     path: '/jobseekerDashboard',
     action: async () => await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text()),
+  },
+  {
+    path: '/jobseekerDashboard/jobseekerprofile',
+    action: async () => 
+      {
+        const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
+        console.log('job seeker dashboard');
+                const response = await getJobseekerDetail();
+                console.log(response);
+        const profileHTML = await loadJobseekerProfile(response);
+        const combinedHTML = dashboardHTML.replace('<div id="jobseeker-content-container"></div>', `<div id="jobseeker-content-container">${profileHTML}</div>`);
+        return combinedHTML;
+      }
+  },
+  {
+    path: '/jobseekerDashboard/myapplications',
+    action: async () => 
+      {
+        const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
+        const applications = await getApplicationByJobseekerId();
+        console.log("applications for job seeker",applications)
+        const applicationHTML = await getApplicationforJobseeker(applications) || '';
+        const combinedHTML = dashboardHTML.replace('<div id="jobseeker-content-container"></div>', `<div id="jobseeker-content-container">${applicationHTML}</div>`);
+        return combinedHTML;
+      }
   },
 
   {

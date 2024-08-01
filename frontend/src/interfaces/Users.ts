@@ -42,5 +42,5 @@ export interface getJobseeker{
     education:string,
     skills:string,
     industry:string,
-    contactNo:number
+    contactNo:string
 }

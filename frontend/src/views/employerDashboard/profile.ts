@@ -1,23 +1,16 @@
-
-// import bootstrap from "bootstrap";
-import { Employer, getEmployer } from "../../interfaces/Users";
+import {getEmployer } from "../../interfaces/Users";
+import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import { updateEmployer } from "../../scripts/services/employer";
 import { populateEmployerTemplate } from "../../utils/replaceTemplateVar";
-import { loadContent } from "./employerDashboard";
 
- 
-
-
-
-export function printsth(){
-    console.log("sth isss");
-}
 export async function loadEmployerProfile(employer:getEmployer) {
     console.log("From employer profile")
     console.log(employer);
     console.log(employer.contactNo);
-    const HTML = await fetch('./src/views/employerDashboard/profile.html').then(response => response.text());
+    const HTML = await fetch('/src/views/employerDashboard/profile.html').then(response => response.text());
+    console.log(HTML);
     const contentHTML = populateEmployerTemplate(HTML,employer);
+    // console.log(contentHTML);
         return contentHTML;
 }
 
@@ -35,7 +28,7 @@ export async function updateEmployerForm(event:Event){
     console.log(formData);
     const response = await updateEmployer(formData);
     if (response.data.message === "Profile updated successfully") {
-        loadContent('company-profile');
+        navigateTo('/employerdashboard/companyprofile');
     } else {
         alert('Failed to update profile: ' + response.data.error);
     }

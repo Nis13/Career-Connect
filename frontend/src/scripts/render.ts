@@ -15,7 +15,6 @@ const render = async (pathname: string) => {
   
     if (contentElement) {
       contentElement.innerHTML = content;
-  
       addEventListeners();
     } else {
       console.error("Content element not found");

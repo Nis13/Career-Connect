@@ -70,7 +70,7 @@ export function populateJobseekerTemplate(template: string, jobseeker: (getJobse
     template = template
     .replace(/{{userName}}/g, jobseeker.name)
     .replace(/{{userEmail}}/g, jobseeker.email)
-    .replace(/{{userContactNo}}/g, jobseeker.contactNo.toString())
+    .replace(/{{userContactNo}}/g, jobseeker.contactNo)
     .replace(/{{userResume}}/g, jobseeker.resume)
     .replace(/{{userEducation}}/g, jobseeker.education)
     .replace(/{{userSkills}}/g, jobseeker.skills)

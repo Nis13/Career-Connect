@@ -1,3 +1,4 @@
+import { loggedinNav, navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import { login } from "../../scripts/services/auth";
 import {storeToken} from "../../utils/token";
 
@@ -14,8 +15,16 @@ const handleLogin = async (event: Event) => {
       const response = await login({ email, password });
       console.log("Message:", response.message);
       alert(response.message);
+      if (response.message) {
+        localStorage.setItem('role',response.role);
+        // await saveData(response.accessToken);
+        loggedinNav(response.role);
+        if (response.role == "employer") navigateTo('/employerDashboard');
+        else if(response.role == "jobseeker") navigateTo('/jobseekerDashboard'); 
+      };
       console.log(response.accessToken);
       storeToken(response.accessToken);
+      
     } catch (error) {
       console.log("Error during login:", error);
     }
