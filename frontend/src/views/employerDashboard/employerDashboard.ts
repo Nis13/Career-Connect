@@ -1,4 +1,5 @@
 import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
+import { updateJobseekerForm } from "../jobseekerDashboard/profile";
 import { updateEmployerForm } from "./profile";
 
 // import { showJoblistingByEmployer } from "../joblisting/joblisting";
@@ -50,14 +51,14 @@ import { updateEmployerForm } from "./profile";
 // }
 
 
-export function showJobBtn(){
-    const viewJobButtons = document.querySelectorAll(".change-status-btn") as NodeListOf<HTMLButtonElement>;
+// export function showJobBtn(){
+//     const viewJobButtons = document.querySelectorAll(".change-status-btn") as NodeListOf<HTMLButtonElement>;
 
-    viewJobButtons.forEach(button => {
-    button.style.display = "block";
+//     viewJobButtons.forEach(button => {
+//     button.style.display = "block";
     
-});
-}
+// });
+// }
 
 export function viewJob(){
     const viewJobButtons = document.querySelectorAll(".view-job-btn") as NodeListOf<HTMLButtonElement>;
@@ -82,10 +83,15 @@ export function viewUser(){
     
 });
 }
-export function  editProfileEvent(){
+export function  editEmployerProfileEvent(){
     document
         .getElementById('editEmployerProfileForm')
         ?.addEventListener('submit', updateEmployerForm);
+}
+export function  editJobseekerProfileEvent(){
+    document
+        .getElementById('editJobseekerProfileForm')
+        ?.addEventListener('submit', updateJobseekerForm);
 }
 
 // document.addEventListener('DOMContentLoaded', () => {

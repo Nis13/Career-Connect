@@ -1,4 +1,4 @@
-import { ApplicationList, employerViewApplication } from "../../interfaces/Application";
+import { employerViewApplication } from "../../interfaces/Application";
 import { populateApplicationTemplate} from "../../utils/replaceTemplateVar";
 
 export const getApplicationforEmployer =  async (data:employerViewApplication[]) =>{

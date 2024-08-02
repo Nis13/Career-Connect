@@ -6,14 +6,16 @@ import { getJoblistingform } from '../views/joblisting/updateJoblisting';
 import { getapplyform } from '../views/application/application';
 import { joblisting, joblistingByUserId} from './services/joblisting';
 
-import { getApplicationByEmployerId, getApplicationByJobId, getApplicationByJobseekerId, showApplicationByIdS } from './services/application';
+import { getallApplications, getApplicationByEmployerId, getApplicationByJobId, getApplicationByJobseekerId, showApplicationByIdS } from './services/application';
 import { getrole } from '../utils/token';
 import { showApplicationById } from '../views/application/seeapplication';
 import { getApplicationforEmployer, getApplicationforJobseeker } from '../views/application/viewapplication';
-import { getEmployerDetail } from './services/employer';
+import { getallEmployer, getEmployerDetail } from './services/employer';
 import { loadEmployerProfile } from '../views/employerDashboard/profile';
-import { getJobseekerDetail } from './services/jobseeker';
+import { getallJobseeker, getJobseekerDetail } from './services/jobseeker';
 import { loadJobseekerProfile } from '../views/jobseekerDashboard/profile';
+import { displayEmployers } from '../views/adminDashboard/allemployer';
+import { displayJobseekers } from '../views/adminDashboard/allJobseeker';
 
 const routes = [
   {
@@ -42,6 +44,7 @@ const routes = [
     action: async () => {
       const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
       const applications = await getApplicationByEmployerId();
+      console.log(applications);
       const applicationsHTML = await getApplicationforEmployer(applications) || '';
 
       const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${applicationsHTML}</div>`);
@@ -188,6 +191,52 @@ const routes = [
       // return `id of job ${id}`;
     },
   },
+  {
+    path: '/adminDashboard',
+    action: async () => await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text()),
+  },
+  {
+    path: '/adminDashboard/getallEmployer',
+    action: async () => {
+      const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
+
+      const data = await getallEmployer();
+      const dataHTML = await displayEmployers(data)|| '';
+      return sidebarHTML.replace('<div id="admin-content-container"></div>',`<div id="admin-content-container">${dataHTML}</div>`)
+    }
+  },
+  {
+    path: '/adminDashboard/getallJobseeker',
+    action: async () => {
+      const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
+
+      const data = await getallJobseeker();
+      const dataHTML = await displayJobseekers(data)|| '';
+      return sidebarHTML.replace('<div id="admin-content-container"></div>',`<div id="admin-content-container">${dataHTML}</div>`)
+    }
+  },
+  {
+    path: '/adminDashboard/getallApplications',
+    action: async () => {
+      const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
+      const data = await getallApplications();
+      const dataHTML = await getApplicationforEmployer(data) || '';
+
+      return sidebarHTML.replace('<div id="admin-content-container"></div>',`<div id="admin-content-container">${dataHTML}</div>`)      
+    },
+  },
+  {
+    path: '/adminDashboard/getallJoblistings',
+    action: async () => {
+      const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
+      const data = await joblisting();
+
+      const dataHTML = await showJoblisting(data);
+
+      return sidebarHTML.replace('<div id="admin-content-container"></div>',`<div id="admin-content-container">${dataHTML}</div>`)      
+    },
+  },
+
 ];
 
 const router = new UniversalRouter(routes);

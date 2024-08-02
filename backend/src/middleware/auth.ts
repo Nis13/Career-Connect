@@ -27,13 +27,13 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
     next();
   }
 
-  export function authorize(role: string) {
+  export function authorize(...roles: string[]) {
     return async (req: Request, res: Response, next: NextFunction) => {
       const user = req.user!;
-      const userId = user.id;
+      // const userId = user.id;
       // const userPermissions = await UserModel.authorizeUser(userId);
-      console.log(role);
-      if (user.role === role){
+      console.log(user.role);
+      if (roles.includes(user.role)) {
         next();
       }
       else return {message:"Forbidden"}

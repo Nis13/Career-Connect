@@ -20,7 +20,8 @@ const handleLogin = async (event: Event) => {
         // await saveData(response.accessToken);
         loggedinNav(response.role);
         if (response.role == "employer") navigateTo('/employerDashboard');
-        else if(response.role == "jobseeker") navigateTo('/jobseekerDashboard'); 
+        else if(response.role == "jobseeker") navigateTo('/jobseekerDashboard');
+        else if (response.role == "admin") navigateTo('/adminDashboard'); 
       };
       console.log(response.accessToken);
       storeToken(response.accessToken);

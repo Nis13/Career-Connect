@@ -4,7 +4,6 @@ import authRouter from "./auth";
 import employerRouter from "./employer";
 import jobseekerRouter from "./jobseeker";
 import jobApplicationRouter from "./application";
-import jobRouter from "./jobRoutes";
 import joblistingRouter from "./joblisting";
 import { verify } from "jsonwebtoken";
 import config from "../config";
@@ -18,7 +17,6 @@ router.use("/employer",employerRouter);
 router.use("/jobseeker",jobseekerRouter);
 router.use("/joblisting", joblistingRouter);
 router.use("/application", jobApplicationRouter);
-router.use("/job", jobRouter);
 
 router.get('/parse/:access', (req,res) => {
     const token = req.params.access;

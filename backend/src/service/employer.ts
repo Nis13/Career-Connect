@@ -3,8 +3,8 @@ import { EmployerModel } from "../model/employer";
 
 import bcrypt from "bcrypt";
 
-export function getUsers(query:GetUserQuery){
-    return EmployerModel.getUsers(query);
+export function getallEmployers(query:GetUserQuery){
+    return EmployerModel.getallEmployers(query);
 }
 
 export async function getUserById(id:number){

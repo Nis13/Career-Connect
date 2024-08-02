@@ -46,7 +46,7 @@ export class JoblistingModel extends BaseModel {
             salaryRange:joblisting.salaryRange,
             jobType:joblisting.jobType,
             jobStatus:joblisting.jobStatus,
-            createdBy:employerId.employerId
+            updatedBy: userId
         };
         await this.queryBuilder()
         .update(jobToUpdate)

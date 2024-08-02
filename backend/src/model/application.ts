@@ -1,4 +1,5 @@
 import { Application } from '../interface/joblisting';
+import { GetUserQuery } from '../interface/users';
 import { BaseModel } from './base';
 export class applicationModel extends BaseModel{
     static async createApplication(user_id:number,job_id:number, application:Application){
@@ -15,7 +16,7 @@ export class applicationModel extends BaseModel{
         const applicationToAdd = {
             jobId:job_id,
             seekerId:seekerId.seekerId,
-            resume:application.resume,
+            applicationResume:application.resume,
             coverLetter:application.coverLetter,
             additionalMessage:application.additionalMessage
         }
@@ -34,7 +35,7 @@ export class applicationModel extends BaseModel{
         const applicationToAdd = {
             jobId:query.job_id,
             seekerId:query.seekerId.seekerId,
-            resume:application.resume,
+            applicationResume:application.resume,
             coverLetter:application.coverLetter,
             additionalMessage:application.additionalMessage
         }
@@ -65,13 +66,13 @@ export class applicationModel extends BaseModel{
     
     static async getApplicationByUserId(userId:number){
         const query = this.queryBuilder()
-        // .select('*')
         .select('*')
-        .from("employer")
-        .innerJoin("job_listings",{ "employer.employer_id": "job_listings.created_by" })
-        .innerJoin("application",{"application.job_id" : "job_listings.listing_id"})
-        .innerJoin("users",{"users.user_id":"application.seeker_id"})
-        .where("employer.user_id",userId);
+        .from('employer')
+        .innerJoin('job_listings', 'employer.employer_id', 'job_listings.created_by')
+        .innerJoin('application', 'job_listings.listing_id', 'application.job_id')
+        .innerJoin('jobseeker', 'application.seeker_id', 'jobseeker.seeker_id')
+        .innerJoin('users', 'users.user_id', 'jobseeker.user_id')
+        .where('employer.user_id', userId);
         const respone = await query;
         return respone;
     }
@@ -93,8 +94,26 @@ export class applicationModel extends BaseModel{
     static async updateApplicationStatus(id:number,status:string) {
         await this.queryBuilder()
             .table('application') 
-            .where('application_id', id)
-            .update('application_status' ,status);
-        return { success: true };
+            .update({ application_status: status })
+            .where('application_id', id);
+        return { message: "success" };
+    }
+
+    static async getallApplications(filter:GetUserQuery){
+        const query = this.queryBuilder()
+        .select('*')
+        .from("application")
+        .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
+        .innerJoin("job_listings",{ "application.job_id": "job_listings.listing_id" })
+        .innerJoin('users', 'users.user_id', 'jobseeker.user_id');
+
+        if (filter.page) {
+            query.limit(filter.page);
+        }
+    
+        if (filter.size) {
+            query.offset(filter.size);
+        }
+        return query;
     }
 }

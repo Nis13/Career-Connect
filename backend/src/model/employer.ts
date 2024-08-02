@@ -1,16 +1,16 @@
 import { Employer, GetUserQuery, User } from "../interface/users";
 import { BaseModel } from "./base";
 
-interface UserUpdate {
+export interface UserUpdate {
     name?: string;
     email?: string;
     // Add other user fields if necessary
 }
 
-interface EmployerUpdate {
-    description?: string;
+export interface EmployerUpdate {
+    company_description?: string;
     location?: string;
-    contact_no?: number;
+    employer_contact_no?: number;
 }
 
 export class EmployerModel extends BaseModel {
@@ -35,10 +35,10 @@ export class EmployerModel extends BaseModel {
 
         const employerToCreate = {
             user_id: userId.userId, 
-            description: employer.companyDescription,
+            company_description: employer.companyDescription,
             logo: employer.companyLogo,
             location: employer.companyLocation,
-            contact_no: employer.companyContact
+            employer_contact_no: employer.companyContactNo
         };
 
         await this.queryBuilder()
@@ -64,9 +64,9 @@ static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
         if (updatedData.email) userUpdates.email = updatedData.email;
        
         const employerUpdates: EmployerUpdate = {};
-        if (updatedData.companyDescription) employerUpdates.description = updatedData.companyDescription;
+        if (updatedData.companyDescription) employerUpdates.company_description = updatedData.companyDescription;
         if (updatedData.companyLocation) employerUpdates.location = updatedData.companyLocation;
-        if (updatedData.companyContact) employerUpdates.contact_no = updatedData.companyContact;
+        if (updatedData.companyContactNo) employerUpdates.employer_contact_no = updatedData.companyContactNo;
 
         await this.queryBuilder().transaction(async trx => {
             if (Object.keys(userUpdates).length > 0) {
@@ -99,10 +99,18 @@ static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
     }
 
 
-    static async getUsers(filter:GetUserQuery){
-        const query = this.queryBuilder().select('*').table('users');
+    static async getallEmployers(filter:GetUserQuery){
+        const query = this.queryBuilder().select('*').table('employer').innerJoin('users','users.user_id','employer.user_id');
+        if (filter.page) {
+            query.limit(filter.page);
+        }
+    
+        if (filter.size) {
+            query.offset(filter.size);
+        }
         return query;
     }
+
     static async count(filter:GetUserQuery){
         const { q } = filter;
 

@@ -1,21 +1,22 @@
-import { NextFunction, Response} from "express";
+import { NextFunction,Request as ExpressRequest, Response} from "express";
 import { GetUserQuery } from "../interface/users";
 import * as EmployerService from "../service/employer";
 import HttpStatusCodes from "http-status-codes";
 import { Request } from "../interface/auth";
 
-// export async function getUsers(req: Request<any,any,any,GetUserQuery>, res: Response, next: NextFunction) {
-//     try {
-//       const {query} = req;
-//       const data = await EmployerService.getUsers(query);
-//       if (!data){
-//         return {message:"users data no accessible"};
-//       }
-//       res.status(HttpStatusCodes.OK).json(data);
-//     } catch (error) {
-//       next(error);
-//     }
-//   }
+
+export async function getallEmployers(req: ExpressRequest<any,any,any,GetUserQuery>, res: Response, next: NextFunction) {
+    try {
+      const {query} = req;
+      const data = await EmployerService.getallEmployers(query);
+      if (!data){
+        return {message:"users data no accessible"};
+      }
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
   
   // export async function getUserById(req: Request, res: Response, next: NextFunction) {
   //   try {

@@ -7,7 +7,7 @@ import render from "../render";
 import { addApplication } from "../../views/application/application";
 import { showJoblistingFilter } from "../../views/joblisting/jobfilter";
 import { handleChangeStatus } from "../services/application";
-import { editProfileEvent, viewJob, viewUser} from "../../views/employerDashboard/employerDashboard";
+import { editEmployerProfileEvent, editJobseekerProfileEvent, viewJob, viewUser} from "../../views/employerDashboard/employerDashboard";
 import { getrole, getToken } from "../../utils/token";
 
 let areEventListenersAdded = false;
@@ -22,7 +22,8 @@ seeJobApplication();
             changeStatus();
             viewJob();
             viewUser();
-            editProfileEvent()
+            editEmployerProfileEvent();
+            editJobseekerProfileEvent();
 
             // document
             // .getElementById('editUserProfileForm')
@@ -75,19 +76,12 @@ seeJobApplication();
           // navigateTo(`/updatejob/${jobId}`);
         }
       });
-  
-      // document
-      // .getElementById("employerDashboard")
-      // ?.addEventListener("click", () => navigateTo('/employerDashboard'));
       
 
         // Jobseeker
 // document
 // .getElementById("jobseeker-dashboard")
 // ?.addEventListener("click", () => navigateTo('/employerDashboard'));
-// document
-// .getElementById("see-jobs")
-// ?.addEventListener("click", () => loadContentJobseeker('job-postings'));
 document
 .getElementById("jobseeker-applications")
 ?.addEventListener("click", () => navigateTo('/jobseekerDashboard/myapplications'));
@@ -97,22 +91,6 @@ document
       
   
 // Employer Dashboard
-// document
-// .getElementById("dashboard")
-// ?.addEventListener("click", () => loadContent('dashboard'));
-// document
-// .getElementById("applications")
-// ?.addEventListener("click", () => loadContent('applications'));
-// document
-// .getElementById("job-post-show")
-// ?.addEventListener("click", () => loadContent('job-postings'));
-// document
-// .getElementById("company-profile")
-// ?.addEventListener("click", () => loadContent('company-profile'));
-
-// document
-// .getElementById("dashboard")
-// ?.addEventListener("click", () => navigateTo('/employerDashboard'));
 document
 .getElementById("applications")
 ?.addEventListener("click", () => navigateTo('/employerDashboard/viewapplications'));
@@ -122,6 +100,23 @@ document
 document
 .getElementById("company-profile")
 ?.addEventListener("click", () => navigateTo('/employerdashboard/companyprofile'));
+
+//admin Dashboard
+document
+.getElementById("admin-dashboard")
+?.addEventListener("click", () => navigateTo('/adminDashboard'));
+document
+.getElementById("view-employers")
+?.addEventListener("click", () => navigateTo('/adminDashboard/getallEmployer'));
+document
+.getElementById("view-jobseekers")
+?.addEventListener("click", () => navigateTo('/adminDashboard/getallJobseeker'));
+document
+.getElementById("view-applications")
+?.addEventListener("click", () => navigateTo('/adminDashboard/getallApplications'));
+document
+.getElementById("view-joblistings")
+?.addEventListener("click", () => navigateTo('/adminDashboard/getallJoblistings'));
 
 
 
@@ -152,7 +147,9 @@ if (areEventListenersAdded) return;
       document
       .getElementById("jobseeker-dashboard-nav")
       ?.addEventListener("click", () => navigateTo('/jobseekerDashboard'));
-
+      document
+      .getElementById("admin-dashboard-nav")
+      ?.addEventListener("click", () => navigateTo('/adminDashboard'));
       document
       .getElementById("logout-link")
       ?.addEventListener("click", logout);
@@ -247,10 +244,13 @@ export function updateJoblistingEventListeners() {
       document.querySelectorAll('#change-status-btn').forEach(button => {
         button.addEventListener('click', async () => {
             const applicationId = (button as HTMLButtonElement).dataset.id!;
+            console.log("from change status btn",applicationId);
             const status = (document.getElementById(`status-select-${applicationId}`) as HTMLSelectElement).value;
             handleChangeStatus(parseInt(applicationId),status);
             console.log(status);
-            navigateTo('/employerdashboard/viewapplications');
+            const role = getrole();
+            if (role == 'employer')navigateTo('/employerdashboard/viewapplications');
+            if (role == 'admin')navigateTo('/adminDashboard/getallApplications');
         })})
     }
   
@@ -273,6 +273,8 @@ export function updateJoblistingEventListeners() {
           if (employerDashboardNav) employerDashboardNav.style.display = 'none';
           const addjob = document.getElementById('add-joblisting-link');
           if (addjob) addjob.style.display = 'none';
+          const adminDashboardNav = document.getElementById('admin-dashboard-nav');
+          if (adminDashboardNav) adminDashboardNav.style.display = 'none';
      navigateTo('/');
     }
     export function loggedinNav(role:string){
@@ -305,5 +307,16 @@ export function updateJoblistingEventListeners() {
           if (addjob) addjob.style.display = 'block';
           
         }
+        else if(role == 'admin'){
+          const adminDashboardNav = document.getElementById('admin-dashboard-nav');
+          if (adminDashboardNav) adminDashboardNav.style.display = 'block';
+        }
       } 
     }
+
+  //   export function showJobBtn(){
+  //     const viewJobButtons =  (document.querySelectorAll(".apply-btn") as NodeListOf<HTMLButtonElement>)
+  //     viewJobButtons.forEach(button => {
+  //         button.style.display = "block";
+  //       });
+  // }

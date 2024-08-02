@@ -25,15 +25,17 @@ export interface UserCredentials {
 }
 
 export interface getEmployer{
-    description: string;
+    userId:string,
+    companyDescription: string;
     logo: string;
-    contactNo: string;
+    employerContactNo: string;
     location: string;
     name: string;
     email: string;
 }
 
 export interface getJobseeker{
+    userId:string,
     name:string,
     email:string,
     resume:string,

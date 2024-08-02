@@ -6,7 +6,6 @@ import { populateEmployerTemplate } from "../../utils/replaceTemplateVar";
 export async function loadEmployerProfile(employer:getEmployer) {
     console.log("From employer profile")
     console.log(employer);
-    console.log(employer.contactNo);
     const HTML = await fetch('/src/views/employerDashboard/profile.html').then(response => response.text());
     console.log(HTML);
     const contentHTML = populateEmployerTemplate(HTML,employer);
@@ -21,9 +20,9 @@ export async function updateEmployerForm(event:Event){
      {
         name: (document.getElementById('profileName') as HTMLInputElement).value,
         email: (document.getElementById('profileEmail') as HTMLInputElement).value,
-        companyContact: (document.getElementById('profileContact') as HTMLInputElement).value,
+        companyContactNo: (document.getElementById('profileContact') as HTMLInputElement).value,
         companyLocation: (document.getElementById('profileLocation') as HTMLInputElement).value,
-        conpanyDescription: (document.getElementById('profileDescription') as HTMLTextAreaElement).value,
+        companyDescription: (document.getElementById('profileDescription') as HTMLTextAreaElement).value,
     };
     console.log(formData);
     const response = await updateEmployer(formData);

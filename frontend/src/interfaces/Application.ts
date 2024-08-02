@@ -1,7 +1,7 @@
 
 
 export interface Application{
-    resume:string,
+    applicationResume:string,
     coverLetter:string,
     additionalMessage?:string
 }

@@ -1,5 +1,6 @@
-import { Application, GetJobQuery } from "../interface/joblisting";
+import { Application} from "../interface/joblisting";
 import { applicationModel } from "../model/application";
+import { GetUserQuery } from '../interface/users';
 
 export function createApplication(userId:number, seekerId:number, application:Application){
     return applicationModel.createApplication(userId, seekerId, application);
@@ -19,6 +20,9 @@ export function updateApplicationStatus(applicationId:number, status:string){
 
 export function getApplicationByUserId(userId:number){
     return applicationModel.getApplicationByUserId(userId);
+}
+export function getallApplications(query:GetUserQuery){
+    return applicationModel.getallApplications(query);
 }
 
 export function getApplicationByJobseekerId(userId:number){

@@ -36,8 +36,11 @@ export function loadNav(){
     if (employerDashboardNav) employerDashboardNav.style.display = 'block';
 
     const addjob = document.getElementById('add-joblisting-link');
-    if (addjob) addjob.style.display = 'block';
-    
+    if (addjob) addjob.style.display = 'block'; 
+  }
+  else if(role == 'admin'){
+    const adminDashboardNav = document.getElementById('admin-dashboard-nav');
+    if (adminDashboardNav) adminDashboardNav.style.display = 'block';
   }
 }
 export async function saveData(token:string){
@@ -94,6 +97,10 @@ document.addEventListener("DOMContentLoaded", async()=>{
     const addjob = document.getElementById('add-joblisting-link');
     if (addjob) addjob.style.display = 'block';
     
+  }
+  else if(role == 'admin'){
+    const adminDashboardNav = document.getElementById('admin-dashboard-nav');
+    if (adminDashboardNav) adminDashboardNav.style.display = 'block';
   }
 }
 

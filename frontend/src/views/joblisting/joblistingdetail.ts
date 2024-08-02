@@ -21,20 +21,32 @@ export const joblistingDetail =  async (listing_id:number,userRole:string) =>{
 }
 
 function getButtons(userRole:string){
-if (userRole == 'jobseeker') {
+// if (userRole == 'jobseeker') {
+//   return `<div class=" mb-3">
+//                         <p class="btn apply-btn" id="job-apply-btn" data-id="{{listing_id}}">Apply Now</p>
+//                         </div> </div>
+//             </div>
+//         </div>
+//     </div>
+// </div>
+// </div>
+// </div>`
+// } else 
+if(userRole == 'employer') {
   return `<div class=" mb-3">
-                        <p class="btn apply-btn" id="job-apply-btn" data-id="{{listing_id}}">Apply Now</p>
-                        </div> </div>
+                        <p class="btn btn-secondary ms-2 job-edit-btn" id="job-edit-btn" data-id="{{listing_id}}">Edit</p>
+                        <p class="btn see-application-btn" id="see-application-btn" data-id="{{listing_id}}">See Applications</p>
+                    </div> </div>
             </div>
         </div>
     </div>
 </div>
 </div>
 </div>`
-} else if(userRole == 'employer') {
+}
+else if (userRole == 'admin'){
   return `<div class=" mb-3">
                         <p class="btn btn-secondary ms-2 job-edit-btn" id="job-edit-btn" data-id="{{listing_id}}">Edit</p>
-                        <p class="btn see-application-btn" id="see-application-btn" data-id="{{listing_id}}">See Applications</p>
                     </div> </div>
             </div>
         </div>

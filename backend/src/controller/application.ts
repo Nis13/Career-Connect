@@ -1,13 +1,14 @@
-import { NextFunction , Response} from "express";
+import { NextFunction ,Request as ExpressRequest, Response} from "express";
 import { Request } from "../interface/auth";
 import * as ApplicationService from "../service/application";
 import HttpStatusCodes from "http-status-codes";
+import { GetUserQuery } from "../interface/users";
 
 export async function createApplication(req: Request, res: Response, next: NextFunction) {
     try {
       console.log(req.file)
       if (req.file){
-        const fileUrl = `pdf/${req.file.filename}`;
+        const fileUrl = `resumes/${req.file.filename}`;
         console.log(fileUrl);
       
         const userId = req.user?.id;
@@ -76,6 +77,19 @@ export async function getApplicationByJobseekerId(req: Request, res: Response, n
 } catch (error) {
   next(error);
 }
+}
+
+export async function getallApplications(req: ExpressRequest<any,any,any,GetUserQuery>, res: Response, next: NextFunction) {
+  try {
+    const {query} = req;
+    const data = await ApplicationService.getallApplications(query);
+    if (!data){
+      return {message:"application data no accessible"};
+    }
+    res.status(HttpStatusCodes.OK).json(data);
+  } catch (error) {
+    next(error);
+  }
 }
 
 
