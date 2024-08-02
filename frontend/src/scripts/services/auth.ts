@@ -1,5 +1,3 @@
-// frontend/src/scripts/services/auth.ts
-
 import axios from 'axios';
 import { UserCredentials } from '../../interfaces/Users';
 import { BASE_URL } from '../../constants/urls';
@@ -24,10 +22,8 @@ export const signupemployer = async (data: FormData) => {
         return response; 
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            // Handle axios-specific errors
             console.error('Signup error:', error.response?.data || error.message);
         } else {
-            // Handle general errors
             console.error('Unexpected error:', error);
         }
         throw new Error('Signup failed');

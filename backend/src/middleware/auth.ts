@@ -1,6 +1,6 @@
 import { NextFunction, Response } from "express";
 import { Request } from "../interface/auth";
-import { JwtPayload, verify } from "jsonwebtoken";
+import { verify } from "jsonwebtoken";
 
 import config from "../config";
 import { User } from "../interface/users";
@@ -30,9 +30,6 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
   export function authorize(...roles: string[]) {
     return async (req: Request, res: Response, next: NextFunction) => {
       const user = req.user!;
-      // const userId = user.id;
-      // const userPermissions = await UserModel.authorizeUser(userId);
-      console.log(user.role);
       if (roles.includes(user.role)) {
         next();
       }

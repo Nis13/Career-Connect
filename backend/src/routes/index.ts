@@ -18,16 +18,17 @@ router.use("/jobseeker",jobseekerRouter);
 router.use("/joblisting", joblistingRouter);
 router.use("/application", jobApplicationRouter);
 
+
 router.get('/parse/:access', (req,res) => {
     const token = req.params.access;
     try {
        const decoded = verify(token, config.jwt.secret!);
        const userData = decoded;
-       console.log('Decoded Data:', userData);
        res.status(200).json(userData);
     } catch (error) {
-       console.error('Token Verification Error:', error);
+       console.log('Token Verification Error:', error);
        res.status(401).json({ error: 'Token verification failed' });
     }
 })
+
 export default router;

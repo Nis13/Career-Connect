@@ -1,7 +1,5 @@
 import Joi from "joi";
 
-
-
 export const createJobseekerBodySchema = Joi.object({
     name: Joi.string().required().messages({
         'any.required':"Name is required",
@@ -31,6 +29,7 @@ export const createJobseekerBodySchema = Joi.object({
 
         return value;
     }),
+    
     jobseekerEducation:Joi.string().required().messages({
         'any.required':'Education is required'
     }),
@@ -41,10 +40,12 @@ export const createJobseekerBodySchema = Joi.object({
     jobseekerIndustry:Joi.string().required().messages({
         'any.required':'Industry is required'
     }),
-    // jobseekerResume:Joi.string().required().messages({
-    //     'any.required':'Resume is required'
-    // }),
-    jobseekerContact:Joi.number().required().min(100).messages({
+
+    jobseekerResume:Joi.string().required().messages({
+        'any.required':'Resume is required'
+    }),
+
+    jobseekerContact:Joi.number().required().min(100000000).messages({
         'any.required':'Contact number is required',
         "number.base":"Contact number must be a number",
         "number.min":"Enter valid contact number"

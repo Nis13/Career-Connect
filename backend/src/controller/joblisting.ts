@@ -1,6 +1,4 @@
 import { NextFunction , Response} from "express";
-
-
 import * as JoblistingService from "../service/joblisting";
 import HttpStatusCodes from "http-status-codes";
 import { Request } from "../interface/auth";
@@ -37,7 +35,6 @@ export async function getJoblistings(req: Request, res: Response, next: NextFunc
   export async function createJoblisting(req: Request, res: Response, next: NextFunction) {
     try {
         const userId = req.user?.id;
-      console.log(userId);
       const joblisting = req.body;
       const data = await JoblistingService.createJoblisting(userId!,joblisting);
       res.status(HttpStatusCodes.OK).json(data);
@@ -51,7 +48,6 @@ export async function getJoblistings(req: Request, res: Response, next: NextFunc
     try {
         const userId = req.user?.id;
         const { id } = req.params;
-      console.log(userId);
       const joblisting = req.body;
       const data = await JoblistingService.updateJoblisting(userId!,parseInt(id),joblisting);
       res.status(HttpStatusCodes.OK).json(data);
@@ -86,8 +82,6 @@ export async function getJoblistings(req: Request, res: Response, next: NextFunc
   export async function getJoblistingByUserId(req: Request, res: Response, next: NextFunction) {
     try {
         const userId = req.user?.id;
-      console.log(userId);
-      const joblisting = req.body;
       const data = await JoblistingService.getJoblistingByUserId(userId!);
       res.status(HttpStatusCodes.OK).json(data);
     } catch (error) {

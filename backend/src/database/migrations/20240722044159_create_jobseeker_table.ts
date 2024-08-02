@@ -4,7 +4,7 @@ const TABLE_NAME = 'jobseeker';
 
 
 /**
- * Create table TABLE_NAME.
+ * Create table jobseeker.
  *
  * @param   {Knex} knex
  * @returns {Promise}
@@ -28,7 +28,7 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 /**
- * Drop table TABLE_NAME.
+ * Drop table jobseeker.
  *
  * @param   {Knex} knex
  * @returns {Promise}

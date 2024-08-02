@@ -3,9 +3,6 @@ import { createApplication, getallApplications, getApplicationById, getApplicati
 import { authenticate, authorize } from "../middleware/auth";
 import { uploadPDF } from "../middleware/pdfmulter";
 
-
-
-
 const router = express();
 router.get('/getall',authenticate,authorize('admin'),getallApplications);
 router.get('/getbyemployer', authenticate,authorize('admin','employer'), getApplicationByUserId);

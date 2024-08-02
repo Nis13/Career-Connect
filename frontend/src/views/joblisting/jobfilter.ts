@@ -21,10 +21,7 @@ export const showJoblistingFilter =  async (event:Event) =>{
         try {
 
             const response = await joblistingFilter(filter);
-
-            console.log(response);
             const htmlString = await showFilterJoblisting(response);
-            // console.log(htmlString);
            const filterJob =  document.getElementById('joblistings-container')!;
            if (filterJob) {
                filterJob.innerHTML = htmlString || '<p>No job listings found.</p>';

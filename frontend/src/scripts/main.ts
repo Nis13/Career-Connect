@@ -4,12 +4,6 @@ import render from "./render";
 import { BASE_URL } from "../constants/urls";
 import { navigateTo } from "./eventHandlers/eventHandler";
 
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const userRole = getrole();
-//     if(userRole) loadNavigation(userRole);
-// });
-
 export function loadNav(){
   if(getToken()){
     const loginoutBtn = document.getElementById('logout-link');
@@ -59,12 +53,6 @@ document.addEventListener("DOMContentLoaded", async()=>{
   console.log("onload");
   console.log(getToken());
   if (getToken()){
-    // const imageUrl = await getEmployerImage();
-    // const imgElement = document.getElementById('employer-image') as HTMLImageElement;
-    // imgElement.src = imageUrl;
-    
-
-    
     const loginoutBtn = document.getElementById('logout-link');
     if (loginoutBtn) loginoutBtn.style.display = 'block';
     const signupBtn = document.getElementById('employer-signup-link');
@@ -113,7 +101,6 @@ window.addEventListener("popstate", () => {
 
 
 // Initial render
-// render('/');
 render(window.location.pathname);
 
 

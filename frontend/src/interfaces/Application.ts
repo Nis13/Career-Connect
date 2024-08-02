@@ -1,5 +1,3 @@
-
-
 export interface Application{
     applicationResume:string,
     coverLetter:string,

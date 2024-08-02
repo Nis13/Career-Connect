@@ -113,16 +113,6 @@ const routes = [
       return response;
     },
   },
-  // {
-  //   path: '/joblisting/query/:filter',
-  //   action: async ({params}:{params:JobFilter}) =>{
-  //     console.log(params);
-  //     const data = await joblistingFilter(params);
-      
-  //     const response = await showJoblisting(data);
-  //     return response;
-  //   },
-  // },
   
   {
     path: '/addjob',

@@ -1,7 +1,5 @@
-import { GetUserQuery, Jobseeker, User } from "../interface/users";
+import { GetUserQuery, Jobseeker} from "../interface/users";
 import { JobseekerModel } from "../model/jobseeker";
-
-import bcrypt from "bcrypt";
 
 export function getallJobseeker(query:GetUserQuery){
     return JobseekerModel.getallJobseeker(query);

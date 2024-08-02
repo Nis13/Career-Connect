@@ -20,7 +20,6 @@ export async function getallJobseeker(req: ExpressRequest<any,any,any,GetUserQue
   export async function getJobseekerById(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = req.user?.id;
-      console.log(userId)
       if (!userId) {
         return {message:"User ID is required"};
       }
@@ -55,7 +54,6 @@ export async function getallJobseeker(req: ExpressRequest<any,any,any,GetUserQue
       if (!userId) {
         return {message:"User ID is required"};
       }
-      console.log("from model jobseeker",updateData);
       const data = await  JobseekerService.UpdateJobseeker(userId,updateData);
       res.status(HttpStatusCodes.OK).json(data);
     } catch (error) {

@@ -7,8 +7,6 @@ import { getToken} from '../../utils/token';
 export const handleJobApply = async (jobId:number,application:FormData) => {
     try {
       const token = getToken();
-      console.log("form data")
-      console.log(application);
       const response = await axios.post(`${BASE_URL}/application/${jobId}`,
         application,
         {
@@ -17,7 +15,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -27,8 +24,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
   export const getApplicationByJobId = async(listing_id:number) =>{
     try {
       const token = getToken();
-      console.log('from service')
-      console.log(listing_id);
       console.log(`${BASE_URL}/application/byjob/${listing_id}`);
       const response = await axios.get(`${BASE_URL}/application/byjob/${listing_id}`,
         {
@@ -36,7 +31,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -46,8 +40,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
   export const getApplicationByEmployerId = async() =>{
     try {
       const token = getToken();
-      console.log('from service')
-      console.log(`${BASE_URL}/application/getbyemployer/`);
       const response = await axios.get(`http://localhost:8000/application/getbyemployer`,
         {
           headers: {

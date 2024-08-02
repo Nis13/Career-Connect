@@ -1,8 +1,6 @@
 import { addEventListeners } from "./eventHandlers/eventHandler";
 import router from "./router";
 
-// Function to render content based on the route
-
 const render = async (pathname: string) => {
     const content = await router.resolve({ pathname });
   

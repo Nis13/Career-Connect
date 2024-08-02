@@ -6,8 +6,6 @@ import { populateTemplate } from "../../utils/replaceTemplateVar";
 export const getJoblistingform =  async (listing_id:number) =>{
     try {
         const data = await joblistingById(listing_id);
-        // console.log("from detail");
-        // console.log(data);
         data.type = 'JoblistingDetail';
         
         const htmlFile = await fetch('/src/views/joblisting/updateJoblisting.html').then(response => response.text());
@@ -20,9 +18,6 @@ export const getJoblistingform =  async (listing_id:number) =>{
 }
 
 export const updateJoblisting = async(listing_id:number) =>{
-
-  console.log("post job clicked");
-
   const title = (document.getElementById('title') as HTMLInputElement).value;
   const jobDescription = (document.getElementById('jobDescription')as HTMLTextAreaElement).value;
   const requirements = (document.getElementById('requirements')as HTMLTextAreaElement).value;
@@ -32,7 +27,6 @@ export const updateJoblisting = async(listing_id:number) =>{
   const jobType = (document.getElementById('jobType')as HTMLSelectElement).value;
   const jobStatus = (document.getElementById('jobStatus')as HTMLSelectElement).value;
 
-  console.log(jobStatus);
   const jobListing = {
           listingId:listing_id,
           title:title,

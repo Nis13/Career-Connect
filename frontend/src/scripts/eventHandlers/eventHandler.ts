@@ -66,11 +66,8 @@ seeJobApplication();
     ?.addEventListener("submit", (event: Event) => {
       event.preventDefault();
         const target = event.currentTarget as HTMLElement;
-        console.log("target");
-        console.log(target);
         if (target && target.dataset.id) {
           const jobId = target.dataset.id;
-          console.log(jobId);
           updateJoblisting(parseInt(jobId));
           // console.log(`/updatejob/${jobId}`);
           // navigateTo(`/updatejob/${jobId}`);
@@ -165,17 +162,12 @@ if (areEventListenersAdded) return;
 
  // Function to add event listeners to job tiles
  export function addJobTileEventListeners() {
-  // console.log("add event");
   const jobTiles = document.querySelectorAll('.job_tile');
-  // console.log(jobTiles);
-  
   jobTiles.forEach(tile => {
     tile?.addEventListener('click', (event: Event) => {
       const target = event.currentTarget as HTMLElement;
-      // console.log(target);
       if (target && target.dataset.id) {
         const jobId = target.dataset.id;
-        // console.log(`/jobdetail/${jobId}`);
         navigateTo(`/jobdetail/${jobId}`);
       }
     });
@@ -183,32 +175,23 @@ if (areEventListenersAdded) return;
 }
 
 export function updateJoblistingEventListeners() {
-  // console.log("add event");
   const jobEditBtn = document.getElementById("job-edit-btn")!;
-  console.log(jobEditBtn);
   
     jobEditBtn?.addEventListener('click', (event: Event) => {
       const target = event.currentTarget as HTMLElement;
-      console.log("target");
-      console.log(target);
       if (target && target.dataset.id) {
         const jobId = target.dataset.id;
-        console.log(jobId);
-        console.log(`/updatejob/${jobId}`);
         navigateTo(`/updatejob/${jobId}`);
       }
     });
   }
   export function applyJobEventListener(){
     const applyBtn = document.getElementById("job-apply-btn");
-    console.log(applyBtn);
     applyBtn?.addEventListener('click', (event:Event)=>{
       const target = event.currentTarget as HTMLElement;
       if (target && target.dataset.id) {
         const jobId = target.dataset.id;
-        console.log(jobId);
         if(getToken()){
-          console.log(`/applyjob/${jobId}`);
           navigateTo(`/applyjob/${jobId}`);
         }else{
           navigateTo('/login');
@@ -218,13 +201,12 @@ export function updateJoblistingEventListeners() {
     });
     }
 
-  export function saveJobUpdateEventListeners() {
-    // console.log("add event");
-    const jobSaveBtn = document.getElementById("save-job-update")!;
+  // export function saveJobUpdateEventListeners() {
+  //   const jobSaveBtn = document.getElementById("save-job-update")!;
 
-    console.log(jobSaveBtn);
+  //   console.log(jobSaveBtn);
     
-    }
+  //   }
 
     export function seeJobApplication(){
       const seeApplicationBtn = document.getElementById('see-application-btn');
@@ -232,8 +214,6 @@ export function updateJoblistingEventListeners() {
         const target = event.currentTarget as HTMLElement;
       if (target && target.dataset.id) {
         const jobId = target.dataset.id;
-        console.log(jobId);
-        console.log(`/seeApplication/${jobId}`);
         navigateTo(`/seeApplication/${jobId}`);
       }
       })
@@ -244,10 +224,8 @@ export function updateJoblistingEventListeners() {
       document.querySelectorAll('#change-status-btn').forEach(button => {
         button.addEventListener('click', async () => {
             const applicationId = (button as HTMLButtonElement).dataset.id!;
-            console.log("from change status btn",applicationId);
             const status = (document.getElementById(`status-select-${applicationId}`) as HTMLSelectElement).value;
             handleChangeStatus(parseInt(applicationId),status);
-            console.log(status);
             const role = getrole();
             if (role == 'employer')navigateTo('/employerdashboard/viewapplications');
             if (role == 'admin')navigateTo('/adminDashboard/getallApplications');
@@ -262,10 +240,8 @@ export function updateJoblistingEventListeners() {
      const signupBtn = document.getElementById('employer-signup-link');
      if (signupBtn) signupBtn.style.display = 'block';
      const signupBtnJS = document.getElementById('jobseeker-signup-link');
-     console.log(signupBtnJS);
      if (signupBtnJS) signupBtnJS.style.display = 'block';
      const loginBtnJS = document.getElementById('login-link');
-     console.log(loginBtnJS);
      if (loginBtnJS)loginBtnJS.style.display = 'block';
      const jobseekerDashboardNav = document.getElementById('jobseeker-dashboard-nav');
       if (jobseekerDashboardNav) jobseekerDashboardNav.style.display = 'none';
@@ -279,16 +255,13 @@ export function updateJoblistingEventListeners() {
     }
     export function loggedinNav(role:string){
       if (getToken() || getrole()){
-        // const role = getrole();
         const loginoutBtn = document.getElementById('logout-link');
     if (loginoutBtn) loginoutBtn.style.display = 'block';
     const signupBtn = document.getElementById('employer-signup-link');
     if (signupBtn) signupBtn.style.display = 'none';
     const signupBtnJS = document.getElementById('jobseeker-signup-link');
-    console.log(signupBtnJS);
     if (signupBtnJS) signupBtnJS.style.display = 'none';
     const loginBtnJS = document.getElementById('login-link');
-    console.log(loginBtnJS);
     if (loginBtnJS)loginBtnJS.style.display = 'none';
         if (role == 'jobseeker'){
 
@@ -313,10 +286,3 @@ export function updateJoblistingEventListeners() {
         }
       } 
     }
-
-  //   export function showJobBtn(){
-  //     const viewJobButtons =  (document.querySelectorAll(".apply-btn") as NodeListOf<HTMLButtonElement>)
-  //     viewJobButtons.forEach(button => {
-  //         button.style.display = "block";
-  //       });
-  // }

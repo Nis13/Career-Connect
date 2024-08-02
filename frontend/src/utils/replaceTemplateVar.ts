@@ -3,7 +3,6 @@ import { getEmployer, getJobseeker } from '../interfaces/Users';
 import { JoblistingDetail } from './../interfaces/joblisting';
 
 export function populateTemplate(template: string, job: (JoblistingDetail)): string {
-    // console.log(job);
     template = template
     .replace(/{{title}}/g, job.title)
     .replace(/{{listing_id}}/g, job.listingId.toString())
@@ -17,8 +16,6 @@ export function populateTemplate(template: string, job: (JoblistingDetail)): str
     .replace(/{{company_name}}/g, job.name)
     .replace(/{{company_logo}}/g, job.logo);;
   
-
-        // console.log(job.type);
     if (job.type == 'JoblistingDetail') {
             template = template
                 .replace(/{{company_name}}/g, job.name)
@@ -47,9 +44,6 @@ export function populateBriefApplicationTemplate(template: string, application: 
     .replace(/{{resume}}/g, application.applicationResume)
     .replace(/{{coverLetter}}/g, application.coverLetter)
     .replace(/{{additionalMessage}}/g, application.additionalMessage!);
-    // if (application.additionalMessage){
-    //     template = template
-    // }
 
 
     return template;

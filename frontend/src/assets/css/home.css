@@ -1,6 +1,4 @@
-/* body {
-  } */
-   .landing-body{
+.landing-body{
      background-color: #E1D5F0;
 
    }
@@ -33,11 +31,11 @@
     font-weight: bold;
   }
   .stats div {
-    background-color: #ffffff; /* White background for stats */
-    border: 1px solid #ced4da; /* Border to separate stats */
+    background-color: #ffffff; 
+    border: 1px solid #ced4da; 
     border-radius: 0.25rem;
     padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for better separation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .section {

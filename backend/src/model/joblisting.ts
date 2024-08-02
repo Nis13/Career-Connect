@@ -23,20 +23,11 @@ export class JoblistingModel extends BaseModel {
         .insert(jobToCreate)
         .table("job_listings");
 
-        
-    
-    // const createdUser = await this.queryBuilder()
-    //     .select('user_id', 'email', 'name')
-    //     .table("users")
-    //     .where("email", employer.email)
-    //     .first();
-
     return {message:"job Created successfully"};
 
     }
 
     static async updateJoblistingById(userId:number,listing_id:number, joblisting:Joblisting){
-        const employerId = await this.queryBuilder().select('employer_id').from("employer").where('user_id',userId).first();
         const jobToUpdate = {
             title:joblisting.title,
             description:joblisting.jobDescription,
@@ -63,7 +54,6 @@ export class JoblistingModel extends BaseModel {
         return query;
     }
     static async getJoblistingByUserId(userId:number){
-        console.log(userId);
         const query = this.queryBuilder()
         .select('*')
         .table('job_listings')
@@ -74,7 +64,6 @@ export class JoblistingModel extends BaseModel {
     }
     static async getJoblistingById(id:number){
         const query = this.queryBuilder()
-        // .select('*')
         .select('listingId','title','job_listings.description','requirements','benefits','job_listings.location','salaryRange','jobType','jobStatus','name','logo')
         .from("job_listings")
         .innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
@@ -90,7 +79,6 @@ export class JoblistingModel extends BaseModel {
     }
 
     static async getJobListingByFilter(filter:GetJobQuery){
-        // .select('*')
         const query = this.queryBuilder().select('*').table('job_listings').innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
         .innerJoin("users",{"employer.user_id":"users.user_id"});
 

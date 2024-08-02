@@ -17,37 +17,20 @@ export async function getallEmployers(req: ExpressRequest<any,any,any,GetUserQue
       next(error);
     }
   }
-  
-  // export async function getUserById(req: Request, res: Response, next: NextFunction) {
-  //   try {
-  //     const { id } = req.params;
-  //     if (!id) {
-  //       return {message:"User ID is required"};
-  //     }
-  //     const data = await  EmployerService.getUserById(parseInt(id));
-  //     if (!data) {
-  //      return {message:`User with ID ${id} not found`};
-  //     }
-  //     res.status(HttpStatusCodes.OK).json(data);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
 
-  
-  // export function deleteUser(req: Request, res: Response, next: NextFunction) {
-  //   try{
-  //     const { id } = req.params;
-  //     const data = EmployerService.deleteUser(parseInt(id));
-  //     if (!data) {
-  //       return {message:`User with id ${id} not found`};
-  //     }
-  //     res.status(HttpStatusCodes.OK).json(data);
-  //   }
-  //   catch(error){
-  //     next(error);
-  //   }
-  // }
+  export function deleteUser(req: Request, res: Response, next: NextFunction) {
+    try{
+      const { id } = req.params;
+      const data = EmployerService.deleteUser(parseInt(id));
+      if (!data) {
+        return {message:`User with id ${id} not found`};
+      }
+      res.status(HttpStatusCodes.OK).json(data);
+    }
+    catch(error){
+      next(error);
+    }
+  }
 
   export async function getEmployerById(req: Request, res: Response, next: NextFunction) {
     try {

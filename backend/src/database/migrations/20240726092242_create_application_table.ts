@@ -4,7 +4,7 @@ const TABLE_NAME = 'application';
 
 
 /**
- * Create table TABLE_NAME.
+ * Create table application.
  *
  * @param   {Knex} knex
  * @returns {Promise}

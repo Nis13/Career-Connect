@@ -1,4 +1,4 @@
-import { Employer, getEmployer } from "../../interfaces/Users";
+import { getEmployer } from "../../interfaces/Users";
 import { populateEmployerTemplate } from "../../utils/replaceTemplateVar";
 
 export const displayEmployers = async (data: getEmployer[]) => {

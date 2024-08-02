@@ -4,7 +4,7 @@ const TABLE_NAME = 'employer';
 
 
 /**
- * Create table TABLE_NAME.
+ * Create table employer.
  *
  * @param   {Knex} knex
  * @returns {Promise}
@@ -14,9 +14,9 @@ export async function up(knex: Knex): Promise<void> {
     table.bigIncrements('employer_id').primary();
     table.bigInteger("user_id").unsigned().references("user_id").inTable("users").onDelete("CASCADE");
 
-    table.string("description").notNullable();
+    table.string("company_description").notNullable();
     table.string("logo").notNullable();
-    table.string("contact_no").notNullable();
+    table.string("employer_contact_no").notNullable();
     table.string("location").notNullable();
     
 
@@ -27,7 +27,7 @@ export async function up(knex: Knex): Promise<void> {
 }
 
 /**
- * Drop table TABLE_NAME.
+ * Drop table employer.
  *
  * @param   {Knex} knex
  * @returns {Promise}

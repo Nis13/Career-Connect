@@ -1,20 +1,9 @@
-import { Employer, GetUserQuery, User } from "../interface/users";
+import { Employer, EmployerUpdate, GetUserQuery, User, UserUpdate } from "../interface/users";
 import { BaseModel } from "./base";
 
-export interface UserUpdate {
-    name?: string;
-    email?: string;
-    // Add other user fields if necessary
-}
 
-export interface EmployerUpdate {
-    company_description?: string;
-    location?: string;
-    employer_contact_no?: number;
-}
 
 export class EmployerModel extends BaseModel {
-
     static async signup(employer:Employer){
         const userToCreate = {
             email: employer.email,
@@ -44,12 +33,6 @@ export class EmployerModel extends BaseModel {
         await this.queryBuilder()
             .insert(employerToCreate)
             .table("employer");
-    
-    // const createdUser = await this.queryBuilder()
-    //     .select('user_id', 'email', 'name')
-    //     .table("users")
-    //     .where("email", employer.email)
-    //     .first();
 
     return {message:"user Created successfully"};
 
@@ -57,8 +40,6 @@ export class EmployerModel extends BaseModel {
 
 static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
     try {
-        console.log(userId);
-        console.log(updatedData);
         const userUpdates:UserUpdate = {};
         if (updatedData.name) userUpdates.name = updatedData.name;
         if (updatedData.email) userUpdates.email = updatedData.email;
@@ -85,7 +66,7 @@ static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
         return { message: "Profile updated successfully" };
 
     } catch (error) {
-        console.error('Error updating employer profile:', error);
+        console.log('Error updating employer profile:', error);
         return { message: "Failed to update profile" };
     }
 }
@@ -94,7 +75,6 @@ static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
 
     static async getEmployerImage(id:number){
         const query = await this.queryBuilder().select('logo').table('employer').where('user_id',id);
-        console.log(query);
         return query;
     }
 
@@ -129,8 +109,6 @@ static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
     static async getUserByEmail(email: string) {
         const query = await this.queryBuilder().select('*').from("users").where("email", email).first();
         const result = JSON.stringify(query);
-        console.log(`getQuery by email: ${result}`);
-        // const userPermissions =  this.queryBuilder().select('permission').from("permissions").innerjoin("permissions" , { "userPermissions.permission": "permission.id" })
         return query;
     }
 

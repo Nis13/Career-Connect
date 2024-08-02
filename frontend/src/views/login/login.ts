@@ -17,13 +17,11 @@ const handleLogin = async (event: Event) => {
       alert(response.message);
       if (response.message) {
         localStorage.setItem('role',response.role);
-        // await saveData(response.accessToken);
         loggedinNav(response.role);
         if (response.role == "employer") navigateTo('/employerDashboard');
         else if(response.role == "jobseeker") navigateTo('/jobseekerDashboard');
         else if (response.role == "admin") navigateTo('/adminDashboard'); 
       };
-      console.log(response.accessToken);
       storeToken(response.accessToken);
       
     } catch (error) {

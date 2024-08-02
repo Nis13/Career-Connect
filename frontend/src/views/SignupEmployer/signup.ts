@@ -26,15 +26,6 @@ const handleSignupEmployer = async (event: Event) => {
       console.error("Invalid company contact number");
       return;
     }
-    const employerData = {
-      name: name,
-      email: email,
-      password: password,
-      companyDescription: companyDescription,
-      companyLogo: companyLogo,
-      companyLocation: companyLocation,
-      companyContact: companyContact,
-    };
     
     formData.append('name', name);
     formData.append('email', email);

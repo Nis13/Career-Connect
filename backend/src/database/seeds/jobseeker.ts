@@ -3,7 +3,7 @@ import { Knex } from 'knex';
 const TABLE_NAME = 'jobseeker';
 
 /**
- * Delete existing entries and seed values for table TABLE_NAME.
+ * Delete existing entries and seed values for table jobseeeker.
  *
  * @param   {Knex} knex
  * @returns {Promise}

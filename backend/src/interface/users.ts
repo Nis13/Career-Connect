@@ -30,3 +30,23 @@ export interface Jobseekerup extends User{
     industry:string,
     contactNo:number
 }
+
+export interface UserUpdate {
+    name?: string;
+    email?: string;
+}
+
+export interface EmployerUpdate {
+    company_description?: string;
+    location?: string;
+    employer_contact_no?: number;
+}
+
+export interface updateJobseeker{
+    name?:string, 
+    email?:string, 
+    contact_no?:number,  
+    education?:string,
+    skills?:string,
+    industry?:string
+}

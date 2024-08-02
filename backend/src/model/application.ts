@@ -10,9 +10,6 @@ export class applicationModel extends BaseModel{
         .where("user_id", user_id)
         .first();
 
-        console.log(seekerId.seeker_id);
-
-        console.log(job_id);
         const applicationToAdd = {
             jobId:job_id,
             seekerId:seekerId.seekerId,
@@ -20,13 +17,10 @@ export class applicationModel extends BaseModel{
             coverLetter:application.coverLetter,
             additionalMessage:application.additionalMessage
         }
-        console.log("from model")
-        console.log(applicationToAdd);
         await this.queryBuilder()
         .insert(applicationToAdd)
         .table("application");
 
-        // console.log(response);
         return {message:"Applied successfully"};
 
     }
@@ -45,7 +39,6 @@ export class applicationModel extends BaseModel{
         .table("application")
         .where('application_id',application_id);
 
-        // console.log(response);
         if (response) return response;
         else return "problem";
 
@@ -78,9 +71,7 @@ export class applicationModel extends BaseModel{
     }
 
     static async getApplicationByJobseekerId(userId:number){
-        console.log(userId);
         const query = this.queryBuilder()
-        // .select('*')
         .select('*')
         .from("application")
         .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })

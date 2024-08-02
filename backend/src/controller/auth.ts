@@ -60,7 +60,6 @@ export async function login(req: Request, res: Response, next: NextFunction) {
   ) {
     try {
       if (req.file) {
-        // The uploaded file information is available in req.file
         const fileUrl = `resumes/${req.file.filename}`;
         console.log(fileUrl);
       const { body } = req;

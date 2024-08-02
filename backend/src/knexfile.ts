@@ -9,7 +9,6 @@ export const baseKnexConfig:Knex.Config ={
         user:config.database.user,
         password:config.database.password,
         database:config.database.name,
-
     }
 };
 
