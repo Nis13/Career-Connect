@@ -1,11 +1,8 @@
 // frontend/src/scripts/services/auth.ts
 
 import axios from 'axios';
-import { Employer, Jobseeker, UserCredentials } from '../../interfaces/Users';
-
-
-
-const BASE_URL = 'http://localhost:8000'; // Adjust based on your backend URL
+import { UserCredentials } from '../../interfaces/Users';
+import { BASE_URL } from '../../constants/urls';
 
 export const login = async (credentials: UserCredentials) => {
   try {
@@ -20,7 +17,7 @@ export const login = async (credentials: UserCredentials) => {
   }
 };
 
-export const signupemployer = async (data: Employer) => {
+export const signupemployer = async (data: FormData) => {
     try {
         console.log(data);
         const response = await axios.post(`${BASE_URL}/auth/signup/employer`, data);
@@ -37,7 +34,7 @@ export const signupemployer = async (data: Employer) => {
     }
 };
 
-export const signupjobseeker = async (data: Jobseeker) => {
+export const signupjobseeker = async (data: FormData) => {
   try {
       console.log(data);
       const response = await axios.post(`${BASE_URL}/auth/signup/jobseeker`, data);

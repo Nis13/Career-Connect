@@ -37,7 +37,7 @@ export async function login(body: Pick<User, "email" | "password">) {
     const existingUser =  await EmployerModel.getUserByEmail(body.email);
   
     if (!existingUser) {
-      return "Invalid Email";
+      return {message:"Invalid Email"};
     }
   
     const isValidPassword = await bcrypt.compare(
@@ -46,7 +46,7 @@ export async function login(body: Pick<User, "email" | "password">) {
     );
   
     if (!isValidPassword) {
-      return "Invalid Password";
+      return {message:"Invalid Password"};
     }
     
     const payload = {

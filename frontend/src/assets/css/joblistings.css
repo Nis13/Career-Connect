@@ -1,0 +1,91 @@
+
+.row-jobs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; 
+}
+
+
+.job_tile {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    height: 350px;
+    max-height: 450px;
+}
+
+
+.job-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #8C8AFF;
+    transition: all 0.3s ease-in-out;
+}
+
+.card-body {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    padding: 1rem; 
+}
+
+.job-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+}
+
+.job-card:hover .card-body {
+    background-color: #e9ecef;
+}
+
+
+/* Job Detail Page Styles */
+.job-detail-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    /* background-color: #8C8AFF; */
+}
+
+.job-detail-card {
+    min-width: 40vw;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 15px; 
+}
+
+.job-detail-card .card-body {
+    background-color: #ffffff;
+    /* border-left: 5px solid #8C8AFF; */
+    padding: 2rem;
+    border-radius: 15px; 
+}
+
+.job-detail-card .card-title {
+    color: #8C8AFF;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.job-detail-card .card-text {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.job-detail-card .card-text strong {
+    color: #343a40;
+}
+
+/* Badge and Text Styles */
+.badge-light {
+    background-color: #f8f9fa;
+    color: #6c757d;
+}
+
+.text-purple {
+    color: #8C8AFF;
+}

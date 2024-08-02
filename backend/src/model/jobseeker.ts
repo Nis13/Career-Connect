@@ -1,7 +1,17 @@
-import { GetUserQuery, Jobseeker} from "../interface/users";
+import { getallEmployer } from './../../../frontend/src/scripts/services/employer';
+
+import { GetUserQuery, Jobseeker, Jobseekerup} from "../interface/users";
 import { BaseModel } from "./base";
+import { EmployerUpdate, UserUpdate } from "./employer";
 
-
+export interface updateJobseeker{
+    name?:string, 
+    email?:string, 
+    contact_no?:number,  
+    education?:string,
+    skills?:string,
+    industry?:string
+}
 
 export class JobseekerModel extends BaseModel {
 
@@ -28,7 +38,7 @@ export class JobseekerModel extends BaseModel {
             education:jobseeker.jobseekerEducation,
             skills:jobseeker.jobseekerSkills,
             industry:jobseeker.jobseekerIndustry,
-            contact_no:jobseeker.jobseekerContact,
+            contact_no:jobseeker.contactNo,
             resume:jobseeker.jobseekerResume
         };
 
@@ -51,10 +61,18 @@ export class JobseekerModel extends BaseModel {
     }
 
 
-    static async getUsers(filter:GetUserQuery){
-        const query = this.queryBuilder().select('*').table('users');
+    static async getallJobseeker(filter:GetUserQuery){
+        const query = this.queryBuilder().select('*').table('users').innerJoin("jobseeker","jobseeker.user_id","users.user_id");
+        if (filter.page) {
+            query.limit(filter.page);
+        }
+    
+        if (filter.size) {
+            query.offset(filter.size);
+        }
         return query;
     }
+
     static async count(filter:GetUserQuery){
         const { q } = filter;
 
@@ -81,10 +99,50 @@ export class JobseekerModel extends BaseModel {
         const respone = await query;
         return respone;
     }
-
+    static async getJobseekerById(id:number){
+        const query = this.queryBuilder().select('*').from("users").innerJoin("jobseeker",{"jobseeker.user_id":"users.user_id"}).where("users.user_id",id).first();
+        const respone = await query;
+        return respone;
+    }
     static async deleteUser(id: number) {
         await this.queryBuilder().from("jobseeker").where('user_id', id).delete();
         await this.queryBuilder().from("users").where('user_id', id).delete();
         return { message: 'User deleted successfully' };
+    }
+    static async updateJobseeker(userId: number, updatedData: Partial<Jobseekerup>) {
+        try {
+            console.log(userId);
+            console.log("user update:",updatedData);
+            const userUpdates:UserUpdate = {};
+            if (updatedData.name) userUpdates.name = updatedData.name;
+            if (updatedData.email) userUpdates.email = updatedData.email;
+           
+            const jobseekerUpdates: updateJobseeker = {};
+            if (updatedData.contactNo) jobseekerUpdates.contact_no = updatedData.contactNo;
+            if (updatedData.education) jobseekerUpdates.education = updatedData.education;
+            if (updatedData.skills) jobseekerUpdates.skills = updatedData.skills;
+            if (updatedData.industry) jobseekerUpdates.industry = updatedData.industry;
+            console.log(jobseekerUpdates)
+            await this.queryBuilder().transaction(async trx => {
+                if (Object.keys(userUpdates).length > 0) {
+                    await trx('users')
+                        .where('user_id', userId)
+                        .update(userUpdates);
+                }
+                console.log("update user", jobseekerUpdates);
+                if (Object.keys(jobseekerUpdates).length > 0) {
+                    await trx('jobseeker')
+                        .where('user_id', userId)
+                        .update(jobseekerUpdates);
+                }
+                console.log("update jobseeker")
+            });
+    
+            return { message: "jobseeker Profile updated successfully" };
+    
+        } catch (error) {
+            console.error('Error updating employer profile:', error);
+            return { message: "Failed to update profile" };
+        }
     }
 };

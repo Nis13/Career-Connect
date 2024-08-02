@@ -1,0 +1,27 @@
+<div class="card-body">
+    <div class="mb-3">
+        <p class="card-text"><strong>Applicant:</strong> {{name}}</p>
+        <p class="card-text"><strong>Email:</strong> {{email}}</p>
+        <p class="card-text"><strong>Contact:</strong> {{contact}}</p>
+        <p class="card-text"><strong>Application Status:</strong> {{applicationStatus}}</p>
+        <p class="card-text"><strong>Application ID:</strong> {{application_id}}</p>
+    </div>
+
+    <div class="form-group mb-4">
+        <label for="status-select-{{application_id}}" class="form-label"> "status-select-{{application_id}}" Update Status:</label>
+        <select class="form-select" id="status-select-{{application_id}}">
+            <option value="Applied">Applied</option>
+            <option value="Under Review">Under Review</option>
+            <option value="Interview Scheduled">Interview Scheduled</option>
+            <option value="Rejected">Rejected</option>
+            <option value="Hired">Hired</option>
+        </select>
+        <button class="btn btn-primary me-2" id="change-status-btn" data-id="{{application_id}}">Change Status</button>
+    </div>
+
+    <div class="mt-4">
+        
+        <button class="btn btn-secondary me-2 view-user-btn" id="view-user-btn" data-id="{{application_id}}">{{application_id}}View User Application</button>
+        <button class="btn btn-secondary view-job-btn" id="view-job-btn" data-id="{{listing_id}}">View Job</button>
+    </div>
+</div>

@@ -6,21 +6,68 @@
   <title>Job Portal</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="src/assets/css/styles.css">
-  <link rel="stylesheet" href="src/assets/css/login.css">
 </head>
+
 <body>
   <div id="app">
-    <nav class="nav nav-tabs">
-      <a href="#" id="login-link">Login</a>
-      <a href="#" id="employer-signup-link">Signup as Employer</a>
-      <a href="#" id="jobseeker-signup-link">Signup as Job seeker</a>
-      <a href="#" id="home-link">Home</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand mt-2 mt-lg-0" href="#">
+          <img
+            src="./src/assets/images/logomain.png"
+            height="50"
+            alt="MDB Logo"
+            loading="lazy"
+          />
+        </a>
+        <div class="d-flex justify-content-center w-100">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" id="home-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="login-link">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="employer-signup-link">Signup as Employer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="jobseeker-signup-link">Signup as Job Seeker</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="employer-dashboard-nav" style="display: none;">Employer Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="jobseeker-dashboard-nav" style="display: none;">Jobseeker Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="admin-dashboard-nav" style="display: none;">Admin Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="joblisting-link" >Job Listing</a>
+            </li>
+            <li>
+              <a class="nav-link" id="add-joblisting-link" style="display: none;">Add job</a>
+            </li>
+            <li>
+              <a class="nav-link" id="logout-link" style="display: none;">Logout</a>
+            </li>
+            <!-- <img id="employer-image" alt="Employer Image" /> -->
+
+          </ul>
+        </div>
+      </div>
     </nav>
+    
+  
 
-    <div id="content"></div>
+    <div id="content" style="height: 89vh;"></div>
+    <div id="dashboard-left-container"></div>
   </div>
-
   <script type="module" src="./src/scripts/main.ts"></script>
+  <!-- <script type="module" src="./src/views/nav/navLoader.ts"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

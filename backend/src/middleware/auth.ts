@@ -7,7 +7,6 @@ import { User } from "../interface/users";
 
 export function authenticate(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
-  
     if (!authorization) {
       return {message:"token not found"};
     }
@@ -27,5 +26,19 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
   
     next();
   }
+
+  export function authorize(...roles: string[]) {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      const user = req.user!;
+      // const userId = user.id;
+      // const userPermissions = await UserModel.authorizeUser(userId);
+      console.log(user.role);
+      if (roles.includes(user.role)) {
+        next();
+      }
+      else return {message:"Forbidden"}
+    };
+  }
+  
   
   

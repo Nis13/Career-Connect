@@ -1,0 +1,70 @@
+<!-- Profile Dashboard -->
+<div class="container mt-5" id = "mycom">
+    <div class="row">
+        <!-- Profile Header -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <img src="http://localhost:8000/{{employerLogo}}" alt="Employer Logo" class="card-img-top profile-logo">
+                <div class="card-body text-center">
+                    <h1 class="card-title">{{employerName}}</h1>
+                    <p class="card-text"><strong>Email:</strong> {{employerEmail}}</p>
+                    <p class="card-text"><strong>Contact No:</strong> {{employercontactNo}}</p>
+                    <p class="card-text"><strong>Location:</strong> {{employerLocation}}</p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="card-title">About the Company</h3>
+                    <p class="card-text">{{employerDescription}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal">
+                <form id="editEmployerProfileForm">
+                    <div class="mb-3">
+                        <label for="profileName" class="form-label">Company Name</label>
+                        <input type="text" class="form-control" id="profileName" value="{{employerName}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="profileEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="profileEmail" value="{{employerEmail}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="profileContact" class="form-label">Contact No</label>
+                        <input type="text" class="form-control" id="profileContact" value="{{employercontactNo}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="profileLocation" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="profileLocation" value="{{employerLocation}}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="profileDescription" class="form-label">Description</label>
+                        <textarea class="form-control" id="profileDescription" rows="3">{{employerDescription}}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="saveProfileChanges" data-bs-dismiss="modal">Save changes</button>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

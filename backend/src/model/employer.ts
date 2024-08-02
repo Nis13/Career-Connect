@@ -1,7 +1,17 @@
 import { Employer, GetUserQuery, User } from "../interface/users";
 import { BaseModel } from "./base";
 
+export interface UserUpdate {
+    name?: string;
+    email?: string;
+    // Add other user fields if necessary
+}
 
+export interface EmployerUpdate {
+    company_description?: string;
+    location?: string;
+    employer_contact_no?: number;
+}
 
 export class EmployerModel extends BaseModel {
 
@@ -25,10 +35,10 @@ export class EmployerModel extends BaseModel {
 
         const employerToCreate = {
             user_id: userId.userId, 
-            description: employer.companyDescription,
+            company_description: employer.companyDescription,
             logo: employer.companyLogo,
             location: employer.companyLocation,
-            contact_no: employer.companyContact
+            employer_contact_no: employer.companyContactNo
         };
 
         await this.queryBuilder()
@@ -45,11 +55,62 @@ export class EmployerModel extends BaseModel {
 
     }
 
+static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
+    try {
+        console.log(userId);
+        console.log(updatedData);
+        const userUpdates:UserUpdate = {};
+        if (updatedData.name) userUpdates.name = updatedData.name;
+        if (updatedData.email) userUpdates.email = updatedData.email;
+       
+        const employerUpdates: EmployerUpdate = {};
+        if (updatedData.companyDescription) employerUpdates.company_description = updatedData.companyDescription;
+        if (updatedData.companyLocation) employerUpdates.location = updatedData.companyLocation;
+        if (updatedData.companyContactNo) employerUpdates.employer_contact_no = updatedData.companyContactNo;
 
-    static async getUsers(filter:GetUserQuery){
-        const query = this.queryBuilder().select('*').table('users');
+        await this.queryBuilder().transaction(async trx => {
+            if (Object.keys(userUpdates).length > 0) {
+                await trx('users')
+                    .where('user_id', userId)
+                    .update(userUpdates);
+            }
+
+            if (Object.keys(employerUpdates).length > 0) {
+                await trx('employer')
+                    .where('user_id', userId)
+                    .update(employerUpdates);
+            }
+        });
+
+        return { message: "Profile updated successfully" };
+
+    } catch (error) {
+        console.error('Error updating employer profile:', error);
+        return { message: "Failed to update profile" };
+    }
+}
+
+
+
+    static async getEmployerImage(id:number){
+        const query = await this.queryBuilder().select('logo').table('employer').where('user_id',id);
+        console.log(query);
         return query;
     }
+
+
+    static async getallEmployers(filter:GetUserQuery){
+        const query = this.queryBuilder().select('*').table('employer').innerJoin('users','users.user_id','employer.user_id');
+        if (filter.page) {
+            query.limit(filter.page);
+        }
+    
+        if (filter.size) {
+            query.offset(filter.size);
+        }
+        return query;
+    }
+
     static async count(filter:GetUserQuery){
         const { q } = filter;
 
@@ -78,10 +139,20 @@ export class EmployerModel extends BaseModel {
         const respone = await query;
         return respone;
     }
+    
+    static async getEmployerById(id:number){
+        const query = this.queryBuilder().select('*').from("users").innerJoin("employer",{"employer.user_id":"users.user_id"}).where("user_id",id).first();
+        const respone = await query;
+        return respone;
+    }
 
     static async deleteUser(id: number) {
         await this.queryBuilder().from("employer").where('user_id', id).delete();
         await this.queryBuilder().from("users").where('user_id', id).delete();
         return { message: 'User deleted successfully' };
+    }
+
+    static async getEmployerDetails(id:number) {
+        return await this.queryBuilder().select('*').from("employer").innerJoin('users', 'employer.user_id', 'users.user_id').where('users.user_id', id).first();
     }
 };
