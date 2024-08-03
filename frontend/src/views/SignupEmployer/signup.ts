@@ -1,14 +1,9 @@
 import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import { signupemployer } from "../../scripts/services/auth";
 import { getToken } from "../../utils/token";
+import { showError, validateContactNumber, validateEmail, validatePassword } from "../../utils/validation";
 
-const showError = (fieldId: string, message: string) => {
-    const errorContainer = document.getElementById(`${fieldId}-error`);
-    if (errorContainer) {
-        errorContainer.textContent = message;
-        errorContainer.style.display = 'block';
-    }
-};
+
 
 const handleSignupEmployer = async (event: Event) => {
     event.preventDefault();
@@ -43,7 +38,7 @@ const handleSignupEmployer = async (event: Event) => {
     if (companyDescription.length > 255) {
       showError("companyDescription", `Company Description must be 255 characters or less.${companyDescription.length}/255 `);
       return;
-  }
+    }
     if (!companyLocation) {
         showError("companyLocation", "Company Location is required.");
         return;
@@ -57,27 +52,21 @@ const handleSignupEmployer = async (event: Event) => {
         return;
     }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
+    if (!validateEmail(email)) {
         showError("email", "Invalid email format.");
         return;
     }
 
-    // Password validation
-    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordPattern.test(password)) {
+    if (!validatePassword(password)) {
         showError("password", "Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, one digit, and one special character.");
         return;
     }
 
-    // Contact number validation (9 or 10 digits)
-    const contactPattern = /^\d{9,10}$/;
-    if (!contactPattern.test(companyContact)) {
+    if (!validateContactNumber(companyContact)) {
         showError("companyContact", "Company Contact must be 9 or 10 digits.");
         return;
     }
 
-    // File validation
     if (companyLogo && !['image/jpeg', 'image/png'].includes(companyLogo.type)) {
         showError("companyLogo", "Invalid file type. Only JPEG and PNG are allowed.");
         return;
@@ -102,6 +91,10 @@ const handleSignupEmployer = async (event: Event) => {
             } else {
                 navigateTo('/login');
             }
+        }
+        else{
+            showError("companyContact", response.data.message);
+            return;
         }
     } catch (error) {
         console.log("Error during signup:", error);

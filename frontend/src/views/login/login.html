@@ -10,11 +10,13 @@
             <form id="login-form">
                 <div class="form-group">
                     <label for="login-email">Email address</label>
-                    <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                    <input type="string" class="form-control" id="login-email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <span class="error-message" id="emailError" style="color: red;"></span>
                 </div>
                 <div class="form-group">
                     <label for="login-password">Password</label>
-                    <input type="password" class="form-control" id="login-password" placeholder="Password" required>
+                    <input type="password" class="form-control" id="login-password" placeholder="Password">
+                    <span class="error-message" id="passwordError" style="color: red;"></span>
                 </div>
                 <div class="text-center text-lg-start mt-4 pt-2">
                     <button type="submit" class="btn btn-block">Submit</button>

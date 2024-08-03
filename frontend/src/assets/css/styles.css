@@ -3,34 +3,27 @@
 @import url('./signup.css');
 @import url('./home.css');
 
+:root{
+    --dark-color-theme:#070828; 
+}
+
 * {
-    color: #070828;
+    color: var(--dark-color-theme);
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.nav-tabs {
-    border-bottom: 2px solid #dee2e6;
-    justify-content: center; 
-    background-color: #f8f9fa; 
-    padding: 1rem;
-}
 
-.nav-link {
-   
+.nav-link {  
     font-weight: bold;
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;
     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .nav-link:hover {
-    color: #8C8AFF; 
+    color: var(--dark-color-theme); 
     background-color: #e9ecef; 
 }
 
-.nav-link.active {
-    color: #ffffff; 
-    background-color: #8C8AFF; 
-    border-color: #8C8AFF; 
-}

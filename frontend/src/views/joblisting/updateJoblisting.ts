@@ -42,9 +42,10 @@ export const updateJoblisting = async(listing_id:number) =>{
 
   try {
       const response = await handleUpdateJoblisting(jobListing);
-      console.log("message:", response.data);
-      alert(response.data);
-      navigateTo('/');
+      console.log("message:", response.message);
+      alert(response.message);
+      // navigateTo('/joblisting');
+      window.history.back();
     } catch (error) {
       console.log("Error during signup:", error);
     }

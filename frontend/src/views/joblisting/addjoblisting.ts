@@ -34,7 +34,7 @@ export const addjoblisting = async (event:Event) =>{
         const response = await handleAddJoblisting(jobListing);
         console.log("message:", response.data);
         alert(response.data);
-        navigateTo('/');
+        navigateTo('/joblisting');
       } catch (error) {
         console.log("Error during signup:", error);
       }

@@ -10,42 +10,51 @@
                         </div>
                         <!-- Form Column -->
                         <div class="col-md-6">
-                            <div class="card-body p-md-5 text-black">
+                            <div class="card-body p-md-5 text-black"> 
                                 <h1 class="text-center mb-4">Job Seeker Registration</h1>
                                 <form id="jobseekerForm" class="row g-3" enctype="multipart/form-data">
                                     <div class="col-md-12 form-group">
                                         <label for="name">Name <span class="required-star">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <input type="text" class="form-control" id="name" name="name">
+                                        <div id="name-error" class="text-danger" style="display: none;"></div>
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label for="email">Email <span class="required-star">*</span></label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com">
+                                        <div id="email-error" class="text-danger" style="display: none;"></div>
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label for="password">Password <span class="required-star">*</span></label>
-                                        <input type="password" class="form-control" id="password" name="password" required>
+                                        <input type="password" class="form-control" id="password" name="password">
+                                        <div id="password" class="text-danger" style="display: none;"></div>
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label for="jobseekerEducation">Education <span class="required-star">*</span></label>
-                                        <textarea class="form-control" id="jobseekerEducation" name="jobseekerEducation" rows="3" required></textarea>
+                                        <textarea class="form-control" id="jobseekerEducation" name="jobseekerEducation" rows="3"></textarea>
+                                        <div id="jobseekerEducation-error" class="text-danger" style="display: none;"></div>
                                     </div>
                                     <div class="col-md-12 form-group">
                                         <label for="jobseekerSkills">Skills<span class="required-star">*</span></label>
-                                        <input type="text" class="form-control" id="jobseekerSkills" name="jobseekerSkills" required>
+                                        <input type="text" class="form-control" id="jobseekerSkills" name="jobseekerSkills">
+                                        <div id="jobseekerSkills-error" class="text-danger" style="display: none;"></div>
                                     </div>
                                     <div class="col-md-6 form-group">
                                         <label for="jobseekerIndustry">Industry <span class="required-star">*</span></label>
-                                        <input type="text" class="form-control" id="jobseekerIndustry" name="jobseekerIndustry" required>
+                                        <input type="text" class="form-control" id="jobseekerIndustry" name="jobseekerIndustry">
+                                        <div id="jobseekerIndustry-error" class="text-danger" style="display: none;"></div>
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        <label for="jobseekerContact">Jobseeker Contact <span class="required-star">*</span></label>
-                                        <input type="number" class="form-control" id="jobseekerContact" name="jobseekerContact" required>
+                                        <label for="jobseekerContact">Contact <span class="required-star">*</span></label>
+                                        <input type="number" class="form-control" id="jobseekerContact" name="jobseekerContact" >
+                                        <div id="jobseekerContact-error" class="text-danger" style="display: none;"></div>
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        <label for="jobseekerResume">Jobseeker Resume</label>
-                                        <input type="file" class="form-control" id="jobseekerResume" name="jobseekerResume">
+                                        <label for="jobseekerResume">Jobseeker Resume <span class="required-star">*</span></label>
+                                        <input type="file" class="form-control" id="jobseekerResume" name="jobseekerResume" >
+                                        <div id="jobseekerResume-error" class="text-danger" style="display: none;"></div>
                                     </div>
                                     <div class="col-md-12 text-center ">
+                                        <div id="backend-error" class="text-danger" style="display: none;"></div>
                                         <button type="submit" class=" btn ">Register</button>
                                     </div>
                                 </form>
