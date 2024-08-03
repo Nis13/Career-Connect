@@ -11,6 +11,7 @@ import { getrole} from "../../utils/token";
 import { logout } from "../../views/Nav/nav";
 import { addJobTileEventListeners, applyJobEventListener, seeJobApplication, updateJobForm, updateJoblistingEventListeners } from "./jobEvents";
 import { deleteUser } from "../services/jobseeker";
+import { handleSignupAdmin } from "../../views/adminDashboard/alladmin";
 
 let areEventListenersAdded = false;
 
@@ -33,12 +34,18 @@ export const addEventListeners =  () => {
   editEmployerProfileEvent();
   editJobseekerProfileEvent();
 
+  deleteAdminEvent();
+
   document
       .getElementById("admin-create-jobseeker")
       ?.addEventListener("click", () => navigateTo("/signupjobseeker"));
       document
       .getElementById("admin-create-employer")
       ?.addEventListener("click", () => navigateTo("/signupEmployer"));
+      document
+      .getElementById("admin-create-admin")
+      ?.addEventListener("click", () => navigateTo("/signupAdmin"));
+      
 
  
 
@@ -68,6 +75,9 @@ export const addEventListeners =  () => {
    document
    .getElementById('filterForm')
    ?.addEventListener('submit',showJoblistingFilter);
+   document
+   .getElementById("AdminForm")
+   ?.addEventListener("submit", handleSignupAdmin);
  
   
       
@@ -111,6 +121,9 @@ document
 document
 .getElementById("view-joblistings")
 ?.addEventListener("click", () => navigateTo('/adminDashboard/getallJoblistings'));
+document
+.getElementById("view-admins")
+?.addEventListener("click", () => navigateTo('/adminDashboard/getallAdmin'));
 
 deleteUserEvent();
 
@@ -157,13 +170,25 @@ if (areEventListenersAdded) return;
     render(path);
   };
 
-
+  export function deleteAdminEvent() {
+    const userDeleteBtn = document.querySelectorAll(".admin-delete-admin")!;
+    
+      userDeleteBtn?.forEach(button => button.addEventListener('click', (event: Event) => {
+        const target = event.currentTarget as HTMLElement;
+        if (target && target.dataset.id) {
+          const userId = target.dataset.id;
+          console.log(userId);
+          deleteUser(parseInt(userId!));
+          navigateTo(window.location.pathname);
+        }
+      }));
+    }
  
 
  // Function to add event listeners to job tiles
  //joblisting 
  export function deleteUserEvent() {
-  const userDeleteBtn = document.querySelectorAll(".admin-delete-jobseeker" || ".admin-delete-employer")!;
+  const userDeleteBtn = document.querySelectorAll(".admin-delete-jobseeker" || ".admin-delete-employer" || ".admin-delete-admin")!;
   
     userDeleteBtn?.forEach(button => button.addEventListener('click', (event: Event) => {
       const target = event.currentTarget as HTMLElement;

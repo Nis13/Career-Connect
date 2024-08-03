@@ -16,6 +16,8 @@ import { getallJobseeker, getJobseekerDetail } from './services/jobseeker';
 import { loadJobseekerProfile } from '../views/jobseekerDashboard/profile';
 import { displayEmployers } from '../views/adminDashboard/allemployer';
 import { displayJobseekers } from '../views/adminDashboard/allJobseeker';
+import { getallAdmin } from './services/admin';
+import { displayAdmins } from '../views/adminDashboard/alladmin';
 
 const routes = [
   {
@@ -186,6 +188,11 @@ const routes = [
     action: async () => await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text()),
   },
   {
+    path:  "/signupAdmin",
+    action: async () => await fetch('/src/views/adminDashboard/createAdmin.html').then(response => response.text()),
+  },
+ 
+  {
     path: '/adminDashboard/getallEmployer',
     action: async () => {
       const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
@@ -225,6 +232,16 @@ const routes = [
 
       return sidebarHTML.replace('<div id="admin-content-container"></div>',`<div id="admin-content-container">${dataHTML}</div>`)      
     },
+  },
+  {
+    path: '/adminDashboard/getallAdmin',
+    action: async () => {
+      const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
+
+      const data = await getallAdmin();
+      const dataHTML = await displayAdmins(data)|| '';
+      return sidebarHTML.replace('<div id="admin-content-container"></div>',`<div id="admin-content-container">${dataHTML}</div>`)
+    }
   },
 
 ];

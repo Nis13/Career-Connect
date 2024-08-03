@@ -78,6 +78,8 @@ export function populateJobseekerTemplate(template: string, jobseeker: (getJobse
 export function populateAdminTemplate(template:string, admin: Partial<Admin>){
     template = template
     .replace(/{{userId}}/g, admin.userId!)
-    .replace(/{{userName}}/g, admin.name!)
-    .replace(/{{userEmail}}/g, admin.email!)
+    .replace(/{{name}}/g, admin.name!)
+    .replace(/{{email}}/g, admin.email!)
+
+    return template;
 }
