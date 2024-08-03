@@ -1,5 +1,4 @@
-
-import { addJobTileEventListeners } from "../../scripts/eventHandlers/eventHandler";
+import { addJobTileEventListeners } from "../../scripts/eventHandlers/jobEvents";
 import { joblistingFilter } from "../../scripts/services/joblisting";
 import { showFilterJoblisting} from "./joblisting";
 

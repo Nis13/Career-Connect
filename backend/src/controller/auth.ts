@@ -33,17 +33,17 @@ export async function login(req: Request, res: Response, next: NextFunction) {
       if (req.file) {
         // The uploaded file information is available in req.file
         const fileUrl = `uploads/${req.file.filename}`;
-        console.log(fileUrl);
+        console.log("file data",fileUrl);
       
 
       if (!body || !body.name || !body.password) {
        return {message:"name and password are required"};
       }
-      console.log(body.companyLogo);
       const employerData = {
         ...body,
         companyLogo: fileUrl 
     };
+    console.log(employerData);
       const data = await AuthService.signupEmployer(employerData);
       
       res.status(HttpStatusCodes.CREATED).json(data);

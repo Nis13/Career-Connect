@@ -60,3 +60,17 @@ export async function getallJobseeker(req: ExpressRequest<any,any,any,GetUserQue
       next(error);
     }
   }
+
+  export async function updateJobseekerByAdmin(req: Request, res: Response, next: NextFunction) {
+    try {
+      const updateData = req.body;
+      const {userId} = req.params;
+      if (!userId) {
+        return {message:"User ID is required"};
+      }
+      const data = await  JobseekerService.UpdateJobseeker(parseInt(userId),updateData);
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }

@@ -8,6 +8,9 @@ export interface UserCredentials {
       email:string,
       password:string
   }
+  export interface Admin extends User{
+    userId:string;
+  }
   export interface Employer extends User{
       companyDescription: string,
       companyLogo:File,

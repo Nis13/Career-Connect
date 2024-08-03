@@ -34,7 +34,7 @@ export class EmployerModel extends BaseModel {
             .insert(employerToCreate)
             .table("employer");
 
-    return {message:"user Created successfully"};
+    return {message:"Employer Created successfully"};
 
     }
 
@@ -81,13 +81,10 @@ static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
 
     static async getallEmployers(filter:GetUserQuery){
         const query = this.queryBuilder().select('*').table('employer').innerJoin('users','users.user_id','employer.user_id');
-        if (filter.page) {
-            query.limit(filter.page);
-        }
-    
-        if (filter.size) {
-            query.offset(filter.size);
-        }
+        // if (filter.page && filter.size) {
+        //     const offset = (filter.page - 1) * filter.size;
+        //     query.limit(filter.size).offset(offset);
+        // }
         return query;
     }
 
@@ -124,11 +121,10 @@ static async updateEmployer(userId: number, updatedData: Partial<Employer>) {
         return respone;
     }
 
-    static async deleteUser(id: number) {
-        await this.queryBuilder().from("employer").where('user_id', id).delete();
-        await this.queryBuilder().from("users").where('user_id', id).delete();
-        return { message: 'User deleted successfully' };
-    }
+    // static async deleteUser(id: number) {
+    //     await this.queryBuilder().from("users").where('user_id', id).delete();
+    //     return { message: 'User deleted successfully' };
+    // }
 
     static async getEmployerDetails(id:number) {
         return await this.queryBuilder().select('*').from("employer").innerJoin('users', 'employer.user_id', 'users.user_id').where('users.user_id', id).first();

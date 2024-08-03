@@ -1,5 +1,5 @@
 import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
-import { updateJobseekerForm } from "../jobseekerDashboard/profile";
+import { updateJobseekerByAdminForm, updateJobseekerForm } from "../jobseekerDashboard/profile";
 import { updateEmployerForm } from "./profile";
 
 export function viewJob(){
@@ -28,8 +28,13 @@ export function  editEmployerProfileEvent(){
         .getElementById('editEmployerProfileForm')
         ?.addEventListener('submit', updateEmployerForm);
 }
+
 export function  editJobseekerProfileEvent(){
     document
         .getElementById('editJobseekerProfileForm')
         ?.addEventListener('submit', updateJobseekerForm);
+}
+
+export function updateJobseeker(){
+    document.addEventListener('submit', updateJobseeker);
 }

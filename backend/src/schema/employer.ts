@@ -36,11 +36,11 @@ export const createEmployerBodySchema = Joi.object({
     companyLocation:Joi.string().required().messages({
         'any.required':'Location is required'
     }),
-    companyLogo:Joi.required().messages({
-        'any.required':'Logo is required'
-    }),
+    // companyLogo:Joi.required().messages({
+    //     'any.required':'Logo is required'
+    // }),
     
-    companyContact:Joi.number().required().min(100).messages({
+    companyContactNo:Joi.number().required().min(100).messages({
         'any.required':'Contact number is required',
         "number.base":"Contact number must be a number",
         "number.min":"Enter valid contact number"

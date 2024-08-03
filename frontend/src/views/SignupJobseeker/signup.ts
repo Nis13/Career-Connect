@@ -1,3 +1,5 @@
+import { getToken } from './../../utils/token';
+import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import { signupjobseeker } from "../../scripts/services/auth";
 
 const handleSignupJobseeker = async (event: Event) => {
@@ -36,14 +38,17 @@ const handleSignupJobseeker = async (event: Event) => {
     formData.append('jobseekerEducation', jobseekerEducation);
     formData.append('jobseekerSkills', jobseekerSkills);
     formData.append('jobseekerIndustry', jobseekerIndustry);
-    formData.append('jobseekerContact', jobseekerContact.toString());
+    formData.append('contactNo', jobseekerContact.toString());
     formData.append('resume', jobseekerResume);
   
     try {
       const response = await signupjobseeker(formData);
       console.log("message:", response.data.message);
       alert(response.data.message);
-      // navigateTo('/');
+      if (response.data.message == "Jobseeker created Successfully") {
+        if (getToken()) navigateTo('/adminDashboard/getallJobseeker')
+          else navigateTo('/login');
+      }
     } catch (error) {
       console.error("Error during signup:", error);
     }

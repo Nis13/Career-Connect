@@ -65,7 +65,8 @@ export class applicationModel extends BaseModel{
         .innerJoin('application', 'job_listings.listing_id', 'application.job_id')
         .innerJoin('jobseeker', 'application.seeker_id', 'jobseeker.seeker_id')
         .innerJoin('users', 'users.user_id', 'jobseeker.user_id')
-        .where('employer.user_id', userId);
+        .where('employer.user_id', userId)
+        .orderBy("application_id")
         const respone = await query;
         return respone;
     }

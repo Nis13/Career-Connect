@@ -53,3 +53,37 @@ export const getJobseekerDetail = async () => {
       throw new Error('joblisting get failed');
     }
   }
+
+  export const deleteUser = async (userId:number) => {
+    try {
+      const token = getToken();
+      console.log("from delete")
+      const response = await axios.delete(`http://localhost:8000/jobseeker/deleteuser/${userId}`,
+        {
+          headers: {
+          Authorization: `Bearer ${token}`
+        }}
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error('joblisting get failed');
+    }
+  }
+
+  export const updateJobseekerByAdmin = async (userId:number,updateData: Partial<Jobseeker>) =>{
+    try {
+      const token = getToken();
+      const response = await axios.put(`http://localhost:8000/jobseeker/updateprofile/${userId}`,
+        updateData,
+        {
+          headers: {
+          Authorization: `Bearer ${token}`
+        }}
+      );
+      console.log(response.data);
+      return response;
+    } catch (error) {
+      throw new Error('joblisting get failed');
+    }
+  }

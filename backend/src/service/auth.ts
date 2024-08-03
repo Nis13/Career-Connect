@@ -63,7 +63,7 @@ export async function login(body: Pick<User, "email" | "password">) {
     const refreshToken = await sign(payload, config.jwt.secret!, {
       expiresIn: config.jwt.refreshTokenExpityMS,
     });
-    return {  message:"user logged in successfully",role:existingUser.role,accessToken, refreshToken };
+    return {  message:"User Logged in Successfully!",role:existingUser.role,accessToken, refreshToken };
   }
 
 

@@ -1,6 +1,7 @@
-import { loggedinNav, navigateTo } from "../../scripts/eventHandlers/eventHandler";
+import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import { login } from "../../scripts/services/auth";
 import {storeToken} from "../../utils/token";
+import { loggedinNav } from "../Nav/nav";
 
 // Function to handle login form submission
 const handleLogin = async (event: Event) => {
@@ -15,14 +16,15 @@ const handleLogin = async (event: Event) => {
       const response = await login({ email, password });
       console.log("Message:", response.message);
       alert(response.message);
-      if (response.message) {
+      if (response.message == "User Logged in Successfully!") {
+        storeToken(response.accessToken);
         localStorage.setItem('role',response.role);
         loggedinNav(response.role);
         if (response.role == "employer") navigateTo('/employerDashboard');
         else if(response.role == "jobseeker") navigateTo('/jobseekerDashboard');
         else if (response.role == "admin") navigateTo('/adminDashboard'); 
       };
-      storeToken(response.accessToken);
+      
       
     } catch (error) {
       console.log("Error during login:", error);
