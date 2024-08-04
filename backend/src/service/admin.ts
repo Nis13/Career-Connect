@@ -9,8 +9,8 @@ export function getallAdmin(adminId:number){
 export async function createAdmin(adminData:User){
   const password = await bcrypt.hash(adminData.password, 10);
   adminData.password = password;
-    const data = AdminModel.createAdmin(adminData);
-    return data;
+    AdminModel.createAdmin(adminData);
+    return {message:"Admin Created successfully"};;
 }
 export async function getAdminById(id:number){
     const data = await AdminModel.getAdminById(id);

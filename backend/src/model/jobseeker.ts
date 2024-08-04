@@ -31,16 +31,9 @@ export class JobseekerModel extends BaseModel {
             resume:jobseeker.jobseekerResume
         };
         console.log(jobseekerToCreate);
-        const response = await this.queryBuilder()
+        return await this.queryBuilder()
             .insert(jobseekerToCreate)
             .table("jobseeker");
-    if (response){
-        return {message:"Jobseeker created Successfully"};
-    }else{
-        return {message:"User can't be created"}
-    }
-
-
     }
 
 
@@ -90,12 +83,10 @@ export class JobseekerModel extends BaseModel {
     }
 
     static async deleteUser(id: number) {
-        await this.queryBuilder().from("users").where('user_id', id).delete();
-        return { message: 'User deleted successfully' };
+        return await this.queryBuilder().from("users").where('user_id', id).delete();
     }
 
     static async updateJobseeker(userId: number, updatedData: Partial<Jobseekerup>) {
-        try {
             const userUpdates:UserUpdate = {};
             if (updatedData.name) userUpdates.name = updatedData.name;
             if (updatedData.email) userUpdates.email = updatedData.email;
@@ -106,7 +97,7 @@ export class JobseekerModel extends BaseModel {
             if (updatedData.skills) jobseekerUpdates.skills = updatedData.skills;
             if (updatedData.industry) jobseekerUpdates.industry = updatedData.industry;
             
-            await this.queryBuilder().transaction(async trx => {
+            return await this.queryBuilder().transaction(async trx => {
                 if (Object.keys(userUpdates).length > 0) {
                     await trx('users')
                         .where('user_id', userId)
@@ -119,12 +110,5 @@ export class JobseekerModel extends BaseModel {
                         .update(jobseekerUpdates);
                 }
             });
-    
-            return { message: "jobseeker Profile updated successfully" };
-    
-        } catch (error) {
-            console.log('Error updating employer profile:', error);
-            return { message: "Failed to update profile" };
-        }
-    }
-};
+}
+}

@@ -30,12 +30,12 @@ export class EmployerModel extends BaseModel {
             employer_contact_no: employer.companyContactNo
         };
 
-        await this.queryBuilder()
+        return await this.queryBuilder()
             .insert(employerToCreate)
             .table("employer");
 
-    return {message:"Employer Created successfully"};
-
+    
+ 
     }
 
 static async updateEmployer(userId: number, updatedData: Partial<Employer>) {

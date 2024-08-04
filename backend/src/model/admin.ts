@@ -9,22 +9,18 @@ export class AdminModel extends BaseModel{
             role: 'admin', 
             name: admin.name
         };
-        await this.queryBuilder()
+        return await this.queryBuilder()
         .insert(userToCreate)
         .table("users");
-
-        return {message:"Admin Created successfully"};
     }
 
     static async getallAdmin(adminId:number){
         const query = await this.queryBuilder().select("*").from("users").where("role","admin").whereNot("userId",adminId);
-        console.log("get all");
         return query;
     }
 
     static async getAdminById(userId:number){
-        const query = await this.queryBuilder().select("*").from("users").where("user_id",userId);
-        return {message:"Employer deleted successfully"};
+        return await this.queryBuilder().select("*").from("users").where("user_id",userId);    
     }
 
     static async deleteAdminById(userId:number){

@@ -31,9 +31,9 @@ const handleLogin = async (event: Event) => {
         storeToken(response.accessToken);
         localStorage.setItem('role',response.role);
         loggedinNav(response.role);
-        if (response.role == "employer") navigateTo('/employerDashboard');
+        if (response.role == "employer") {window.history.replaceState({}, '', '/employerDashboard'); navigateTo('/employerDashboard')}
         else if(response.role == "jobseeker") navigateTo('/jobseekerDashboard');
-        else if (response.role == "admin") navigateTo('/adminDashboard/getallEmployer'); 
+        else if (response.role == "admin") {window.history.replaceState({}, '', '/adminDashboard/getallEmployer'); navigateTo('/adminDashboard/getallEmployer')}; 
       }
       else{
         (document.getElementById('passwordError') as HTMLElement).textContent = response.message;

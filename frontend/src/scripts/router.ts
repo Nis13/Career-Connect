@@ -27,7 +27,9 @@ const routes = [
   },
   {
     path: '/login',
-  action: async () => await fetch('/src/views/login/login.html').then(response => response.text())
+  action: async () => {
+    return await fetch('/src/views/login/login.html').then(response => response.text())
+  }
   },
   {
     path: '/signupemployer',

@@ -36,9 +36,8 @@ export const addjoblisting = async (event:Event) =>{
 
         alert(response);
         if (response == 'job created successfully') navigateTo('/joblisting');
-      } catch (error) {
+    }
+    catch (error) {
         console.log("Error during signup:", error);
       }
-
-
-}
+    }

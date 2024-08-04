@@ -86,6 +86,7 @@ const handleSignupEmployer = async (event: Event) => {
         console.log("message:", response.data.message);
         if (response.data.message === "Employer Created successfully") {
             showError("", ""); 
+            alert(response.data.message);
             if (getToken()) {
                 navigateTo('/adminDashboard/getallEmployer');
             } else {

@@ -10,13 +10,14 @@ export async function signupEmployer(employer:Employer){
 
   if (existingUser) {
     const message = "User already exists";
-    return {message:message};
+    return {message:message}; 
   }
 
   const password = await bcrypt.hash(employer.password, 10);
   employer.password = password;
 
-  return EmployerModel.signup(employer);
+  EmployerModel.signup(employer);
+  return {message:"Employer Created successfully"};
 }
 
 export async function signupJobseeker(jobseeker:Jobseeker){
@@ -30,8 +31,12 @@ export async function signupJobseeker(jobseeker:Jobseeker){
   const password = await bcrypt.hash(jobseeker.password, 10);
   jobseeker.password = password;
 
-  return await JobseekerModel.signup(jobseeker);
+  const response = await JobseekerModel.signup(jobseeker);
+  if (response){
+    return {message:"Jobseeker created Successfully"};
+  }
 }
+
 
 export async function login(body: Pick<User, "email" | "password">) {
     const existingUser =  await EmployerModel.getUserByEmail(body.email);

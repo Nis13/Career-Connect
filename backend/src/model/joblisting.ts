@@ -19,11 +19,9 @@ export class JoblistingModel extends BaseModel {
             createdBy:employerId.employerId
         };
 
-        await this.queryBuilder()
+        return await this.queryBuilder()
         .insert(jobToCreate)
         .table("job_listings");
-
-    return {message:"job created successfully"};
 
     }
 
