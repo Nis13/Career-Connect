@@ -16,8 +16,10 @@ export async function getJoblistingById(id:number){
 };
 
 export async function createJoblisting(employerId:number,joblisting:Joblisting){
-    return await JoblistingModel.createJoblisting(employerId,joblisting);
+    await JoblistingModel.createJoblisting(employerId,joblisting);
+    return {message:"job created successfully"};
 }
+
 export async function updateJoblisting(employerId:number,listing_id:number,joblisting:Joblisting){
   return await JoblistingModel.updateJoblistingById(employerId,listing_id,joblisting);
 }
@@ -38,4 +40,12 @@ export async function updateJoblisting(employerId:number,listing_id:number,jobli
 
   export function getJoblistingByUserId(id:number){
     return JoblistingModel.getJoblistingByUserId(id);
+  }
+
+  export function totaljobpostByUser(userId:number){
+    return JoblistingModel.totaljobpostByUser(userId);
+  }
+
+  export function totalactiveJobByEmployer(userId:number){
+    return JoblistingModel.totalactiveJobByEmployer(userId);
   }

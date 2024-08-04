@@ -65,7 +65,8 @@ export class applicationModel extends BaseModel{
         .innerJoin('application', 'job_listings.listing_id', 'application.job_id')
         .innerJoin('jobseeker', 'application.seeker_id', 'jobseeker.seeker_id')
         .innerJoin('users', 'users.user_id', 'jobseeker.user_id')
-        .where('employer.user_id', userId);
+        .where('employer.user_id', userId)
+        .orderBy("application_id");
         const respone = await query;
         return respone;
     }
@@ -96,7 +97,8 @@ export class applicationModel extends BaseModel{
         .from("application")
         .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
         .innerJoin("job_listings",{ "application.job_id": "job_listings.listing_id" })
-        .innerJoin('users', 'users.user_id', 'jobseeker.user_id');
+        .innerJoin('users', 'users.user_id', 'jobseeker.user_id')
+        .orderBy("application_id");
 
         if (filter.page) {
             query.limit(filter.page);
@@ -107,4 +109,45 @@ export class applicationModel extends BaseModel{
         }
         return query;
     }
+
+    static async totalApplicationByEmployer(userId:number){
+        const query = this.queryBuilder()
+        .count('* as total')
+        .from('employer')
+        .innerJoin('job_listings', 'employer.employer_id', 'job_listings.created_by')
+        .innerJoin('application', 'job_listings.listing_id', 'application.job_id')
+        .where('employer.user_id', userId)
+        
+        const response = await query;
+    const count = (response[0] as { total: string })?.total;
+    return parseInt(count, 10) || 0;
+    }
+
+    static async totalJobApplied(userId:number){
+        const query = this.queryBuilder()
+        .count('* as total')
+        .from('application')
+        .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
+        .where('jobseeker.user_id', userId)
+        
+        const response = await query;
+    const count = (response[0] as { total: string })?.total;
+    return parseInt(count, 10) || 0;
+    }
+
+    static async totalJobRejected(userId:number){
+        const query = this.queryBuilder()
+        .count('* as total')
+        .from('application')
+        .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
+        .where('jobseeker.user_id', userId)
+        .andWhere("application.application_status","Rejected");
+        
+        const response = await query;
+    const count = (response[0] as { total: string })?.total;
+    return parseInt(count, 10) || 0;
+    }
+
+
+    
 }

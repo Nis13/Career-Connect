@@ -12,18 +12,16 @@ export class JoblistingModel extends BaseModel {
             description:joblisting.jobDescription,
             requirements:joblisting.requirements,
             benefits:joblisting.benefits,
-            location:joblisting.location,
+            jobLocation:joblisting.location,
             salaryRange:joblisting.salaryRange,
             jobType:joblisting.jobType,
             jobStatus:joblisting.jobStatus,
             createdBy:employerId.employerId
         };
 
-        await this.queryBuilder()
+        return await this.queryBuilder()
         .insert(jobToCreate)
         .table("job_listings");
-
-    return {message:"job Created successfully"};
 
     }
 
@@ -33,7 +31,7 @@ export class JoblistingModel extends BaseModel {
             description:joblisting.jobDescription,
             requirements:joblisting.requirements,
             benefits:joblisting.benefits,
-            location:joblisting.location,
+            jobLocation:joblisting.location,
             salaryRange:joblisting.salaryRange,
             jobType:joblisting.jobType,
             jobStatus:joblisting.jobStatus,
@@ -50,7 +48,8 @@ export class JoblistingModel extends BaseModel {
 
     static async getJoblistings(){
         const query = await this.queryBuilder().select('*').table('job_listings').innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
-        .innerJoin("users",{"employer.user_id":"users.user_id"});
+        .innerJoin("users",{"employer.user_id":"users.user_id"})
+        .orderBy("job_listings.created_at","desc");
         return query;
     }
     static async getJoblistingByUserId(userId:number){
@@ -59,12 +58,13 @@ export class JoblistingModel extends BaseModel {
         .table('job_listings')
         .innerJoin('employer', 'job_listings.created_by', 'employer.employer_id')
         .innerJoin('users', 'employer.user_id', 'users.user_id')
-        .where('users.user_id', userId);        const respone = await query;
-        return respone;
+        .where('users.user_id', userId);        
+        const response = await query;
+        return response;
     }
     static async getJoblistingById(id:number){
         const query = this.queryBuilder()
-        .select('listingId','title','job_listings.description','requirements','benefits','job_listings.location','salaryRange','jobType','jobStatus','name','logo')
+        .select('listingId','title','job_listings.description','requirements','benefits','job_listings.job_location','salaryRange','jobType','jobStatus','name','logo')
         .from("job_listings")
         .innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
         .innerJoin("users",{"employer.user_id":"users.user_id"})
@@ -87,7 +87,7 @@ export class JoblistingModel extends BaseModel {
         }
 
         if(filter.location){
-            query.where("job_listings.location","ilike",`%${filter.location}`);
+            query.where("job_listings.job_location","ilike",`%${filter.location}`);
         }
 
         if(filter.jobType){
@@ -98,7 +98,7 @@ export class JoblistingModel extends BaseModel {
             query.where("users.name","ilike",`%${filter.name}`);
         }
         if (filter.jobStatus){
-            query.where("job_listings.title","ilike",`%${filter.jobStatus}`);
+            query.where("job_listings.jobStatus","ilike",`%${filter.jobStatus}`);
         }
 
         const data = await query;
@@ -106,4 +106,28 @@ export class JoblistingModel extends BaseModel {
         return data;
 
     }
+
+    static async totaljobpostByUser(userId:number){
+        const query = this.queryBuilder()
+        .count('* as total') 
+        .table('job_listings')
+        .innerJoin('employer', 'job_listings.created_by', 'employer.employer_id')
+        .where('employer.user_id', userId);
+
+    const response = await query;
+    const count = (response[0] as { total: string })?.total;
+    return parseInt(count, 10) || 0;
 };
+static async totalactiveJobByEmployer(userId:number){
+    const query = this.queryBuilder()
+    .count('* as total') 
+    .table('job_listings')
+    .innerJoin('employer', 'job_listings.created_by', 'employer.employer_id')
+    .where('employer.user_id', userId)
+    .where("job_listings.job_status","Active");
+
+const response = await query;
+const count = (response[0] as { total: string })?.total;
+return parseInt(count, 10) || 0;
+};
+}

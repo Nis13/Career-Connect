@@ -1,20 +1,31 @@
 <div class="container-fluid job-detail-page py-5">
     <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card job-detail-card shadow-lg border-light rounded">
+        <div class="col-lg-8.5">
+            <div class="card job-detail-card shadow-lg border-light rounded-3">
                 <div class="card-body p-4">
                     <div class="row">
-                        <div class="col-md-3 text-center">
+                        
+                        <div class="col-md-4 text-center">
                             <img src="http://localhost:8000/{{company_logo}}" alt="Logo" class="img-fluid mb-3" style="width: 100px; height: 100px;">
-                            <h5 class="card-title">{{title}}</h5>
+                            <h5 class="card-title">{{company_name}}</h5>
+                            
                             <p class="card-text"><strong>Salary:</strong>{{salaryRange}}</p>
                             <p class="card-text">{{jobType}}</p>
                             <div class="d-flex justify-content-center mb-2">
-                                <span class="badge bg-light text-dark me-2">IT</span>
+                                <span class="badge bg-light text-dark me-2">{{location}}</span>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-8">
+                            <div>
+                                <span class="badge bg-light text-danger me-2">{{jobStatus}}</span>
+                            </div>
+                            <div>
+                                <h5 class="card-title">{{title}}</h5>
+                                
+                            </div>
+                            
                             <div class="d-flex justify-content-between mb-3">
+                                
                                 <div>
                                     <h5 class="text-purple">Job Description</h5>
                                     <p>{{description}}</p>
@@ -23,13 +34,13 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <h5 class="text-purple">Requirements</h5>
-                                    <p>{{requirements}}</p>
+                                    <pre>{{requirements}}</pre>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between mb-3">
                                 <div>
                                     <h5 class="text-purple">Benefits</h5>
-                                    <p>{{benefits}}</p>
+                                    <p><pre>{{benefits}}</pre></p>
                                 </div>
                             </div>
                         

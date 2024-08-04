@@ -1,5 +1,5 @@
 import { Application, employerViewApplication } from '../interfaces/Application';
-import { getEmployer, getJobseeker } from '../interfaces/Users';
+import { Admin, getEmployer, getJobseeker, User } from '../interfaces/Users';
 import { JoblistingDetail } from './../interfaces/joblisting';
 
 export function populateTemplate(template: string, job: (JoblistingDetail)): string {
@@ -9,7 +9,7 @@ export function populateTemplate(template: string, job: (JoblistingDetail)): str
     .replace(/{{benefits}}/g, job.benefits)
     .replace(/{{requirements}}/g, job.requirements)
     .replace(/{{description}}/g, job.description)
-    .replace(/{{location}}/g, job.location)
+    .replace(/{{location}}/g, job.jobLocation)
     .replace(/{{jobStatus}}/g, job.jobStatus)
     .replace(/{{jobType}}/g, job.jobType)
     .replace(/{{salaryRange}}/g, job.salaryRange)
@@ -50,6 +50,7 @@ export function populateBriefApplicationTemplate(template: string, application: 
 }
 export function populateEmployerTemplate(template: string, employer: (getEmployer)){
     template = template
+    // .replace(/{{userId}}/g, employer.userId)
     .replace(/{{employerId}}/g, employer.userId)
     .replace(/{{employerName}}/g, employer.name)
     .replace(/{{employerEmail}}/g, employer.email)
@@ -70,6 +71,15 @@ export function populateJobseekerTemplate(template: string, jobseeker: (getJobse
     .replace(/{{userEducation}}/g, jobseeker.education)
     .replace(/{{userSkills}}/g, jobseeker.skills)
     .replace(/{{userIndustry}}/g, jobseeker.industry)
+
+    return template;
+}
+
+export function populateAdminTemplate(template:string, admin: Partial<Admin>){
+    template = template
+    .replace(/{{userId}}/g, admin.userId!)
+    .replace(/{{name}}/g, admin.name!)
+    .replace(/{{email}}/g, admin.email!)
 
     return template;
 }

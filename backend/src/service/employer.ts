@@ -1,7 +1,9 @@
+import { Jobseeker } from './../interface/users';
 import { Employer, GetUserQuery, User } from "../interface/users";
 import { EmployerModel } from "../model/employer";
 
 import bcrypt from "bcrypt";
+import { JobseekerModel } from '../model/jobseeker';
 
 export function getallEmployers(query:GetUserQuery){
     return EmployerModel.getallEmployers(query);
@@ -33,7 +35,7 @@ export function getUserByEmail(email:string){
     if (!userToDelete) {
       return {message:'User not found'};
     }
-    return EmployerModel.deleteUser(id);
+    return JobseekerModel.deleteUser(id);
   }
 
   export function getEmployerDetails(id:number){

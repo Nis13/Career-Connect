@@ -21,7 +21,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string("description").notNullable();
     table.text("requirements").notNullable();
     table.text("benefits").notNullable();
-    table.string("location").notNullable();
+    table.string("job_location").notNullable();
     table.string("salary_range").notNullable();
     table.enu('job_type', ['Full-Time', 'Part-Time', 'Internship','Contract']).notNullable();
     table.enu('job_status', ['Active', 'Inactive']).defaultTo('Active').notNullable();

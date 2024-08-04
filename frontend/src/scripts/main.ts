@@ -3,40 +3,41 @@ import { getrole, getToken, handleToken } from "../utils/token";
 import render from "./render";
 import { BASE_URL } from "../constants/urls";
 import { navigateTo } from "./eventHandlers/eventHandler";
+import { loggedinNav } from "../views/Nav/nav";
 
-export function loadNav(){
-  if(getToken()){
-    const loginoutBtn = document.getElementById('logout-link');
-    if (loginoutBtn) loginoutBtn.style.display = 'block';
-    const signupBtn = document.getElementById('employer-signup-link');
-    if (signupBtn) signupBtn.style.display = 'none';
-    const signupBtnJS = document.getElementById('jobseeker-signup-link');
-    console.log(signupBtnJS);
-    if (signupBtnJS) signupBtnJS.style.display = 'none';
-    const loginBtnJS = document.getElementById('login-link');
-    console.log(loginBtnJS);
-    if (loginBtnJS)loginBtnJS.style.display = 'none'
-  }
+// export function loadNav(){
+//   if(getToken()){
+//     const loginoutBtn = document.getElementById('logout-link');
+//     if (loginoutBtn) loginoutBtn.style.display = 'block';
+//     const signupBtn = document.getElementById('employer-signup-link');
+//     if (signupBtn) signupBtn.style.display = 'none';
+//     const signupBtnJS = document.getElementById('jobseeker-signup-link');
+//     console.log(signupBtnJS);
+//     if (signupBtnJS) signupBtnJS.style.display = 'none';
+//     const loginBtnJS = document.getElementById('login-link');
+//     console.log(loginBtnJS);
+//     if (loginBtnJS)loginBtnJS.style.display = 'none'
+//   }
   
-  const role = getrole();
-  console.log(role);
-  if (role == 'jobseeker'){
+//   const role = getrole();
+//   console.log(role);
+//   if (role == 'jobseeker'){
 
-    const jobseekerDashboardNav = document.getElementById('jobseeker-dashboard-nav');
-    if (jobseekerDashboardNav) jobseekerDashboardNav.style.display = 'block';
-  }
-  else if (role == 'employer'){
-    const employerDashboardNav = document.getElementById('employer-dashboard-nav');
-    if (employerDashboardNav) employerDashboardNav.style.display = 'block';
+//     const jobseekerDashboardNav = document.getElementById('jobseeker-dashboard-nav');
+//     if (jobseekerDashboardNav) jobseekerDashboardNav.style.display = 'block';
+//   }
+//   else if (role == 'employer'){
+//     const employerDashboardNav = document.getElementById('employer-dashboard-nav');
+//     if (employerDashboardNav) employerDashboardNav.style.display = 'block';
 
-    const addjob = document.getElementById('add-joblisting-link');
-    if (addjob) addjob.style.display = 'block'; 
-  }
-  else if(role == 'admin'){
-    const adminDashboardNav = document.getElementById('admin-dashboard-nav');
-    if (adminDashboardNav) adminDashboardNav.style.display = 'block';
-  }
-}
+//     const addjob = document.getElementById('add-joblisting-link');
+//     if (addjob) addjob.style.display = 'block'; 
+//   }
+//   else if(role == 'admin'){
+//     const adminDashboardNav = document.getElementById('admin-dashboard-nav');
+//     if (adminDashboardNav) adminDashboardNav.style.display = 'block';
+//   }
+// }
 export async function saveData(token:string){
   try{
     const response = await axios.get(`${BASE_URL}/parse/${token}`);
@@ -53,18 +54,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
   console.log("onload");
   console.log(getToken());
   if (getToken()){
-    const loginoutBtn = document.getElementById('logout-link');
-    if (loginoutBtn) loginoutBtn.style.display = 'block';
-    const signupBtn = document.getElementById('employer-signup-link');
-    if (signupBtn) signupBtn.style.display = 'none';
-    const signupBtnJS = document.getElementById('jobseeker-signup-link');
-    console.log(signupBtnJS);
-    if (signupBtnJS) signupBtnJS.style.display = 'none';
-    const loginBtnJS = document.getElementById('login-link');
-    console.log(loginBtnJS);
-    if (loginBtnJS)loginBtnJS.style.display = 'none';
-   
-
+    loggedinNav(getrole()!)
   }
   else{
     navigateTo('/login');
@@ -73,23 +63,6 @@ document.addEventListener("DOMContentLoaded", async()=>{
   console.log('no acesss');
   const role = getrole();
   console.log(role);
-  if (role == 'jobseeker'){
-
-    const jobseekerDashboardNav = document.getElementById('jobseeker-dashboard-nav');
-    if (jobseekerDashboardNav) jobseekerDashboardNav.style.display = 'block';
-  }
-  else if (role == 'employer'){
-    const employerDashboardNav = document.getElementById('employer-dashboard-nav');
-    if (employerDashboardNav) employerDashboardNav.style.display = 'block';
-
-    const addjob = document.getElementById('add-joblisting-link');
-    if (addjob) addjob.style.display = 'block';
-    
-  }
-  else if(role == 'admin'){
-    const adminDashboardNav = document.getElementById('admin-dashboard-nav');
-    if (adminDashboardNav) adminDashboardNav.style.display = 'block';
-  }
 }
 
 )

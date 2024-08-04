@@ -23,13 +23,16 @@ export function getUserByEmail(email:string){
     if (!userToDelete) {
       return {message:'User not found'};
     }
-    return JobseekerModel.deleteUser(id);
+    JobseekerModel.deleteUser(id);
+    return { message: 'User deleted successfully' };
   }
+
   export function UpdateJobseeker(id: number, updatedData: Partial<Jobseeker>) {
     const userToUpdate = JobseekerModel.getUserById(id);
     if (!userToUpdate) {
       return {message:'User not found'};
     }
-    return JobseekerModel.updateJobseeker(id, updatedData);
+    JobseekerModel.updateJobseeker(id, updatedData);
+    return { message: "jobseeker Profile updated successfully" };
   }
   

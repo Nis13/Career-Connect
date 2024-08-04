@@ -15,7 +15,7 @@
 }
 
 
-.job-card {
+.job-card, .application-card {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -44,47 +44,36 @@
 
 /* Job Detail Page Styles */
 .job-detail-page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     min-height: 100%;
-    /* background-color: #8C8AFF; */
-}
-
-.job-detail-card {
-    min-width: 40vw;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: none;
-    border-radius: 15px; 
-}
-
-.job-detail-card .card-body {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 15px; 
+    }
+.card{
+    border-radius: 1.25rem;
 }
 
 .job-detail-card .card-title {
     color: #8C8AFF;
     font-weight: bold;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .job-detail-card .card-text {
     color: #6c757d;
     margin-bottom: 1rem;
 }
-
-.job-detail-card .card-text strong {
-    color: #343a40;
+pre{
+    font-family: inherit; 
+  font-size: inherit;   
+  line-height: 1.5;   
+  white-space: pre-line;
 }
-
-/* Badge and Text Styles */
 .badge-light {
     background-color: #f8f9fa;
     color: #6c757d;
 }
-
 .text-purple {
     color: #8C8AFF;
+} 
+
+.border-color{
+    border-color: #8C8AFF;
 }

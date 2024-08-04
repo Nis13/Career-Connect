@@ -11,11 +11,13 @@ import { getrole } from '../utils/token';
 import { showApplicationById } from '../views/application/seeapplication';
 import { getApplicationforEmployer, getApplicationforJobseeker } from '../views/application/viewapplication';
 import { getallEmployer, getEmployerDetail } from './services/employer';
-import { loadEmployerProfile } from '../views/employerDashboard/profile';
+import { loadEmployerDash, loadEmployerProfile } from '../views/employerDashboard/profile';
 import { getallJobseeker, getJobseekerDetail } from './services/jobseeker';
-import { loadJobseekerProfile } from '../views/jobseekerDashboard/profile';
+import { jobseekerDash, loadJobseekerProfile } from '../views/jobseekerDashboard/profile';
 import { displayEmployers } from '../views/adminDashboard/allemployer';
 import { displayJobseekers } from '../views/adminDashboard/allJobseeker';
+import { getallAdmin } from './services/admin';
+import { displayAdmins } from '../views/adminDashboard/alladmin';
 
 const routes = [
   {
@@ -25,7 +27,9 @@ const routes = [
   },
   {
     path: '/login',
-  action: async () => await fetch('/src/views/login/login.html').then(response => response.text())
+  action: async () => {
+    return await fetch('/src/views/login/login.html').then(response => response.text())
+  }
   },
   {
     path: '/signupemployer',
@@ -37,7 +41,13 @@ const routes = [
   },
   {
     path: '/employerDashboard',
-    action: async () => await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text()),
+    action: async () => {
+      const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
+      const HTML = await loadEmployerDash();
+      console.log(HTML)
+      const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${HTML}</div>`);
+      return combinedHTML;
+    },
   },
   {
     path: '/employerdashboard/viewapplications',
@@ -76,7 +86,13 @@ const routes = [
   },
   {
     path: '/jobseekerDashboard',
-    action: async () => await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text()),
+    action: async () => {
+      const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
+      const HTML = await jobseekerDash();
+      console.log(HTML)
+      const combinedHTML = dashboardHTML.replace('<div id="jobseeker-content-container"></div>', `<div id="jobseeker-content-container">${HTML}</div>`);
+      return combinedHTML;
+    },
   },
   {
     path: '/jobseekerDashboard/jobseekerprofile',
@@ -181,10 +197,15 @@ const routes = [
       // return `id of job ${id}`;
     },
   },
+  // {
+  //   path: '/adminDashboard',
+  //   action: async () => await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text()),
+  // },
   {
-    path: '/adminDashboard',
-    action: async () => await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text()),
+    path:  "/signupAdmin",
+    action: async () => await fetch('/src/views/adminDashboard/createAdmin.html').then(response => response.text()),
   },
+ 
   {
     path: '/adminDashboard/getallEmployer',
     action: async () => {
@@ -225,6 +246,16 @@ const routes = [
 
       return sidebarHTML.replace('<div id="admin-content-container"></div>',`<div id="admin-content-container">${dataHTML}</div>`)      
     },
+  },
+  {
+    path: '/adminDashboard/getallAdmin',
+    action: async () => {
+      const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
+
+      const data = await getallAdmin();
+      const dataHTML = await displayAdmins(data)|| '';
+      return sidebarHTML.replace('<div id="admin-content-container"></div>',`<div id="admin-content-container">${dataHTML}</div>`)
+    }
   },
 
 ];

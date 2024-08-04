@@ -16,7 +16,7 @@ export const showJoblisting = async (data: JoblistingDetail[]) => {
       .join("");
     const addedHtmlString =
       filterHtml +
-      '<div class="container mt-4 p-5"><div class="row">' +
+      '<div class="container p-5" id="filter-job"><div class="row">' +
       htmlString +
       "</div></div>";
     console.log("From show job listing");
@@ -34,7 +34,7 @@ export const showFilterJoblisting = async (data: JoblistingDetail[]) => {
       .map((data: JoblistingDetail) => populateTemplate(htmlFile, data))
       .join("");
     const addedHtmlString =
-      '<div class="container mt-4 p-5"><div class="row">' +
+      '<div class="container"><div class="row">' +
       htmlString +
       "</div></div>";
     return addedHtmlString;
@@ -53,7 +53,7 @@ export const showJoblistingByEmployer = async (data: JoblistingDetail[]) => {
       .map((data: JoblistingDetail) => populateTemplate(htmlFile, data))
       .join("");
     const addedHtmlString =
-      '<div class="container mt-4 p-5"><div class="row-jobs">' +
+      '<div class="container mt-4"><div class="row-jobs">' +
       htmlString +
       "</div></div>";
     return addedHtmlString;

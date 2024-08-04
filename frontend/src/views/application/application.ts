@@ -1,3 +1,4 @@
+import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import { handleJobApply } from "../../scripts/services/application";
 
 export const getapplyform =  async (jobId:string) =>{
@@ -33,6 +34,7 @@ export const addApplication = async (event:Event) =>{
       const response = await handleJobApply(parseInt(jobId),formData);
       console.log("message:", response.message);
       alert(response.message);
+      if (response.message == "Applied successfully") navigateTo('/jobseekerDashboard/myapplications');
     }
     // navigateTo('/');
   } catch (error) {

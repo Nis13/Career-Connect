@@ -5,6 +5,7 @@ import employerRouter from "./employer";
 import jobseekerRouter from "./jobseeker";
 import jobApplicationRouter from "./application";
 import joblistingRouter from "./joblisting";
+import adminRouter from "./admin";
 import { verify } from "jsonwebtoken";
 import config from "../config";
 
@@ -13,6 +14,7 @@ import config from "../config";
 const router = express();
 
 router.use("/auth",authRouter);
+router.use("/admin",adminRouter);
 router.use("/employer",employerRouter);
 router.use("/jobseeker",jobseekerRouter);
 router.use("/joblisting", joblistingRouter);

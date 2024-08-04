@@ -7,7 +7,7 @@ export interface Joblisting {
     description: string;
     requirements: string;
     benefits: string;
-    location: string;
+    jobLocation: string;
     salaryRange: string;
     jobType: string;
     jobStatus: string;

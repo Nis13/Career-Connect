@@ -1,44 +1,42 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10">
-            <div class="card border-light shadow-sm p-4">
-                <h3 class="card-title mb-4 text-center">Edit Job Details</h3>
+            <div class="card border-color shadow-lg p-4 rounded">
+                <h3 class="card-title mb-4 text-center text-purple">Edit Job Details</h3>
                 <form id="updateJobForm" data-id="{{listing_id}}">
                     <div class="mb-3">
                         <label for="title" class="form-label">Job Title</label>
-                        <input type="text" class="form-control" id="title" value="{{title}}" required>
+                        <input type="text" class="form-control form-control-lg border-color" id="title" value="{{title}}" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="jobDescription" class="form-label">Job Description</label>
-                        <textarea class="form-control" id="jobDescription" rows="4"  required>{{description}}</textarea>
+                        <textarea class="form-control form-control-lg border-color" id="jobDescription" rows="4" required>{{description}}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="requirements" class="form-label">Requirements</label>
-                        <textarea class="form-control" id="requirements" rows="4"  required>{{requirements}}</textarea>
+                        <textarea class="form-control form-control-lg border-color" id="requirements" rows="4" required>{{requirements}}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="benefits" class="form-label">Benefits</label>
-                        <textarea class="form-control" id="benefits" rows="4" required>{{benefits}}</textarea>
+                        <textarea class="form-control form-control-lg border-color" id="benefits" rows="4" required>{{benefits}}</textarea>
                     </div>
 
                     <div class="mb-3">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="location" value="{{location}}" required>
+                        <input type="text" class="form-control form-control-lg border-color" id="location" value="{{location}}" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="salaryRange">Salary Range</label>
-                        <div class="d-flex">
-                            <input type="string" class="form-control" id="salaryRange" value="{{salaryRange}}" required>
-                        </div>
+                        <label for="salaryRange" class="form-label">Salary Range</label>
+                        <input type="text" class="form-control form-control-lg border-color" id="salaryRange" value="{{salaryRange}}" required>
                     </div>
 
                     <div class="mb-3">
                         <label for="jobType" class="form-label">Job Type</label>
-                        <select class="form-select col-lg-5" id="jobType" required>
+                        <select class="form-select form-select-lg border-color" id="jobType" required>
                             <option value="Full-Time" selected>Full-Time</option>
                             <option value="Part-Time">Part-Time</option>
                             <option value="Internship">Internship</option>
@@ -48,14 +46,14 @@
 
                     <div class="mb-3">
                         <label for="jobStatus" class="form-label">Job Status</label>
-                        <select class="form-select col-lg-5" id="jobStatus" required>
+                        <select class="form-select form-select-lg border-color" id="jobStatus" required>
                             <option value="Active" selected>Active</option>
                             <option value="Inactive">Inactive</option>
                         </select>
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn  btn-lg" id="save-job-update">Save Updates</button>
+                        <button type="submit" class="btn  btn-lg rounded-pill shadow">Save Updates</button>
                     </div>
                 </form>
             </div>

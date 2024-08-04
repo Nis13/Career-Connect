@@ -46,3 +46,34 @@ export const joblisting = async () => {
       throw new Error('joblisting get failed');
     }
   };
+
+  export const totaljobpostByUser = async () =>{
+    try {
+      const token = getToken();
+      const response = await axios.get(`http://localhost:8000/joblisting/totalJobposted`,
+        {
+          headers: {
+          Authorization: `Bearer ${token}`
+        }}
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error('joblisting get failed');
+    }
+  }
+  export const totalActiveJob = async () =>{
+    try {
+      const token = getToken();
+      const response = await axios.get(`http://localhost:8000/joblisting/totalActiveJob`,
+        {
+          headers: {
+          Authorization: `Bearer ${token}`
+        }}
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error('joblisting get failed');
+    }
+  }

@@ -1,0 +1,25 @@
+<div class="col-md-6">
+    <div class="card-body p-md-5 text-black">
+        <h1 class="text-center mb-4">Admin Registration</h1>
+        <form id="AdminForm" class="row g-3" enctype="multipart/form-data">
+            <div class="col-md-12 form-group">
+                <label for="name">Name <span class="required-star">*</span></label>
+                <input type="text" class="form-control" id="name" name="name" >
+                <div id="name-error" class="text-danger" style="display: none;"></div>
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="email">Email <span class="required-star">*</span></label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" >
+                <div id="email-error" class="text-danger" style="display: none;"></div>
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="password">Password <span class="required-star">*</span></label>
+                <input type="password" class="form-control" id="password" name="password">
+                <div id="password-error" class="text-danger" style="display: none;"></div>
+            </div>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
