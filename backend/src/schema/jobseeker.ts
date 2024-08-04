@@ -41,10 +41,6 @@ export const createJobseekerBodySchema = Joi.object({
         'any.required':'Industry is required'
     }),
 
-    // jobseekerResume:Joi.string().required().messages({
-    //     'any.required':'Resume is required'
-    // }),
-
     contactNo:Joi.number().required().min(100000000).messages({
         'any.required':'Contact number is required',
         "number.base":"Contact number must be a number",

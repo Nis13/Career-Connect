@@ -32,9 +32,10 @@ export const addjoblisting = async (event:Event) =>{
 
     try {
         const response = await handleAddJoblisting(jobListing);
-        console.log("message:", response.data);
-        alert(response.data);
-        navigateTo('/joblisting');
+        console.log(response);
+
+        alert(response);
+        if (response == 'job created successfully') navigateTo('/joblisting');
       } catch (error) {
         console.log("Error during signup:", error);
       }

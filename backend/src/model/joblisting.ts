@@ -23,7 +23,7 @@ export class JoblistingModel extends BaseModel {
         .insert(jobToCreate)
         .table("job_listings");
 
-    return {message:"job Created successfully"};
+    return {message:"job created successfully"};
 
     }
 
@@ -50,7 +50,8 @@ export class JoblistingModel extends BaseModel {
 
     static async getJoblistings(){
         const query = await this.queryBuilder().select('*').table('job_listings').innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
-        .innerJoin("users",{"employer.user_id":"users.user_id"});
+        .innerJoin("users",{"employer.user_id":"users.user_id"})
+        .orderBy("job_listings.created_at","desc");
         return query;
     }
     static async getJoblistingByUserId(userId:number){

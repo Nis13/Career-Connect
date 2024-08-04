@@ -13,7 +13,8 @@ export const handleAddJoblisting = async (jobData:addJoblisting) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      return response.data;
+      console.log(response.data.message);
+      return response.data.message;
     } catch (error) {
       throw new Error('joblisting get failed');
     }
