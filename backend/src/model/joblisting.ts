@@ -12,7 +12,7 @@ export class JoblistingModel extends BaseModel {
             description:joblisting.jobDescription,
             requirements:joblisting.requirements,
             benefits:joblisting.benefits,
-            location:joblisting.location,
+            jobLocation:joblisting.location,
             salaryRange:joblisting.salaryRange,
             jobType:joblisting.jobType,
             jobStatus:joblisting.jobStatus,
@@ -33,7 +33,7 @@ export class JoblistingModel extends BaseModel {
             description:joblisting.jobDescription,
             requirements:joblisting.requirements,
             benefits:joblisting.benefits,
-            location:joblisting.location,
+            jobLocation:joblisting.location,
             salaryRange:joblisting.salaryRange,
             jobType:joblisting.jobType,
             jobStatus:joblisting.jobStatus,
@@ -64,7 +64,7 @@ export class JoblistingModel extends BaseModel {
     }
     static async getJoblistingById(id:number){
         const query = this.queryBuilder()
-        .select('listingId','title','job_listings.description','requirements','benefits','job_listings.location','salaryRange','jobType','jobStatus','name','logo')
+        .select('listingId','title','job_listings.description','requirements','benefits','job_listings.job_location','salaryRange','jobType','jobStatus','name','logo')
         .from("job_listings")
         .innerJoin("employer",{ "employer.employer_id": "job_listings.created_by" })
         .innerJoin("users",{"employer.user_id":"users.user_id"})
@@ -87,7 +87,7 @@ export class JoblistingModel extends BaseModel {
         }
 
         if(filter.location){
-            query.where("job_listings.location","ilike",`%${filter.location}`);
+            query.where("job_listings.job_location","ilike",`%${filter.location}`);
         }
 
         if(filter.jobType){
@@ -98,7 +98,7 @@ export class JoblistingModel extends BaseModel {
             query.where("users.name","ilike",`%${filter.name}`);
         }
         if (filter.jobStatus){
-            query.where("job_listings.title","ilike",`%${filter.jobStatus}`);
+            query.where("job_listings.jobStatus","ilike",`%${filter.jobStatus}`);
         }
 
         const data = await query;

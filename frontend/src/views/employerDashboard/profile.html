@@ -1,30 +1,37 @@
-<div class="container mt-5" id = "mycom">
+<div class="container mt-5" id="mycom">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <img src="http://localhost:8000/{{employerLogo}}" alt="Employer Logo" class="card-img-top profile-logo">
-                <div class="card-body text-center">
-                    <h1 class="card-title">{{employerName}}</h1>
-                    <p class="card-text"><strong>Email:</strong> {{employerEmail}}</p>
-                    <p class="card-text"><strong>Contact No:</strong> {{employercontactNo}}</p>
-                    <p class="card-text"><strong>Location:</strong> {{employerLocation}}</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-                        Edit Profile
-                    </button>
-                </div>
-            </div>
+      <!-- Employer Logo Section -->
+      <div class="col-md-4 d-flex justify-content-center">
+        <div class="card mb-4 border-0">
+          <img src="http://localhost:8000/{{employerLogo}}" alt="Employer Logo" class="card-img-top img-fluid" style="max-height: 200px; object-fit: cover;">
         </div>
-
-        <div class="col-md-8">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h3 class="card-title">About the Company</h3>
-                    <p class="card-text">{{employerDescription}}</p>
-                </div>
+      </div>
+  
+      <!-- Employer Details Section -->
+      <div class="col-md-8">
+        <div class="card mb-4 border-2 border-color">
+          <div class="card-body">
+            <div class="text-center mb-4">
+              <h1 class="card-title text-purple">{{employerName}}</h1>
+              <p class="card-text"><strong>Email:</strong> {{employerEmail}}</p>
+              <p class="card-text"><strong>Contact No:</strong> {{employercontactNo}}</p>
+              <p class="card-text"><strong>Location:</strong> {{employerLocation}}</p>
             </div>
+  
+            <h3 class="card-title">About the Company</h3>
+            <p class="card-text">{{employerDescription}}</p>
+          </div>
+  
+          <div class="text-center mb-4">
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+              Edit Profile
+            </button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  
 
 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
     <div class="modal-dialog">

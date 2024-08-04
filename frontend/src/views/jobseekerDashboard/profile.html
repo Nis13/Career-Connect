@@ -1,15 +1,13 @@
 <div class="container mt-5" id="userProfile">
     <div class="row">
       <!-- Profile Header -->
-      <div class="col-md-4">
-        <div class="card mb-4">
+      <div class="col-md-8">
+        <div class="card mb-4 profile-card">
           <div class="card-body text-center">
-            <h1 class="card-title">{{userName}}</h1>
+            <h1 class="card-title text-purple">{{userName}}</h1>
             <p class="card-text"><strong>Email:</strong> {{userEmail}}</p>
             <p class="card-text"><strong>Contact No:</strong> {{userContactNo}}</p>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
-              Edit Profile
-            </button>
+            
           </div>
         </div>
       </div>
@@ -18,14 +16,21 @@
       <div class="col-md-8">
         <div class="card mb-4">
           <div class="card-body">
-            <h3 class="card-title">About Me</h3>
+            <h3 class="card-title text-purple">About Me</h3>
           
             <p class="card-text"><strong>Education:</strong> {{userEducation}}</p>
             <p class="card-text"><strong>Skills:</strong> {{userSkills}}</p>
             <p class="card-text"><strong>Industry:</strong> {{userIndustry}}</p>
-            <a href="http://localhost:8000/{{userResume}}" target="_blank" class="btn btn-primary">
-              View Resume
-            </a>
+            <div class=" d-flex align-items-center jutify-content center ">
+              <a href="http://localhost:8000/{{userResume}}" target="_blank" class="btn mr-3">
+                View Resume
+              </a>
+
+              <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                Edit Profile
+              </button>
+
+            </div>
           </div>
         </div>
       </div>
@@ -43,7 +48,7 @@
         <div class="modal-body">
           <form id="editJobseekerProfileForm">
             <div class="mb-3">
-              <label for="profileName" class="form-label">Name</label>
+              <label for="profileName" class="form-label">Name </label>
               <input type="text" class="form-control" id="profileName" value="{{userName}}">
             </div>
             <div class="mb-3">
@@ -66,11 +71,11 @@
               <label for="profileIndustry" class="form-label">Industry</label>
               <input type="text" class="form-control" id="profileIndustry" value="{{userIndustry}}">
             </div>
-            <button type="submit" class="btn btn-primary" id="saveJobseekerProfileChanges" data-bs-dismiss="modal">Save changes</button>
+            <button type="submit" class="btn" id="saveJobseekerProfileChanges" data-bs-dismiss="modal">Save changes</button>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>

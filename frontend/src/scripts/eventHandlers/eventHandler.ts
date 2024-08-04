@@ -126,7 +126,9 @@ document
 ?.addEventListener("click", () => navigateTo('/adminDashboard/getallAdmin'));
 
 deleteUserEvent();
-
+document
+.getElementById("clear-filter")
+?.addEventListener("click", () => navigateTo('/joblisting'));
 
 if (areEventListenersAdded) return;
     document

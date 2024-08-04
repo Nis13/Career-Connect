@@ -9,7 +9,7 @@ export function populateTemplate(template: string, job: (JoblistingDetail)): str
     .replace(/{{benefits}}/g, job.benefits)
     .replace(/{{requirements}}/g, job.requirements)
     .replace(/{{description}}/g, job.description)
-    .replace(/{{location}}/g, job.location)
+    .replace(/{{location}}/g, job.jobLocation)
     .replace(/{{jobStatus}}/g, job.jobStatus)
     .replace(/{{jobType}}/g, job.jobType)
     .replace(/{{salaryRange}}/g, job.salaryRange)
