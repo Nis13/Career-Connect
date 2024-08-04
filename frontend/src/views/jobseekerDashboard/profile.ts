@@ -3,6 +3,7 @@ import {  getJobseeker } from "../../interfaces/Users";
 import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import { updateJobseeker } from "../../scripts/services/jobseeker";
 import {  populateJobseekerTemplate } from "../../utils/replaceTemplateVar";
+import { totalJobApplied, totalJobRejected } from '../../scripts/services/application';
 
 export async function loadJobseekerProfile(jobseeker:getJobseeker) {
     const HTML = await fetch('/src/views/jobseekerDashboard/profile.html').then(response => response.text());
@@ -52,3 +53,42 @@ export async function updateJobseekerByAdminForm(event:Event){
         alert('Failed to update profile: ' + response.data.error);
     }
 }
+
+export async function jobseekerDash(){
+        const totalJobapplied = await totalJobApplied();
+        const totalJobrejected = await totalJobRejected();
+        const totalpending = totalJobapplied - totalJobrejected;
+    
+        const HTML = `<div class="container mt-4">
+            <h1 class="text-center mb-4">Jobseeker Dashboard</h1>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card text-white border-color h-100 d-flex justify-content-center align-items-center bg-light shadow">
+                        <div class="card-body text-center ">
+                            <h5 class="card-title">Total Job Applied</h5>
+                            <p class="card-text display-3 font-weight-bold">${totalJobapplied}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-white border-color h-100 d-flex justify-content-center align-items-center bg-light shadow">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Total Pending</h5>
+                            <p class="card-text display-3 font-weight-bold">${totalpending}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card text-white border-color h-100 d-flex justify-content-center align-items-center bg-light shadow">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Total Job Rejected</h5>
+                            <p class="card-text display-3 font-weight-bold">${totalJobrejected}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                        `
+        return HTML;
+    }
+

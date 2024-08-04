@@ -128,6 +128,9 @@ document
 document
 .getElementById("employer-dashboard")
 ?.addEventListener("click", () => navigateTo('/employerDashboard'));
+document
+      .getElementById("jobseeker-dashboard")
+      ?.addEventListener("click", () => navigateTo('/jobseekerDashboard'));
 
 
 if (areEventListenersAdded) return;

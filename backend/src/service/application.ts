@@ -33,3 +33,9 @@ export function totalApplicationByEmployer(userId:number){
     return applicationModel.totalApplicationByEmployer(userId);
 }
 
+export function totalJobApplied(userId:number){
+    return applicationModel.totalJobApplied(userId);
+}
+export function totalJobRejected(userId:number){
+    return applicationModel.totalJobRejected(userId);
+}

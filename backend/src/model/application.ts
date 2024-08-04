@@ -122,4 +122,32 @@ export class applicationModel extends BaseModel{
     const count = (response[0] as { total: string })?.total;
     return parseInt(count, 10) || 0;
     }
+
+    static async totalJobApplied(userId:number){
+        const query = this.queryBuilder()
+        .count('* as total')
+        .from('application')
+        .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
+        .where('jobseeker.user_id', userId)
+        
+        const response = await query;
+    const count = (response[0] as { total: string })?.total;
+    return parseInt(count, 10) || 0;
+    }
+
+    static async totalJobRejected(userId:number){
+        const query = this.queryBuilder()
+        .count('* as total')
+        .from('application')
+        .innerJoin("jobseeker",{ "jobseeker.seeker_id": "application.seeker_id" })
+        .where('jobseeker.user_id', userId)
+        .andWhere("application.application_status","Rejected");
+        
+        const response = await query;
+    const count = (response[0] as { total: string })?.total;
+    return parseInt(count, 10) || 0;
+    }
+
+
+    
 }

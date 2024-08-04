@@ -13,7 +13,7 @@ import { getApplicationforEmployer, getApplicationforJobseeker } from '../views/
 import { getallEmployer, getEmployerDetail } from './services/employer';
 import { loadEmployerDash, loadEmployerProfile } from '../views/employerDashboard/profile';
 import { getallJobseeker, getJobseekerDetail } from './services/jobseeker';
-import { loadJobseekerProfile } from '../views/jobseekerDashboard/profile';
+import { jobseekerDash, loadJobseekerProfile } from '../views/jobseekerDashboard/profile';
 import { displayEmployers } from '../views/adminDashboard/allemployer';
 import { displayJobseekers } from '../views/adminDashboard/allJobseeker';
 import { getallAdmin } from './services/admin';
@@ -84,7 +84,13 @@ const routes = [
   },
   {
     path: '/jobseekerDashboard',
-    action: async () => await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text()),
+    action: async () => {
+      const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
+      const HTML = await jobseekerDash();
+      console.log(HTML)
+      const combinedHTML = dashboardHTML.replace('<div id="jobseeker-content-container"></div>', `<div id="jobseeker-content-container">${HTML}</div>`);
+      return combinedHTML;
+    },
   },
   {
     path: '/jobseekerDashboard/jobseekerprofile',

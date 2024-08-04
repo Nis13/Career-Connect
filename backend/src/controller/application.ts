@@ -102,4 +102,24 @@ export async function totalApplicationByEmployer(req: Request, res: Response, ne
 }
 }
 
+export async function totalJobApplied(req: Request, res: Response, next: NextFunction){
+  try {
+  const userId = req.user?.id;
+  const data = await ApplicationService.totalJobApplied(userId!);
+  res.status(HttpStatusCodes.OK).json(data);
+} catch (error) {
+  next(error);
+}
+}
+
+export async function totalJobRejected(req: Request, res: Response, next: NextFunction){
+  try {
+  const userId = req.user?.id;
+  const data = await ApplicationService.totalJobRejected(userId!);
+  res.status(HttpStatusCodes.OK).json(data);
+} catch (error) {
+  next(error);
+}
+}
+
 
