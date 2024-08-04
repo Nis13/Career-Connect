@@ -1,5 +1,6 @@
-import { getToken } from "../../utils/token";
+import { getrole, getToken } from "../../utils/token";
 import { updateJoblisting } from "../../views/joblisting/updateJoblisting";
+import { handleChangeStatus } from "../services/application";
 import { navigateTo } from "./eventHandler";
 
 export function seeJobApplication(){
@@ -68,3 +69,25 @@ export function seeJobApplication(){
                 }
               });
           }
+
+          export function changeStatus(){
+
+            document.querySelectorAll('#change-status-btn').forEach(button => {
+              button.addEventListener('click', async () => {
+                  const applicationId = (button as HTMLButtonElement).dataset.id!;
+                  const status = (document.getElementById(`status-select-${applicationId}`) as HTMLSelectElement).value;
+                  handleChangeStatus(parseInt(applicationId),status);
+                  const role = getrole();
+                  if (role == 'employer')navigateTo('/employerdashboard/viewapplications');
+                  if (role == 'admin')navigateTo('/adminDashboard/getallApplications');
+              })})
+          }
+
+export function addJobEventListeners(){
+  addJobTileEventListeners();
+  updateJoblistingEventListeners();
+  seeJobApplication();
+  applyJobEventListener();
+  updateJobForm();
+  changeStatus();
+}

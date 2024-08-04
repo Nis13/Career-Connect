@@ -35,6 +35,6 @@ export function  editJobseekerProfileEvent(){
         ?.addEventListener('submit', updateJobseekerForm);
 }
 
-export function updateJobseeker(){
-    document.addEventListener('submit', updateJobseeker);
-}
+// export function updateJobseeker(){
+//     document.addEventListener('submit', updateJobseeker);
+// }
