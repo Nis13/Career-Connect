@@ -88,3 +88,23 @@ export async function getJoblistings(req: Request, res: Response, next: NextFunc
       next(error);
     }
   }
+
+  export async function totaljobpostByUser(req: Request, res: Response, next: NextFunction) {
+    try {
+        const userId = req.user?.id;
+      const data = await JoblistingService.totaljobpostByUser(userId!);
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  export async function totalactiveJobByEmployer(req: Request, res: Response, next: NextFunction) {
+    try {
+        const userId = req.user?.id;
+      const data = await JoblistingService.totalactiveJobByEmployer(userId!);
+      res.status(HttpStatusCodes.OK).json(data);
+    } catch (error) {
+      next(error);
+    }
+  }

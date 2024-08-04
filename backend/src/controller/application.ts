@@ -92,4 +92,14 @@ export async function getallApplications(req: ExpressRequest<any,any,any,GetUser
   }
 }
 
+export async function totalApplicationByEmployer(req: Request, res: Response, next: NextFunction){
+  try {
+  const userId = req.user?.id;
+  const data = await ApplicationService.totalApplicationByEmployer(userId!);
+  res.status(HttpStatusCodes.OK).json(data);
+} catch (error) {
+  next(error);
+}
+}
+
 

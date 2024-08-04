@@ -1,6 +1,9 @@
+import { totalActiveJob} from './../../scripts/services/joblisting';
 import {getEmployer } from "../../interfaces/Users";
 import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
+import { totalApplicationByEmployer } from "../../scripts/services/application";
 import { updateEmployer } from "../../scripts/services/employer";
+import { totaljobpostByUser } from "../../scripts/services/joblisting";
 import { populateEmployerTemplate } from "../../utils/replaceTemplateVar";
 
 export async function loadEmployerProfile(employer:getEmployer) {
@@ -25,6 +28,53 @@ export async function updateEmployerForm(event:Event){
     } else {
         alert('Failed to update profile: ' + response.data.error);
     }
+}
+
+export async function loadEmployerDash(){
+    const totalJobposted = await totaljobpostByUser();
+    const totalApplication = await totalApplicationByEmployer();
+    const totalActive = await totalActiveJob();
+    const totalInactiveJob = totalJobposted-totalActive;
+
+    const HTML = `<div class="container mt-4">
+        <h1 class="text-center mb-4">Employer Dashboard</h1>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card text-white border-color h-100 d-flex justify-content-center align-items-center bg-light shadow">
+                    <div class="card-body text-center ">
+                        <h5 class="card-title">Total Job Posted</h5>
+                        <p class="card-text display-3 font-weight-bold">${totalJobposted}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card text-white border-color h-100 d-flex justify-content-center align-items-center bg-light shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Total Applications Received</h5>
+                        <p class="card-text display-3 font-weight-bold">${totalApplication}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card text-white border-color h-100 d-flex justify-content-center align-items-center bg-light shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Total Active Jobs</h5>
+                        <p class="card-text display-3 font-weight-bold">${totalActive}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card text-white border-color h-100 d-flex justify-content-center align-items-center bg-light shadow">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Total Inactive Jobs</h5>
+                        <p class="card-text display-3 font-weight-bold">${totalInactiveJob}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    `
+    return HTML;
 }
 
 

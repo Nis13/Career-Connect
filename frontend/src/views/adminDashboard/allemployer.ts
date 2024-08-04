@@ -4,7 +4,7 @@ import { populateEmployerTemplate } from "../../utils/replaceTemplateVar";
 export const displayEmployers = async (data: getEmployer[]) => {
   const tableHTML = `<div class="container mt-4">
             <h1>Admin Dashboard - Employers</h1>
-            <div><button id='admin-create-employer'>Create Employer</button></div>
+            <div><button id='admin-create-employer' class="btn">Create Employer</button></div>
             <table class="table table-striped mt-4">
                 <thead>
                     <tr>
@@ -26,7 +26,7 @@ export const displayEmployers = async (data: getEmployer[]) => {
                         <td>{{employerEmail}}</td>
                         <td>{{employercontactNo}}</td>
                         <td>{{employerLocation}}</td>
-                        <td><button class='admin-delete-jobseeker' data-id='{{employerId}}'>Delete Jobseeker</button></td>
+                        <td><button class='btn admin-delete-jobseeker' data-id='{{employerId}}'>Delete Jobseeker</button></td>
                         </tr> 
                     `;
   const htmlString = data

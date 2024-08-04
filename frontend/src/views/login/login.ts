@@ -33,7 +33,7 @@ const handleLogin = async (event: Event) => {
         loggedinNav(response.role);
         if (response.role == "employer") navigateTo('/employerDashboard');
         else if(response.role == "jobseeker") navigateTo('/jobseekerDashboard');
-        else if (response.role == "admin") navigateTo('/adminDashboard'); 
+        else if (response.role == "admin") navigateTo('/adminDashboard/getallEmployer'); 
       }
       else{
         (document.getElementById('passwordError') as HTMLElement).textContent = response.message;

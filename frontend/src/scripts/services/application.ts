@@ -122,3 +122,19 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
       throw new Error('japplications get failed');
     }
   }
+
+  export const totalApplicationByEmployer = async () =>{
+    try {
+      const token = getToken();
+      const response = await axios.get(`http://localhost:8000/application/totalApplication`,
+        {
+          headers: {
+          Authorization: `Bearer ${token}`
+        }}
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error('application get failed');
+    }
+  }

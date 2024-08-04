@@ -29,3 +29,7 @@ export function getApplicationByJobseekerId(userId:number){
     return applicationModel.getApplicationByJobseekerId(userId);
 }
 
+export function totalApplicationByEmployer(userId:number){
+    return applicationModel.totalApplicationByEmployer(userId);
+}
+

@@ -39,3 +39,11 @@ export async function updateJoblisting(employerId:number,listing_id:number,jobli
   export function getJoblistingByUserId(id:number){
     return JoblistingModel.getJoblistingByUserId(id);
   }
+
+  export function totaljobpostByUser(userId:number){
+    return JoblistingModel.totaljobpostByUser(userId);
+  }
+
+  export function totalactiveJobByEmployer(userId:number){
+    return JoblistingModel.totalactiveJobByEmployer(userId);
+  }

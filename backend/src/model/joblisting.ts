@@ -59,8 +59,9 @@ export class JoblistingModel extends BaseModel {
         .table('job_listings')
         .innerJoin('employer', 'job_listings.created_by', 'employer.employer_id')
         .innerJoin('users', 'employer.user_id', 'users.user_id')
-        .where('users.user_id', userId);        const respone = await query;
-        return respone;
+        .where('users.user_id', userId);        
+        const response = await query;
+        return response;
     }
     static async getJoblistingById(id:number){
         const query = this.queryBuilder()
@@ -106,4 +107,28 @@ export class JoblistingModel extends BaseModel {
         return data;
 
     }
+
+    static async totaljobpostByUser(userId:number){
+        const query = this.queryBuilder()
+        .count('* as total') 
+        .table('job_listings')
+        .innerJoin('employer', 'job_listings.created_by', 'employer.employer_id')
+        .where('employer.user_id', userId);
+
+    const response = await query;
+    const count = (response[0] as { total: string })?.total;
+    return parseInt(count, 10) || 0;
 };
+static async totalactiveJobByEmployer(userId:number){
+    const query = this.queryBuilder()
+    .count('* as total') 
+    .table('job_listings')
+    .innerJoin('employer', 'job_listings.created_by', 'employer.employer_id')
+    .where('employer.user_id', userId)
+    .where("job_listings.job_status","Active");
+
+const response = await query;
+const count = (response[0] as { total: string })?.total;
+return parseInt(count, 10) || 0;
+};
+}

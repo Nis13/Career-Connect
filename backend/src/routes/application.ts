@@ -1,11 +1,12 @@
 import express from "express";
-import { createApplication, getallApplications, getApplicationById, getApplicationByJobId, getApplicationByJobseekerId, getApplicationByUserId, updateApplicationStatus } from "../controller/application";
+import { createApplication, getallApplications, getApplicationById, getApplicationByJobId, getApplicationByJobseekerId, getApplicationByUserId, totalApplicationByEmployer, updateApplicationStatus } from "../controller/application";
 import { authenticate, authorize } from "../middleware/auth";
 import { uploadPDF } from "../middleware/pdfmulter";
 
 const router = express();
 router.get('/getall',authenticate,authorize('admin'),getallApplications);
 router.get('/getbyemployer', authenticate,authorize('admin','employer'), getApplicationByUserId);
+router.get('/totalApplication', authenticate,authorize('admin','employer'), totalApplicationByEmployer);
 router.get('/getbyjobseeker', authenticate,authorize('admin','jobseeker'), getApplicationByJobseekerId);
 router.post('/:job_id', uploadPDF.single('resume'),authenticate,authorize('admin','jobseeker'),createApplication);
 router.get('/byjob/:job_id',authenticate,authorize('admin','employer','jobseeker'),getApplicationByJobId);

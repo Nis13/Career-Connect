@@ -2,9 +2,11 @@
 @import url('./login.css');
 @import url('./signup.css');
 @import url('./home.css');
+@import url('./dashboard.css');
 
 :root{
     --dark-color-theme:#070828; 
+    --purple-color: #8C8AFF;
 }
 
 * {

@@ -8,7 +8,7 @@ export const displayAdmins = async (datas: Admin[]) => {
   console.log("get all admin",datas);
   const tableHTML = `<div class="container mt-4">
             <h1>Admin Dashboard - Admins</h1>
-            <div><button id='admin-create-admin'>Create Admin</button></div>
+            <div><button id='admin-create-admin' class="btn">Create Admin</button></div>
             <table class="table table-striped mt-4">
                 <thead>
                     <tr>
@@ -26,7 +26,7 @@ export const displayAdmins = async (datas: Admin[]) => {
                         <td>{{userId}}</td>
                         <td>{{name}}</td>
                         <td>{{email}}</td>
-                        <td><button class='admin-delete-admin' data-id='{{userId}}'>Delete Admin</button></td>
+                        <td><button class='btn admin-delete-admin' data-id='{{userId}}'>Delete Admin</button></td>
                         </tr> 
                     `;
                     const htmlString = datas

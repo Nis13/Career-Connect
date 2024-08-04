@@ -11,7 +11,7 @@ import { getrole } from '../utils/token';
 import { showApplicationById } from '../views/application/seeapplication';
 import { getApplicationforEmployer, getApplicationforJobseeker } from '../views/application/viewapplication';
 import { getallEmployer, getEmployerDetail } from './services/employer';
-import { loadEmployerProfile } from '../views/employerDashboard/profile';
+import { loadEmployerDash, loadEmployerProfile } from '../views/employerDashboard/profile';
 import { getallJobseeker, getJobseekerDetail } from './services/jobseeker';
 import { loadJobseekerProfile } from '../views/jobseekerDashboard/profile';
 import { displayEmployers } from '../views/adminDashboard/allemployer';
@@ -39,7 +39,13 @@ const routes = [
   },
   {
     path: '/employerDashboard',
-    action: async () => await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text()),
+    action: async () => {
+      const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
+      const HTML = await loadEmployerDash();
+      console.log(HTML)
+      const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${HTML}</div>`);
+      return combinedHTML;
+    },
   },
   {
     path: '/employerdashboard/viewapplications',
@@ -183,10 +189,10 @@ const routes = [
       // return `id of job ${id}`;
     },
   },
-  {
-    path: '/adminDashboard',
-    action: async () => await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text()),
-  },
+  // {
+  //   path: '/adminDashboard',
+  //   action: async () => await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text()),
+  // },
   {
     path:  "/signupAdmin",
     action: async () => await fetch('/src/views/adminDashboard/createAdmin.html').then(response => response.text()),

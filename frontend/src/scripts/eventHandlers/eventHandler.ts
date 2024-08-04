@@ -105,10 +105,6 @@ document
 .getElementById("company-profile")
 ?.addEventListener("click", () => navigateTo('/employerdashboard/companyprofile'));
 
-//admin Dashboard
-document
-.getElementById("admin-dashboard")
-?.addEventListener("click", () => navigateTo('/adminDashboard'));
 document
 .getElementById("view-employers")
 ?.addEventListener("click", () => navigateTo('/adminDashboard/getallEmployer'));
@@ -128,7 +124,11 @@ document
 deleteUserEvent();
 document
 .getElementById("clear-filter")
-?.addEventListener("click", () => navigateTo('/joblisting'));
+?.addEventListener("click", () => render(window.location.pathname));
+document
+.getElementById("employer-dashboard")
+?.addEventListener("click", () => navigateTo('/employerDashboard'));
+
 
 if (areEventListenersAdded) return;
     document
@@ -158,7 +158,7 @@ if (areEventListenersAdded) return;
       ?.addEventListener("click", () => navigateTo('/jobseekerDashboard'));
       document
       .getElementById("admin-dashboard-nav")
-      ?.addEventListener("click", () => navigateTo('/adminDashboard'));
+      ?.addEventListener("click", () => navigateTo('/adminDashboard/getallEmployer'));
       document
       .getElementById("logout-link")
       ?.addEventListener("click", logout);
