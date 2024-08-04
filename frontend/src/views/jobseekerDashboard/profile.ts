@@ -4,6 +4,7 @@ import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import { updateJobseeker } from "../../scripts/services/jobseeker";
 import {  populateJobseekerTemplate } from "../../utils/replaceTemplateVar";
 import { totalJobApplied, totalJobRejected } from '../../scripts/services/application';
+import { showError, validateContactNumber, validateEmail } from '../../utils/validation';
 
 export async function loadJobseekerProfile(jobseeker:getJobseeker) {
     const HTML = await fetch('/src/views/jobseekerDashboard/profile.html').then(response => response.text());
@@ -21,6 +22,42 @@ export async function updateJobseekerForm(event:Event){
         industry:(document.getElementById("profileIndustry") as HTMLTextAreaElement).value,
    
 }
+
+if (!formData.name) {
+    showError("name", "Name is required.");
+    return;
+}
+if (!formData.email) {
+    showError("email", "Email is required.");
+    return;
+}
+if (!formData.contactNo) {
+    showError("jobseekerContact", "Contact is required.");
+    return;
+  }
+  if (!formData.education) {
+    showError("jobseekerEducation", "Education is required.");
+    return;
+}
+if (!formData.skills) {
+  showError("jobseekerSkills", "Skill is required.");
+  return;
+}
+if (!formData.industry) {
+  showError("jobseekerIndustry", "Industry is required.");
+  return;
+}
+if (!validateEmail(formData.email)) {
+    showError("email", "Invalid email format.");
+    return;
+  }
+
+  if (!validateContactNumber(formData.contactNo.toString())) {
+    showError("jobseekerContact", "Company Contact must be 9 or 10 digits.");
+    return;
+  }
+
+
     const response = await updateJobseeker(formData);
     if (response.data.message === "jobseeker Profile updated successfully") {
         navigateTo('/jobseekerDashboard/jobseekerprofile');

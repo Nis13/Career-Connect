@@ -48,28 +48,34 @@
         <div class="modal-body">
           <form id="editJobseekerProfileForm">
             <div class="mb-3">
-              <label for="profileName" class="form-label">Name </label>
-              <input type="text" class="form-control" id="profileName" value="{{userName}}">
+              <label for="profileName">Name <span class="required-star">*</span></label>
+              <input type="text" class="form-control" id="profileName" name="name" value="{{userName}}">
+              <div id="name-error" class="text-danger" style="display: none;"></div>
             </div>
             <div class="mb-3">
-              <label for="profileEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="profileEmail" value="{{userEmail}}">
+                <label for="profileEmail" class="form-label">Email<span class="required-star">*</span></label>
+                <input type="email" class="form-control" id="profileEmail" value="{{userEmail}}">
+                <div id="email-error" class="text-danger" style="display: none;"></div>
             </div>
             <div class="mb-3">
-              <label for="profileContact" class="form-label">Contact No</label>
-              <input type="text" class="form-control" id="profileContact" value="{{userContactNo}}">
+              <label for="profileContact" class="form-label">Contact No<span class="required-star">*</span></label>
+              <input type="number" class="form-control" id="profileContact" value="{{userContactNo}}">
+              <div id="jobseekerContact-error" class="text-danger" style="display: none;"></div>
             </div>
             <div class="mb-3">
-              <label for="profileEducation" class="form-label">Education</label>
+              <label for="profileEducation" class="form-label">Education<span class="required-star">*</span></label>
               <input type="text" class="form-control" id="profileEducation" value="{{userEducation}}">
+              <div id="jobseekerEducation-error" class="text-danger" style="display: none;"></div>
             </div>
             <div class="mb-3">
-              <label for="profileSkills" class="form-label">Skills</label>
+              <label for="profileSkills" class="form-label">Skills<span class="required-star">*</span></label>
               <input type="text" class="form-control" id="profileSkills" value="{{userSkills}}">
+              <div id="jobseekerSkills-error" class="text-danger" style="display: none;"></div>
             </div>
             <div class="mb-3">
-              <label for="profileIndustry" class="form-label">Industry</label>
+              <label for="profileIndustry" class="form-label">Industry<span class="required-star">*</span></label>
               <input type="text" class="form-control" id="profileIndustry" value="{{userIndustry}}">
+              <div id="jobseekerIndustry-error" class="text-danger" style="display: none;"></div>
             </div>
             <button type="submit" class="btn" id="saveJobseekerProfileChanges" data-bs-dismiss="modal">Save changes</button>
           </form>

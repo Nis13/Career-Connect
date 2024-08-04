@@ -5,6 +5,7 @@ import { totalApplicationByEmployer } from "../../scripts/services/application";
 import { updateEmployer } from "../../scripts/services/employer";
 import { totaljobpostByUser } from "../../scripts/services/joblisting";
 import { populateEmployerTemplate } from "../../utils/replaceTemplateVar";
+import { showError } from '../../utils/validation';
 
 export async function loadEmployerProfile(employer:getEmployer) {
     const HTML = await fetch('/src/views/employerDashboard/profile.html').then(response => response.text());
@@ -14,7 +15,7 @@ export async function loadEmployerProfile(employer:getEmployer) {
 
 export async function updateEmployerForm(event:Event){
     event.preventDefault();
-    const formData=
+    const formData= 
      {
         name: (document.getElementById('profileName') as HTMLInputElement).value,
         email: (document.getElementById('profileEmail') as HTMLInputElement).value,
@@ -22,7 +23,29 @@ export async function updateEmployerForm(event:Event){
         companyLocation: (document.getElementById('profileLocation') as HTMLInputElement).value,
         companyDescription: (document.getElementById('profileDescription') as HTMLTextAreaElement).value,
     };
+    if (!formData.name) {
+        showError("name", "Name is required.");
+        return;
+    }
+    if (!formData.email) {
+        showError("email", "Email is required.");
+        return;
+    }
+    if (!formData.companyContactNo) {
+        showError("jobseekerContact", "Contact is required.");
+        return;
+      }
+      if (!formData.companyLocation) {
+        showError("location", "Contact is required.");
+        return;
+      }
+      if (!formData.companyDescription) {
+        showError("description", "Contact is required.");
+        return;
+      }
+
     const response = await updateEmployer(formData);
+    // alert(response.data.message);
     if (response.data.message === "Profile updated successfully") {
         navigateTo('/employerdashboard/companyprofile');
     } else {

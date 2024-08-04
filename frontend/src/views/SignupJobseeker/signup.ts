@@ -67,7 +67,7 @@ if (!validatePassword(password)) {
   showError("password", "Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, one digit, and one special character.");
   return;
 }
-
+ 
 if (!validateContactNumber(jobseekerContact.toString())) {
   showError("jobseekerContact", "Company Contact must be 9 or 10 digits.");
   return;
@@ -90,7 +90,7 @@ if (!validatePDFFile(jobseekerResume)) {
     try {
       const response = await signupjobseeker(formData);
       console.log("message:", response.data.message);
-      alert(response.data.message);
+      // alert(response.data.message);
       if (response.data.message == "Jobseeker created Successfully") {
         if (getToken()) navigateTo('/adminDashboard/getallJobseeker')
           else navigateTo('/login');

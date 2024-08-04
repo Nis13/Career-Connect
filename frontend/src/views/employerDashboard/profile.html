@@ -43,30 +43,37 @@
             <div class="modal-body" id="modal">
                 <form id="editEmployerProfileForm">
                     <div class="mb-3">
-                        <label for="profileName" class="form-label">Company Name</label>
+                        <label for="profileName" class="form-label">Company Name<span class="required-star">*</span></label>
                         <input type="text" class="form-control" id="profileName" value="{{employerName}}">
+                        <div id="name-error" class="text-danger" style="display: none;"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="profileEmail" class="form-label">Email</label>
+                        <label for="profileEmail" class="form-label">Email<span class="required-star">*</span></label>
                         <input type="email" class="form-control" id="profileEmail" value="{{employerEmail}}">
+                        <div id="email-error" class="text-danger" style="display: none;"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="profileContact" class="form-label">Contact No</label>
-                        <input type="text" class="form-control" id="profileContact" value="{{employercontactNo}}">
+                        <label for="profileContact" class="form-label">Contact No<span class="required-star">*</span></label>
+                        <input type="number" class="form-control" id="profileContact" value="{{employercontactNo}}">
+                        <div id="jobseekerContact-error" class="text-danger" style="display: none;"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="profileLocation" class="form-label">Location</label>
+                        <label for="profileLocation" class="form-label">Location<span class="required-star">*</span></label>
                         <input type="text" class="form-control" id="profileLocation" value="{{employerLocation}}">
+                        <div id="location-error" class="text-danger" style="display: none;"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="profileDescription" class="form-label">Description</label>
+                        <label for="profileDescription" class="form-label">Description<span class="required-star">*</span></label>
                         <textarea class="form-control" id="profileDescription" rows="3">{{employerDescription}}</textarea>
+                        <div id="description-error" class="text-danger" style="display: none;"></div>
                     </div>
+                    <div id = "show response"></div>
                     <button type="submit" class="btn btn-primary" id="saveProfileChanges" data-bs-dismiss="modal">Save changes</button>
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                </div>
             </div>
+
         </div>
     </div>
 </div>
