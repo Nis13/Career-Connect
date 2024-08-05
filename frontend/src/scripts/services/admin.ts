@@ -12,7 +12,6 @@ import {  User } from "../../interfaces/Users";
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -28,8 +27,6 @@ import {  User } from "../../interfaces/Users";
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log("from all")
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('admin get failed');
@@ -45,7 +42,6 @@ import {  User } from "../../interfaces/Users";
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('admin get failed');
@@ -62,7 +58,6 @@ import {  User } from "../../interfaces/Users";
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -77,7 +72,6 @@ import {  User } from "../../interfaces/Users";
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('admin delete failed');

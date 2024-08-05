@@ -25,7 +25,6 @@ const handleLogin = async (event: Event) => {
   
     try {
       const response = await login({ email, password });
-      console.log("Message:", response.message);
       // alert(response.message);
       if (response.message == "User Logged in Successfully!") {
         storeToken(response.accessToken);

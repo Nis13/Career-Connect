@@ -64,8 +64,6 @@ export function seeJobApplication(){
                 if (target && target.dataset.id) {
                   const jobId = target.dataset.id;
                   updateJoblisting(parseInt(jobId));
-                  // console.log(`/updatejob/${jobId}`);
-                  // navigateTo(`/updatejob/${jobId}`);
                 }
               });
           }

@@ -20,7 +20,6 @@ export const showJoblistingFilter =  async (event:Event) =>{
         try {
 
             const response = await joblistingFilter(filter);
-            console.log(response);
             // const filterJob =  document.getElementById('joblistings-container')!;
             const filterJob =  document.getElementById('filter-job')!;
             let htmlString = '<h1>Filtered Jobs</h1>';
@@ -32,6 +31,6 @@ export const showJoblistingFilter =  async (event:Event) =>{
 
            addJobTileEventListeners();
       } catch (error) {
-        console.log("Error during listing:", error);
+        return "Error during listing:";
       }
 }

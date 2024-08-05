@@ -45,7 +45,6 @@ const routes = [
       if (getrole() !== "employer") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
       const HTML = await loadEmployerDash();
-      console.log(HTML)
       const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${HTML}</div>`);
       return combinedHTML;
     },
@@ -56,7 +55,6 @@ const routes = [
       if (getrole() !== "employer") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
       const applications = await getApplicationByEmployerId();
-      console.log(applications);
       const applicationsHTML = await getApplicationforEmployer(applications) || '';
 
       const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${applicationsHTML}</div>`);
@@ -81,9 +79,7 @@ const routes = [
       if (getrole() !== "employer") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
       const response = await getEmployerDetail();
-      console.log(response);
       const applicationsHTML = await loadEmployerProfile(response) || '';
-      console.log(applicationsHTML);
       const combinedHTML = dashboardHTML.replace('<div id="content-container"></div>', `<div id="content-container">${applicationsHTML}</div>`);
       return combinedHTML;
     },
@@ -94,7 +90,6 @@ const routes = [
       if (getrole() !== "jobseeker") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
       const HTML = await jobseekerDash();
-      console.log(HTML)
       const combinedHTML = dashboardHTML.replace('<div id="jobseeker-content-container"></div>', `<div id="jobseeker-content-container">${HTML}</div>`);
       return combinedHTML;
     },
@@ -105,9 +100,7 @@ const routes = [
       {
         if (getrole() !== "jobseeker") return "<h1>No Access</h1>";
         const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
-        console.log('job seeker dashboard');
-                const response = await getJobseekerDetail();
-                console.log(response);
+        const response = await getJobseekerDetail();
         const profileHTML = await loadJobseekerProfile(response);
         const combinedHTML = dashboardHTML.replace('<div id="jobseeker-content-container"></div>', `<div id="jobseeker-content-container">${profileHTML}</div>`);
         return combinedHTML;
@@ -120,7 +113,6 @@ const routes = [
         if (getrole() !== "jobseeker") return "<h1>No Access</h1>";
         const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
         const applications = await getApplicationByJobseekerId();
-        console.log("applications for job seeker",applications)
         const applicationHTML = await getApplicationforJobseeker(applications) || '';
         const combinedHTML = dashboardHTML.replace('<div id="jobseeker-content-container"></div>', `<div id="jobseeker-content-container">${applicationHTML}</div>`);
         return combinedHTML;
@@ -131,7 +123,6 @@ const routes = [
     path: '/joblisting',
     action: async () =>{
       const data = await joblisting();
-
       const response = await showJoblisting(data);
       return response;
     },
@@ -170,13 +161,8 @@ const routes = [
     path:'/seeapplication/:id',
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
-      console.log('from nav');
-      console.log(id);
-      console.log('from views');
         const data = await getApplicationByJobId(parseInt(id!));
-        console.log(data);
       const response = await getApplicationforEmployer(data);
-      console.log(response);
       return response;
     },
   },
@@ -184,12 +170,7 @@ const routes = [
     path:'/applicationdetail/:id',
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
-      console.log('from nav');
-      console.log(id);
-      console.log('from views');
         const data = await showApplicationByIdS(parseInt(id!));
-        console.log("Application by ID")
-      console.log(data);
       const response = await showApplicationById(data);
       return response;
     },

@@ -6,7 +6,6 @@ import { getToken } from '../../utils/token';
 export const handleUpdateJoblisting = async (jobData:updateJoblisting) => {
     try {
       const token = getToken();
-      console.log(token);
       const response = await axios.put(`${BASE_URL}/joblisting/${jobData.listingId}`,
         jobData,
         {
@@ -14,7 +13,6 @@ export const handleUpdateJoblisting = async (jobData:updateJoblisting) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');

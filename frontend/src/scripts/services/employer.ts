@@ -11,9 +11,6 @@ export const getEmployerDetail = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log("from backend")
-      console.log(response.data);
-
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -29,7 +26,6 @@ export const getEmployerDetail = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -46,7 +42,6 @@ export const getEmployerDetail = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -62,7 +57,6 @@ export const getEmployerDetail = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');

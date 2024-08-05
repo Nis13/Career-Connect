@@ -38,7 +38,6 @@ export function loggedinNav(role:string){
 
   export function logout(){
     localStorage.clear();
-     console.log('from logout');
      const loginoutBtn = document.getElementById('logout-link');
      if (loginoutBtn) loginoutBtn.style.display = 'none';
 

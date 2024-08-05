@@ -24,7 +24,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
   export const getApplicationByJobId = async(listing_id:number) =>{
     try {
       const token = getToken();
-      console.log(`${BASE_URL}/application/byjob/${listing_id}`);
       const response = await axios.get(`${BASE_URL}/application/byjob/${listing_id}`,
         {
           headers: {
@@ -46,7 +45,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -55,16 +53,12 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
   export const getApplicationByJobseekerId = async() =>{
     try {
       const token = getToken();
-      console.log('from service')
-      console.log(`http://localhost:8000/application/getbyjobseeker`);
       const response = await axios.get(`http://localhost:8000/application/getbyjobseeker`,
         {
           headers: {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log("from jobseeker application")
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -82,7 +76,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return 'joblisting get failed';
@@ -92,16 +85,12 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
   export const showApplicationByIdS = async(application_id:number) =>{
     try {
       const token = getToken();
-      console.log('from service')
-      console.log(application_id);
-      console.log(`${BASE_URL}/application/get/${application_id}`);
       const response = await axios.get(`${BASE_URL}/application/get/${application_id}`,
         {
           headers: {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -116,7 +105,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('japplications get failed');
@@ -132,7 +120,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('application get failed');
@@ -148,7 +135,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('application get failed');
@@ -164,7 +150,6 @@ export const handleJobApply = async (jobId:number,application:FormData) => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('application get failed');

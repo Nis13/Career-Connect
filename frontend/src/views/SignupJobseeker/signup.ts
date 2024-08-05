@@ -89,11 +89,14 @@ if (!validatePDFFile(jobseekerResume)) {
   
     try {
       const response = await signupjobseeker(formData);
-      console.log("message:", response.data.message);
       // alert(response.data.message);
       if (response.data.message == "Jobseeker created Successfully") {
         if (getToken()) navigateTo('/adminDashboard/getallJobseeker')
           else navigateTo('/login');
+      }
+      else{
+        showError("backend",response.data.message);
+         return;
       }
     } catch (error) {
       console.error("Error during signup:", error);

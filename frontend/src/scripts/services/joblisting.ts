@@ -10,7 +10,6 @@ export const joblisting = async () => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -24,7 +23,6 @@ export const joblisting = async () => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -40,7 +38,6 @@ export const joblisting = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -56,7 +53,6 @@ export const joblisting = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -71,7 +67,6 @@ export const joblisting = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');

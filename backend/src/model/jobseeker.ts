@@ -10,7 +10,6 @@ export class JobseekerModel extends BaseModel {
             role: 'jobseeker', 
             name: jobseeker.name
         };
-        console.log("user to create",userToCreate);
         await this.queryBuilder()
         .insert(userToCreate)
         .table("users");
@@ -20,7 +19,6 @@ export class JobseekerModel extends BaseModel {
         .table("users")
         .where("email", jobseeker.email)
         .first();
-        console.log("user id",userId);
 
         const jobseekerToCreate = {
             user_id: userId.userId, 
@@ -30,7 +28,6 @@ export class JobseekerModel extends BaseModel {
             contact_no:jobseeker.contactNo,
             resume:jobseeker.jobseekerResume
         };
-        console.log(jobseekerToCreate);
         return await this.queryBuilder()
             .insert(jobseekerToCreate)
             .table("jobseeker");

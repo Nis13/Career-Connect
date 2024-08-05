@@ -20,7 +20,6 @@ export function populateTemplate(template: string, job: (JoblistingDetail)): str
             template = template
                 .replace(/{{company_name}}/g, job.name)
                 .replace(/{{company_logo}}/g, job.logo);
-            console.log('additinonal edit');
         }
     return template;
 
@@ -39,7 +38,6 @@ export function populateApplicationTemplate(template: string, application: (empl
     return template;
 }
 export function populateBriefApplicationTemplate(template: string, application: (Application)){
-    console.log(application)
     template = template
     .replace(/{{resume}}/g, application.applicationResume)
     .replace(/{{coverLetter}}/g, application.coverLetter)

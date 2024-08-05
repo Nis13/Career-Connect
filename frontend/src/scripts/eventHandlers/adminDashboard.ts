@@ -13,7 +13,6 @@ export function deleteAdminEvent() {
       const target = event.currentTarget as HTMLElement;
       if (target && target.dataset.id) {
         const userId = target.dataset.id;
-        console.log(userId);
         deleteUser(parseInt(userId!));
         navigateTo(window.location.pathname);
       }
@@ -33,7 +32,6 @@ export function deleteUserEvent() {
       const target = event.currentTarget as HTMLElement;
       if (target && target.dataset.id) {
         const userId = target.dataset.id;
-        console.log(userId);
         deleteUser(parseInt(userId!));
         navigateTo(window.location.pathname);
       }

@@ -15,9 +15,6 @@ export const getapplyform =  async (jobId:string) =>{
 export const addApplication = async (event:Event) =>{
   event.preventDefault();
 
- 
-  console.log('apply application');
-
  const formData = new FormData();
   const resume = (document.getElementById('resume') as HTMLInputElement).files![0];
   const coverletter = (document.getElementById('coverletter') as HTMLInputElement).value;
@@ -32,7 +29,6 @@ export const addApplication = async (event:Event) =>{
     if (target && target.dataset.id) {
       const jobId = target.dataset.id;
       const response = await handleJobApply(parseInt(jobId),formData);
-      console.log("message:", response.message);
       alert(response.message);
       if (response.message == "Applied successfully") navigateTo('/jobseekerDashboard/myapplications');
     }

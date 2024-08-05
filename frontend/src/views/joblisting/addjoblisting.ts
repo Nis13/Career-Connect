@@ -1,10 +1,9 @@
 import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
 import {  handleAddJoblisting } from "../../scripts/services/addJoblisting";
+import { getrole } from "../../utils/token";
 
 export const addjoblisting = async (event:Event) =>{
     event.preventDefault();
-
-    console.log("post job clicked");
 
     const title = (document.getElementById('title') as HTMLInputElement).value;
     const jobDescription = (document.getElementById('description')as HTMLTextAreaElement).value;
@@ -32,10 +31,11 @@ export const addjoblisting = async (event:Event) =>{
 
     try {
         const response = await handleAddJoblisting(jobListing);
-        console.log(response);
 
         alert(response);
-        if (response == 'job created successfully') navigateTo('/joblisting');
+        const role = getrole()
+        if (response == 'job created successfully' && role == "admin") navigateTo('/joblisting');
+        if (response == 'job created successfully' && role == "employer") navigateTo('/employerdashboard/jobposted')
     }
     catch (error) {
         console.log("Error during signup:", error);

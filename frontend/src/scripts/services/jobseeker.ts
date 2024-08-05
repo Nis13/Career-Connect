@@ -5,16 +5,12 @@ import { Jobseeker } from "../../interfaces/Users";
 export const getJobseekerDetail = async () => {
     try {
       const token = getToken();
-      console.log(token);
       const response = await axios.get(`http://localhost:8000/jobseeker/detail`,
         {
           headers: {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log("from backend jobseeker")
-      console.log(response.data);
-
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -31,7 +27,6 @@ export const getJobseekerDetail = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -47,7 +42,6 @@ export const getJobseekerDetail = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -57,14 +51,12 @@ export const getJobseekerDetail = async () => {
   export const deleteUser = async (userId:number) => {
     try {
       const token = getToken();
-      console.log("from delete")
       const response = await axios.delete(`http://localhost:8000/jobseeker/deleteuser/${userId}`,
         {
           headers: {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
@@ -81,7 +73,6 @@ export const getJobseekerDetail = async () => {
           Authorization: `Bearer ${token}`
         }}
       );
-      console.log(response.data);
       return response;
     } catch (error) {
       throw new Error('joblisting get failed');

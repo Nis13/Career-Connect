@@ -5,7 +5,6 @@ import { populateAdminTemplate} from "../../utils/replaceTemplateVar";
 import { getToken } from "../../utils/token";
 
 export const displayAdmins = async (datas: Admin[]) => {
-  console.log("get all admin",datas);
   const tableHTML = `<div class="container mt-4">
             <h1>Admin Dashboard - Admins</h1>
             <div><button id='admin-create-admin' class="btn">Create Admin</button></div>
@@ -32,7 +31,6 @@ export const displayAdmins = async (datas: Admin[]) => {
                     const htmlString = datas
                     .map((data: Admin) => populateAdminTemplate(adminHTML, data))
                     .join("");
-    console.log("htmlString",htmlString);
 
   return tableHTML.replace('<tbody id="employer-table-body"></tbody>',`<tbody id="employer-table-body">${htmlString}</tbody>`);
 };
@@ -53,7 +51,6 @@ export const handleSignupAdmin = async (event: Event) => {
 
   try {
     const response = await createAdmin(userData);
-    console.log("message:", response.data.message);
     alert(response.data.message);
     if (response.data.message == "Admin Created successfully") {
       if (getToken()) navigateTo('/adminDashboard/getallAdmin')

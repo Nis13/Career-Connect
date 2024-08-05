@@ -32,7 +32,6 @@ export async function signupEmployer(
     const { body } = req;
     if (req.file) {
       const fileUrl = `uploads/${req.file.filename}`;
-      console.log("file data", fileUrl);
 
       if (!body || !body.name || !body.password) {
         return { message: "name and password are required" };
@@ -57,18 +56,14 @@ export async function signupJobseeker(
   try {
     if (req.file) {
       const fileUrl = `resumes/${req.file.filename}`;
-      console.log(fileUrl);
       const { body } = req;
       if (!body || !body.name || !body.password) {
         return { message: "name and password are required" };
       }
-      console.log("file url ko");
-      console.log(fileUrl);
       const jobseekerData = {
         ...body,
         jobseekerResume: fileUrl,
       };
-      console.log(jobseekerData.resume);
       const data = await AuthService.signupJobseeker(jobseekerData);
       res.status(HttpStatusCodes.CREATED).json(data);
     }

@@ -10,17 +10,12 @@ export async function createApplication(
   next: NextFunction
 ) {
   try {
-    console.log(req.file);
     if (req.file) {
       const fileUrl = `resumes/${req.file.filename}`;
-      console.log(fileUrl);
 
       const userId = req.user?.id;
-      console.log(userId);
       const { job_id } = req.params;
       const { body } = req;
-      console.log("from body");
-      console.log(body);
       const applicationData = {
         ...body,
         resume: fileUrl,
@@ -77,7 +72,6 @@ export async function updateApplicationStatus(
   try {
     const { application_id } = req.params;
     const body = req.body;
-    console.log(body);
     const data = await ApplicationService.updateApplicationStatus(
       parseInt(application_id),
       body.applicationStatus

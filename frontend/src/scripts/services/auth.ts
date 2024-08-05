@@ -17,7 +17,6 @@ export const login = async (credentials: UserCredentials) => {
 
 export const signupemployer = async (data: FormData) => {
     try {
-        console.log(data);
         const response = await axios.post(`${BASE_URL}/auth/signup/employer`, data);
         return response; 
     } catch (error) {
@@ -32,7 +31,6 @@ export const signupemployer = async (data: FormData) => {
 
 export const signupjobseeker = async (data: FormData) => {
   try {
-      console.log(data);
       const response = await axios.post(`${BASE_URL}/auth/signup/jobseeker`, data);
       return response; 
   } catch (error) {

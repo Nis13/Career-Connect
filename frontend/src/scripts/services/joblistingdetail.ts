@@ -8,7 +8,6 @@ export const joblistingById = async (listingId:number) => {
           'Content-Type': 'application/json',
         },
       });
-      console.log(response.data);
       return response.data;
     } catch (error) {
       throw new Error('joblisting get failed');
