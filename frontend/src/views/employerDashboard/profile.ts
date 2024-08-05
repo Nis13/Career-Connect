@@ -60,7 +60,7 @@ export async function loadEmployerDash(){
     const totalInactiveJob = totalJobposted-totalActive;
 
     const HTML = `<div class="container mt-4">
-        <h1 class="text-center mb-4">Employer Dashboard</h1>
+        <h1 class="text-center mb-4">My Dashboard</h1>
         <div class="row">
             <div class="col-md-6 mb-4">
                 <div class="card text-white border-color h-100 d-flex justify-content-center align-items-center bg-light shadow">

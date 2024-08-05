@@ -1,5 +1,5 @@
 import { navigateTo } from "../../scripts/eventHandlers/eventHandler";
-import { updateJobseekerByAdminForm, updateJobseekerForm } from "../jobseekerDashboard/profile";
+import { updateJobseekerForm } from "../jobseekerDashboard/profile";
 import { updateEmployerForm } from "./profile";
 
 export function viewJob(){

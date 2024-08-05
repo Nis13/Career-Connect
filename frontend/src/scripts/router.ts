@@ -42,6 +42,7 @@ const routes = [
   {
     path: '/employerDashboard',
     action: async () => {
+      if (getrole() !== "employer") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
       const HTML = await loadEmployerDash();
       console.log(HTML)
@@ -52,6 +53,7 @@ const routes = [
   {
     path: '/employerdashboard/viewapplications',
     action: async () => {
+      if (getrole() !== "employer") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
       const applications = await getApplicationByEmployerId();
       console.log(applications);
@@ -64,6 +66,7 @@ const routes = [
   {
     path: '/employerdashboard/jobposted',
     action: async () => {
+      if (getrole() !== "employer") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
       const jobData = await joblistingByUserId();
       const applicationsHTML = await showJoblistingByEmployer(jobData) || '';
@@ -75,6 +78,7 @@ const routes = [
   {
     path: '/employerdashboard/companyprofile',
     action: async () => {
+      if (getrole() !== "employer") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/employerDashboard/employerDashboard.html').then(response => response.text());
       const response = await getEmployerDetail();
       console.log(response);
@@ -87,6 +91,7 @@ const routes = [
   {
     path: '/jobseekerDashboard',
     action: async () => {
+      if (getrole() !== "jobseeker") return "<h1>No Access</h1>";
       const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
       const HTML = await jobseekerDash();
       console.log(HTML)
@@ -98,6 +103,7 @@ const routes = [
     path: '/jobseekerDashboard/jobseekerprofile',
     action: async () => 
       {
+        if (getrole() !== "jobseeker") return "<h1>No Access</h1>";
         const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
         console.log('job seeker dashboard');
                 const response = await getJobseekerDetail();
@@ -111,6 +117,7 @@ const routes = [
     path: '/jobseekerDashboard/myapplications',
     action: async () => 
       {
+        if (getrole() !== "jobseeker") return "<h1>No Access</h1>";
         const dashboardHTML = await fetch('/src/views/jobseekerDashboard/jobseekerDashboard.html').then(response => response.text());
         const applications = await getApplicationByJobseekerId();
         console.log("applications for job seeker",applications)
@@ -136,13 +143,11 @@ const routes = [
   },
   {
     path: '/jobdetail/:id',
-    // action: async () => 'home'
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
       const role = getrole()
       const response = await joblistingDetail(parseInt(id!),role!);
       return response;
-      // return `id of job ${id}`;
     },
   },
   {
@@ -151,22 +156,18 @@ const routes = [
       const {id} = params;
       const response = await getJoblistingform(parseInt(id!));
       return response;
-      // return `id of job ${id}`;
     },
   },
   {
     path:'/applyjob/:id',
-    // action: () => fetch('/src/views/application/application.html').then(response => response.text())
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
       const response = await getapplyform(id!);
       return response;
-      // return `id of job ${id}`;
     },
   },
   {
     path:'/seeapplication/:id',
-    // action: () => fetch('/src/views/application/application.html').then(response => response.text())
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
       console.log('from nav');
@@ -177,12 +178,10 @@ const routes = [
       const response = await getApplicationforEmployer(data);
       console.log(response);
       return response;
-      // return `id of job ${id}`;
     },
   },
   {
     path:'/applicationdetail/:id',
-    // action: () => fetch('/src/views/application/application.html').then(response => response.text())
     action: async({params}:{params:jobDetailParam})=> {
       const {id} = params;
       console.log('from nav');
@@ -192,15 +191,9 @@ const routes = [
         console.log("Application by ID")
       console.log(data);
       const response = await showApplicationById(data);
-      // console.log(response);
       return response;
-      // return `id of job ${id}`;
     },
   },
-  // {
-  //   path: '/adminDashboard',
-  //   action: async () => await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text()),
-  // },
   {
     path:  "/signupAdmin",
     action: async () => await fetch('/src/views/adminDashboard/createAdmin.html').then(response => response.text()),
@@ -209,6 +202,7 @@ const routes = [
   {
     path: '/adminDashboard/getallEmployer',
     action: async () => {
+      if (getrole() !== "admin") return "<h1>No Access</h1>";
       const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
 
       const data = await getallEmployer();
@@ -219,6 +213,7 @@ const routes = [
   {
     path: '/adminDashboard/getallJobseeker',
     action: async () => {
+      if (getrole() !== "admin") return "<h1>No Access</h1>";
       const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
 
       const data = await getallJobseeker();
@@ -229,6 +224,7 @@ const routes = [
   {
     path: '/adminDashboard/getallApplications',
     action: async () => {
+      if (getrole() !== "admin") return "<h1>No Access</h1>";
       const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
       const data = await getallApplications();
       const dataHTML = await getApplicationforEmployer(data) || '';
@@ -239,6 +235,7 @@ const routes = [
   {
     path: '/adminDashboard/getallJoblistings',
     action: async () => {
+      if (getrole() !== "admin") return "<h1>No Access</h1>";
       const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
       const data = await joblisting();
 
@@ -250,6 +247,7 @@ const routes = [
   {
     path: '/adminDashboard/getallAdmin',
     action: async () => {
+      if (getrole() !== "admin") return "<h1>No Access</h1>";
       const sidebarHTML = await fetch('/src/views/adminDashboard/adminDashboard.html').then(response => response.text());
 
       const data = await getallAdmin();

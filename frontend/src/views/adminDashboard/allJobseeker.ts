@@ -30,7 +30,7 @@ export const displayJobseekers = async (data: getJobseeker[]) => {
     <td>{{userSkills}}</td> 
     <td>{{userIndustry}}</td>
     <td>
-      <button class='btn admin-update-jobseeker mb-1' data-id='{{userId}}'>Update Jobseeker</button>
+      // <button class='btn admin-update-jobseeker mb-1' data-id='{{userId}}'>Update Jobseeker</button>
       <button class='btn admin-delete-jobseeker' data-id='{{userId}}'>Delete Jobseeker</button>
     </td>
   </tr>
